@@ -91,23 +91,29 @@ def _assemble_analysis_response(
     deterministic_block: str = "",
     chart_md: str = "",
     source_note: str = "",
+    language: str = "id",
 ) -> str:
     """
     Rakit balasan analisis dalam SATU urutan presentasi yang dipakai BERSAMA oleh
     /analyze dan /analyze/followup (Revisi #3, Opsi B):
 
-        📄 banner file → blok deterministik (bila ada) → narasi LLM → grafik
-        → penanda [SESSION_ID].
+        📄 banner file → blok deterministik (bila ada) → narasi LLM (termasuk
+        **judul** bold, jadi SUB-judul di bawah blok — bukan header puncak) →
+        grafik → penanda [SESSION_ID].
 
     Presentasi MURNI — tidak menghitung/memanggil apa pun. Blok deterministik &
     chart_md dirakit di handler (sumber angka), helper ini hanya menyusun string.
     `source_note` = anotasi banner (mis. "(data dari sesi sebelumnya)" untuk followup;
     kosong untuk analisis pertama).
+
+    Revisi #3 (Commit 4): kata "baris"/"rows" pada banner mengikuti `language` agar
+    laporan SINGLE-LANGUAGE (default "id" → byte-identik dgn perilaku sebelumnya).
     """
+    rows_word = "baris" if language == "id" else "rows"
     banner_suffix = f" {source_note}" if source_note else ""
     det_md = f"{deterministic_block}\n\n---\n\n" if deterministic_block else ""
     return (
-        f"📄 **{file_name}** — {row_count} baris{banner_suffix}\n\n"
+        f"📄 **{file_name}** — {row_count} {rows_word}{banner_suffix}\n\n"
         f"---\n\n"
         f"{det_md}"
         f"{narrative}"
@@ -413,7 +419,9 @@ async def analyze_data(request: AnalysisRequest):
                 logger.warning(f"[analyze] blok deterministik dilewati: {_de}")
                 deterministic_block = ""
 
-            # Commit 3 akan mengisi chart on-demand; di Commit 2 balasan = teks+tabel.
+            # Urutan: banner → blok deterministik → narasi (**judul** jadi sub-judul
+            # di bawah blok, bukan header puncak) → grafik. Single-language via
+            # request.language (hasil detect_language). chart_md diisi di Commit 3.
             text = _assemble_analysis_response(
                 file_name           = file_name,
                 row_count           = len(result["dataframe"]),
@@ -422,6 +430,7 @@ async def analyze_data(request: AnalysisRequest):
                 deterministic_block = deterministic_block,
                 chart_md            = "",
                 source_note         = "",   # /analyze: banner tanpa "sesi sebelumnya"
+                language            = request.language,
             )
         else:
             # Tanpa file (pertanyaan umum) → narasi graph apa adanya, tanpa banner.
@@ -661,6 +670,10 @@ async def analyze_followup(req: FollowUpRequest):
     # angka otoritatif, baru narasi LLM (yang angka nyasarnya sudah diredaksi).
     # Revisi #3 (Commit 1): perakitan dipindah ke _assemble_analysis_response
     # (presentasi bersama dgn /analyze). Output BYTE-IDENTIK dengan sebelumnya.
+    # Revisi #3 (Commit 4): source_note & kata "baris"/"rows" ikut bahasa → laporan
+    # followup juga single-language (default ID byte-identik dgn sebelumnya).
+    _src_note = ("(data dari sesi sebelumnya)" if req.language == "id"
+                 else "(from a previous session)")
     full_response = _assemble_analysis_response(
         file_name           = session.file_name,
         row_count           = len(session.dataframe),
@@ -668,7 +681,8 @@ async def analyze_followup(req: FollowUpRequest):
         session_id          = req.session_id,
         deterministic_block = deterministic_block,
         chart_md            = chart_md,
-        source_note         = "(data dari sesi sebelumnya)",
+        source_note         = _src_note,
+        language            = req.language,
     )
 
     return {"result": full_response, "session_id": req.session_id}
