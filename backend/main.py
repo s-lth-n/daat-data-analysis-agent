@@ -64,6 +64,24 @@ def _render_charts_to_png(charts: list[dict]) -> list[str]:
     return keys
 
 
+def _chart_caption_md(chart_keys: list[str], language: str = "id") -> str:
+    """
+    Build markdown captions + images for rendered chart PNGs, in a SINGLE language.
+
+    Revisi #2: the caption word follows `language` ("Grafik" for id, "Chart"
+    otherwise — default EN, consistent with the global language default). Numbering
+    is omitted when there is exactly one chart. Never bilingual.
+    """
+    word = "Grafik" if language == "id" else "Chart"
+    total = len(chart_keys)
+    md = ""
+    for i, key in enumerate(chart_keys):
+        label = word if total == 1 else f"{word} {i + 1}"
+        url = f"{settings.public_url}/chart/image/{key}.png"
+        md += f"\n\n**📊 {label}**\n\n![{label}]({url})"
+    return md
+
+
 # ── Lifespan ────────────────────────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -529,14 +547,8 @@ async def analyze_followup(req: FollowUpRequest):
     # inilah yang menghentikan "grafik identik berulang" di tiap followup.
     # Fallback (keputusan final): minta-eksplisit-tanpa-intent-groupby tetap
     # menampilkan chart overview cache (session.chart_keys), bukan teks/eror.
-    chart_md = ""
-    if show_charts:
-        total = len(chart_keys_to_show)
-        for i, key in enumerate(chart_keys_to_show):
-            # Label dinamis: jangan paksa "Grafik 1/2/3" saat cuma 1 grafik.
-            label = "Grafik" if total == 1 else f"Grafik {i + 1}"
-            url   = f"{settings.public_url}/chart/image/{key}.png"
-            chart_md += f"\n\n**📊 {label}**\n\n![{label}]({url})"
+    # Label dinamis (tunggal vs jamak) + bahasa mengikuti req.language (Revisi #2).
+    chart_md = _chart_caption_md(chart_keys_to_show, req.language) if show_charts else ""
 
     # Fase 1.7: blok angka deterministik (kalau ada) tampil DULU sebagai sumber
     # angka otoritatif, baru narasi LLM (yang angka nyasarnya sudah diredaksi).

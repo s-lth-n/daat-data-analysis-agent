@@ -313,9 +313,13 @@ class Tools:
         report = header + self._format(data)
 
         pub = self.valves.public_url.rstrip("/")
-        labels = ["Grafik 1", "Grafik 2", "Grafik 3"]
+        # Revisi #2: caption ikut bahasa AKTUAL laporan (backend mendeteksi & meng-
+        # override; nilainya ada di data["language"]). Fallback ke param tool.
+        # Default EN bila bukan 'id'; tidak pernah bilingual.
+        report_lang = data.get("language") or language
+        word = "Grafik" if report_lang == "id" else "Chart"
         for i, k in enumerate(data.get("chart_keys") or []):
-            lbl = labels[i] if i < len(labels) else f"Grafik {i + 1}"
+            lbl = f"{word} {i + 1}"
             report += f"\n\n**📊 {lbl}**\n\n![{lbl}]({pub}/chart/image/{k}.png)"
 
         # Outlet Filter akan mengganti isi pesan asisten dengan laporan ini.
