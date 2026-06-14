@@ -313,8 +313,10 @@ async def analyze_data(request: AnalysisRequest):
         )
 
         session_id: str | None = None
-        chart_keys: list[str] = []
+        chart_keys: list[str] = []          # overview cache (disimpan ke session)
         emit_charts = False  # Revisi #1: gerbang chart on-demand (default teks-saja)
+        chart_keys_to_emit: list[str] = []  # Revisi #3: chart yang DITAMPILKAN balasan ini
+        relevant_spec: dict | None = None   # spec chart relevan (bila berhasil dibangun)
 
         # Save session when a file was analysed and the DataFrame is available
         if request.file_id and result.get("dataframe") is not None:
@@ -355,6 +357,34 @@ async def analyze_data(request: AnalysisRequest):
                     )
                 except Exception:
                     emit_charts = False
+
+                # Revisi #3 (Commit 3): chart on-demand 1-RELEVAN — pola IDENTIK
+                # dengan followup. Overview (3 chart) tetap dirender & disimpan ke
+                # session di atas sebagai CACHE; yang diemisi di balasan INI hanya:
+                #   - intent groupby/temporal → SATU chart relevan dari resolver
+                #     agregasi yang SAMA dengan blok deterministik (Revenue-default
+                #     retail ikut) → chart = tabel by-construction; atau
+                #   - minta grafik eksplisit tanpa intent → fallback overview cache.
+                # Gagal apa pun → fallback cache → tak pernah crash.
+                if emit_charts:
+                    chart_keys_to_emit = list(chart_keys)   # default: overview cache
+                    try:
+                        from tools.groupby_analyzer import build_followup_chart_spec
+                        spec = build_followup_chart_spec(
+                            result.get("dataframe"),
+                            request.prompt,
+                            result.get("column_profile") or {},
+                            result.get("domain_context"),
+                            language=request.language,
+                        )
+                        if spec:
+                            rendered = _render_charts_to_png([spec])
+                            if rendered:
+                                chart_keys_to_emit = rendered   # 1 chart relevan GANTI cache
+                                relevant_spec = spec
+                    except Exception as _ce:
+                        logger.warning(f"[analyze] chart relevan gagal, fallback cache: {_ce}")
+                        # chart_keys_to_emit tetap = overview cache (aman, tak crash)
 
         # Revisi #3 (Commit 2): saat sebuah file dianalisis, rakit balasan dgn pola
         # yang SAMA dengan followup — blok angka deterministik (sumber otoritatif,
@@ -397,13 +427,19 @@ async def analyze_data(request: AnalysisRequest):
             # Tanpa file (pertanyaan umum) → narasi graph apa adanya, tanpa banner.
             text = result["text"]
 
+        # Revisi #3 (Commit 3): charts & chart_keys mencerminkan chart yang DIEMISI
+        # (1 relevan bila ada, selain itu fallback overview cache) — konsisten,
+        # bukan lagi 3 overview generik. Teks-saja bila tak digerbang.
         return AnalysisResponse(
             text       = text,
-            charts     = result.get("charts") if emit_charts else None,
+            charts     = (
+                ([relevant_spec] if relevant_spec else result.get("charts"))
+                if emit_charts else None
+            ),
             statistics = result.get("statistics"),
             language   = request.language,
             session_id = session_id,
-            chart_keys = (chart_keys or None) if emit_charts else None,
+            chart_keys = (chart_keys_to_emit or None) if emit_charts else None,
         )
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
