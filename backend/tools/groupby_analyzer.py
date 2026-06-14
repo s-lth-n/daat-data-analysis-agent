@@ -28,6 +28,13 @@ _GROUPBY_KEYWORDS = [
     r'\bterbanyak\b',
     r'\bterbesar\b',
     r'\btertinggi\b',
+    # Ranking penjualan (Revisi #3, Commit 2): "produk terbaik", "best-selling",
+    # "paling laris". Membuka gerbang groupby/ranking agar dimensi ter-resolve →
+    # baru _select_front_metrics bisa menerapkan Revenue-default retail. Selaras
+    # dengan _SALES_RANK_INTENT. "best" menangkup "best-selling"/"best seller".
+    r'\bterbaik\b',
+    r'\bbest\b',
+    r'\blaris\b',
     # Distribusi/frekuensi kategorik ID↔EN (Fase 1.8): "topik dominan", "sumber
     # yang paling sering", "distribusi/proporsi per kategori". Sama seperti ranking:
     # cuma PINTU MASUK — dimensi tetap di-resolve via sinonim → kolom NYATA, dan
@@ -182,6 +189,16 @@ _METRIC_UNCOMPUTABLE = re.compile(
 _METRIC_PRICE = re.compile(r"\b(harga|price|prices|unit\s*price|unitprice)\b", re.IGNORECASE)
 _METRIC_QTY = re.compile(
     r"\b(kuantitas|quantity|quantities|qty|units?|jumlah\s+(?:barang|unit|item|produk))\b",
+    re.IGNORECASE,
+)
+# Ranking/superlatif berorientasi PENJUALAN (Revisi #3, Commit 2) untuk Revenue-default
+# cerdas di domain RETAIL: "produk terlaris/terbaik/top/best-selling" TANPA metrik
+# eksplisit. SENGAJA tidak memuat revenue/sales/penjualan (sudah ditangani
+# _METRIC_REVENUE) — ini khusus kata ranking yang dulu jatuh ke numeric_now[0]=Quantity
+# (atau lebih buruk, Σ Price di narasi). Hanya pintu masuk; Revenue baru dipilih bila
+# domain=retail & Qty×Price bisa diturunkan (lihat _select_front_metrics).
+_SALES_RANK_INTENT = re.compile(
+    r"\b(terlaris|laris|terbaik|best|top)\b",
     re.IGNORECASE,
 )
 
@@ -608,7 +625,12 @@ _DISTRIB_INTENT = re.compile(
 )
 
 
-def _select_front_metrics(question: str, df: pd.DataFrame, base_numeric: list):
+def _select_front_metrics(
+    question: str,
+    df: pd.DataFrame,
+    base_numeric: list,
+    domain_context: Optional[dict] = None,
+):
     """Metrik yang diminta (revenue/harga/kuantitas) → diprioritaskan sbg kunci
     sort. Returns (work_df, front_cols). work bisa punya kolom Revenue turunan."""
     q = question or ""
@@ -626,6 +648,23 @@ def _select_front_metrics(question: str, df: pd.DataFrame, base_numeric: list):
         qn = _find_numeric(base_numeric, ("quantity", "qty", "kuantitas"))
         if qn:
             front.append(qn)
+    # Revisi #3 (Commit 2): Revenue-default CERDAS untuk domain RETAIL. Pertanyaan
+    # ranking "terlaris/top/terbaik/best-selling" TANPA metrik eksplisit (front masih
+    # kosong, bukan count/distribusi) → pakai Revenue (Qty×Price), bukan
+    # numeric_now[0]=Quantity. Ini yang membuat "produk terlaris" menjawab dgn
+    # kontribusi penjualan (1.058.314), bukan unit (648.922) apalagi Σ Price (163.401).
+    # Hanya bila Revenue bisa diturunkan; kalau tidak → fallback lama. _maybe_add_revenue
+    # dipakai ulang → derivasi TUNGGAL, jadi tabel & chart memakai angka yang sama.
+    if (
+        not front
+        and (domain_context or {}).get("domain_type") == "retail"
+        and _SALES_RANK_INTENT.search(q)
+        and not _METRIC_COUNT.search(q)
+        and not _DISTRIB_INTENT.search(q)
+    ):
+        work, rev = _maybe_add_revenue(work, base_numeric)
+        if rev:
+            front.append(rev)
     return work, front
 
 
@@ -650,12 +689,17 @@ def _resolve_followup_aggregation(
     df: pd.DataFrame,
     question: str,
     column_profile: dict,
+    domain_context: Optional[dict] = None,
 ):
     """
     Inti BERSAMA followup groupby/temporal: resolve dimensi + pilih metrik utama +
     siapkan groupby. Dipakai build_deterministic_block (angka USER) DAN
     build_followup_chart_spec (GRAFIK) → angka di teks & grafik dijamin konsisten
     karena keduanya membaca pemilihan metrik & groupby yang IDENTIK.
+
+    `domain_context` (Revisi #3): mengaktifkan Revenue-default cerdas untuk retail
+    (lihat _select_front_metrics). Tidak memengaruhi nilai metrik/persen di luar
+    pemilihan kolom primer.
 
     Returns None bila bukan followup groupby/temporal, atau dict:
       {work, group_col, is_temporal, primary(str|None), mean_intent(bool),
@@ -675,7 +719,7 @@ def _resolve_followup_aggregation(
         work, group_col, is_temporal = resolved
 
         base_numeric = _base_numeric_metric_cols(work, prof, group_col)
-        work, front = _select_front_metrics(q, work, base_numeric)
+        work, front = _select_front_metrics(q, work, base_numeric, domain_context)
         # Re-scan: `work` kini bisa punya kolom turunan (mis. Revenue) yang tak ada
         # di profil → tetap lolos sebagai metrik; YearStart/angkatan dkk tetap dibuang.
         numeric_now = _base_numeric_metric_cols(work, prof, group_col)
@@ -785,7 +829,8 @@ def build_deterministic_block(
     try:
         # Pemilihan dimensi + metrik + groupby di-share dengan build_followup_chart_spec
         # (lewat _resolve_followup_aggregation) → angka teks & grafik konsisten.
-        agg = _resolve_followup_aggregation(df, question, column_profile)
+        # domain_context diteruskan → Revenue-default retail (Commit 2).
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
         if not agg:
             return ""
         work        = agg["work"]
@@ -901,7 +946,9 @@ def build_followup_chart_spec(
     bila pembuatan gagal. Tidak pernah raise (Phase 2 fail-safe).
     """
     try:
-        agg = _resolve_followup_aggregation(df, question, column_profile)
+        # domain_context diteruskan → chart memakai Revenue-default retail yang SAMA
+        # dengan blok deterministik (Commit 2) → nilai grafik = nilai tabel.
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
         if not agg:
             return None
 

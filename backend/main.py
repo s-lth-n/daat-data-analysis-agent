@@ -356,11 +356,46 @@ async def analyze_data(request: AnalysisRequest):
                 except Exception:
                     emit_charts = False
 
-        # Embed session_id as an HTML comment so the LLM can read it from
-        # conversation context and pass it back on follow-up queries.
-        text = result["text"]
+        # Revisi #3 (Commit 2): saat sebuah file dianalisis, rakit balasan dgn pola
+        # yang SAMA dengan followup — blok angka deterministik (sumber otoritatif,
+        # 100% Python) MEMIMPIN, lalu narasi LLM dari graph sebagai prosa. Ini yang
+        # menggantikan headline Σ Price (163.401) yang menyesatkan dengan metrik benar
+        # (mis. Revenue 1.058.314 utk "produk terlaris" retail). Helper presentasi &
+        # build_deterministic_block identik dengan /analyze/followup → konsisten.
         if session_id:
-            text += f"\n\n[SESSION_ID: {session_id}]"
+            deterministic_block = ""
+            try:
+                from tools.groupby_analyzer import build_deterministic_block
+                _df_clean = result.get("dataframe")
+                if _df_clean is not None:
+                    # request.prompt mengarahkan metrik/dimensi; domain_context dict
+                    # mengaktifkan Revenue-default retail + label unit "transaksi".
+                    deterministic_block = build_deterministic_block(
+                        _df_clean,
+                        request.prompt,
+                        result.get("column_profile") or {},
+                        result.get("domain_context"),
+                        request.language,
+                    )
+            except Exception as _de:
+                # Fallback aman: pertanyaan non-groupby (mis. "ringkas data ini") atau
+                # error apa pun → blok kosong → balasan tetap memakai narasi deskriptif.
+                logger.warning(f"[analyze] blok deterministik dilewati: {_de}")
+                deterministic_block = ""
+
+            # Commit 3 akan mengisi chart on-demand; di Commit 2 balasan = teks+tabel.
+            text = _assemble_analysis_response(
+                file_name           = file_name,
+                row_count           = len(result["dataframe"]),
+                narrative           = result["text"],
+                session_id          = session_id,
+                deterministic_block = deterministic_block,
+                chart_md            = "",
+                source_note         = "",   # /analyze: banner tanpa "sesi sebelumnya"
+            )
+        else:
+            # Tanpa file (pertanyaan umum) → narasi graph apa adanya, tanpa banner.
+            text = result["text"]
 
         return AnalysisResponse(
             text       = text,
