@@ -343,7 +343,8 @@ def _constrained_narrative(state: dict, language: str) -> str:
             "WAJIB: Gunakan angka PERSIS dari blok STATS_CONTEXT. "
             "JANGAN mengarang angka yang tidak ada di STATS_CONTEXT.\n"
             "Fokuskan isi pada field Bahasa Indonesia (ringkasan_id, temuan_utama, "
-            "kesimpulan_id) — minimal 3 temuan. Isi field lain seperlunya."
+            "kesimpulan_id) — minimal 3 temuan. Isi field lain seperlunya.\n"
+            "Jika mengisi domain_note, tulis dalam BAHASA INDONESIA."
         )
     else:
         system_content = (
@@ -352,7 +353,8 @@ def _constrained_narrative(state: dict, language: str) -> str:
             "MANDATORY: Use ONLY exact numbers from the STATS_CONTEXT block. "
             "Do NOT fabricate numbers absent from STATS_CONTEXT.\n"
             "Focus on the English fields (ringkasan_en, key_findings, conclusion_en) "
-            "— at least 3 findings. Fill the other fields minimally."
+            "— at least 3 findings. Fill the other fields minimally.\n"
+            "If you fill domain_note, write it in ENGLISH."
         )
 
     llm_structured = ChatOllama(

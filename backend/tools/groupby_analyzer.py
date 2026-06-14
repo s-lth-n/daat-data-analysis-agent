@@ -703,16 +703,81 @@ def _resolve_followup_aggregation(
         return None
 
 
+def _md_cell(val) -> str:
+    """Escape a value for a markdown table cell (guard stray pipes)."""
+    return str(val).replace("|", "\\|")
+
+
+def _format_groups_as_table(
+    rows: list,
+    dim_label: str,
+    value_header: str,
+    kind: str,
+    mean_intent: bool,
+    language: str,
+) -> str:
+    """
+    Render pre-computed group rows as a MARKDOWN TABLE (Revisi #2).
+    Header kolom hormati `language`; angka memakai format yang sudah jadi
+    (`_fmt_id`/`_fmt_int` di row dict) — fungsi ini murni presentasi, nol LLM.
+    """
+    en = language == "en"
+    if kind == "metric":
+        if mean_intent:
+            headers = [dim_label, value_header, "%",
+                       ("Mean" if en else "Rata-rata"), "n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["mean"], r["n"]]
+        else:
+            headers = [dim_label, value_header, "%", "n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["n"]]
+    else:  # count branch
+        headers = [dim_label, value_header, "%"]
+        row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"]
+
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join("---" for _ in headers) + " |",
+    ]
+    for r in rows:
+        lines.append("| " + " | ".join(_md_cell(c) for c in row_cells(r)) + " |")
+    return "\n".join(lines)
+
+
+def _format_groups_as_list(
+    rows: list,
+    kind: str,
+    value_unit: str,
+    mean_intent: bool,
+) -> str:
+    """Numbered-list fallback — the ORIGINAL format, used only if table render fails."""
+    out: list = []
+    for r in rows:
+        if kind == "metric":
+            seg = f"{r['i']}. {r['group']} — {r['value']} ({r['pct']}%)"
+            if mean_intent and r.get("mean") is not None:
+                seg += f"; rata-rata {r['mean']}"
+            seg += f"; n={r['n']}"
+        else:
+            seg = f"{r['i']}. {r['group']} — {r['value']} {value_unit} ({r['pct']}%)"
+        out.append(seg)
+    return "\n".join(out)
+
+
 def build_deterministic_block(
     df: pd.DataFrame,
     question: str,
     column_profile: dict,
     domain_context: Optional[dict] = None,
+    language: str = "id",
 ) -> str:
     """
     Blok ANGKA KUNCI deterministik untuk LAPORAN USER (BUKAN context LLM).
     Nilai per-grup, total, dan PERSEN dihitung di Python (persen = grup/total NYATA
     × 100). Inilah angka otoritatif yang masuk ke laporan — bukan angka tulisan LLM.
+
+    Revisi #2: dirender sebagai TABEL markdown (header kolom hormati `language`);
+    bila perakitan tabel gagal → fallback ke list bernomor lama. Angka & format
+    (via _fmt_id/_fmt_int) TIDAK berubah. Hanya dipakai di /analyze/followup.
 
     Return "" kalau followup bukan groupby/temporal (laporan tetap normal).
     Tidak pernah raise.
@@ -730,50 +795,84 @@ def build_deterministic_block(
         mean_intent = agg["mean_intent"]
         grp         = agg["grp"]
         gcount      = agg["gcount"]
-        dim_label = "BULAN" if is_temporal else group_col
+        en = language == "en"
+        dim_label = (("MONTH" if en else "BULAN") if is_temporal else group_col)
 
-        lines: list = []
+        rows: list = []
         if primary is not None:
             gsum = grp[primary].sum()
             gmean = grp[primary].mean()
             total = float(gsum.sum())
             order = gsum.sort_values(ascending=False).index[:15]
-            head = (
-                f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
-                f"(bukan estimasi LLM):**\n"
-                f"_Total {primary} = {_fmt_id(total)} dari {_fmt_int(len(work))} baris_"
-            )
+            if en:
+                head = (
+                    f"**📊 Key figures per {dim_label} — computed directly from the "
+                    f"data (not LLM estimates):**\n"
+                    f"_Total {primary} = {_fmt_id(total)} from {_fmt_int(len(work))} rows_"
+                )
+            else:
+                head = (
+                    f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
+                    f"(bukan estimasi LLM):**\n"
+                    f"_Total {primary} = {_fmt_id(total)} dari {_fmt_int(len(work))} baris_"
+                )
             for i, g in enumerate(order, 1):
                 s = float(gsum.get(g, 0.0))
                 pct = (s / total * 100.0) if total else 0.0
-                seg = f"{i}. {g} — {_fmt_id(s)} ({_fmt_id(pct)}%)"
-                if mean_intent:
-                    seg += f"; rata-rata {_fmt_id(float(gmean.get(g, 0.0)))}"
-                seg += f"; n={_fmt_int(int(gcount.get(g, 0)))}"
-                lines.append(seg)
+                rows.append({
+                    "i": i, "group": str(g),
+                    "value": _fmt_id(s), "pct": _fmt_id(pct),
+                    "mean": _fmt_id(float(gmean.get(g, 0.0))),
+                    "n": _fmt_int(int(gcount.get(g, 0))),
+                })
+            kind = "metric"
+            value_header = str(primary)
+            value_unit = ""
         else:
             # Unit count: "transaksi" hanya bila domain RETAIL terdeteksi; selain itu
             # "baris" (netral). "313 transaksi" untuk Topic CDC/epidemiologi menyesatkan.
             unit = (
-                "transaksi"
+                ("transactions" if en else "transaksi")
                 if (domain_context or {}).get("domain_type") == "retail"
-                else "baris"
+                else ("rows" if en else "baris")
             )
             total = float(int(gcount.sum()))
             order = gcount.sort_values(ascending=False).index[:15]
-            head = (
-                f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
-                f"(bukan estimasi LLM):**\n"
-                f"_Total {unit} = {_fmt_int(int(total))}_"
-            )
+            if en:
+                head = (
+                    f"**📊 Key figures per {dim_label} — computed directly from the "
+                    f"data (not LLM estimates):**\n_Total {unit} = {_fmt_int(int(total))}_"
+                )
+            else:
+                head = (
+                    f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
+                    f"(bukan estimasi LLM):**\n_Total {unit} = {_fmt_int(int(total))}_"
+                )
             for i, g in enumerate(order, 1):
                 cnt = int(gcount.get(g, 0))
                 pct = (cnt / total * 100.0) if total else 0.0
-                lines.append(f"{i}. {g} — {_fmt_int(cnt)} {unit} ({_fmt_id(pct)}%)")
+                rows.append({
+                    "i": i, "group": str(g),
+                    "value": _fmt_int(cnt), "pct": _fmt_id(pct),
+                    "mean": None, "n": None,
+                })
+            kind = "count"
+            value_header = ("Count" if en else "Jumlah")
+            value_unit = unit
 
-        if not lines:
+        if not rows:
             return ""
-        return head + "\n\n" + "\n".join(lines)
+
+        # Tabel markdown sebagai presentasi utama; list bernomor lama jadi fallback
+        # aman kalau perakitan tabel gagal (Revisi #2, Bagian A).
+        try:
+            body = _format_groups_as_table(
+                rows, dim_label, value_header, kind, mean_intent, language
+            )
+        except Exception:
+            body = _format_groups_as_list(rows, kind, value_unit, mean_intent)
+
+        return head + "\n\n" + body
     except Exception:
         return ""
 

@@ -511,7 +511,10 @@ async def analyze_followup(req: FollowUpRequest):
             if _ctx and state.get("statistics") is not None:
                 state["statistics"]["__followup_context__"] = _ctx
             # Blok angka OTORITATIF (nilai+persen dihitung di Python, bukan LLM).
-            deterministic_block = build_deterministic_block(_df, req.query, _prof, _domain)
+            # Revisi #2: tabel markdown, header kolom hormati bahasa terdeteksi.
+            deterministic_block = build_deterministic_block(
+                _df, req.query, _prof, _domain, req.language
+            )
     except Exception as _e:
         pass  # Improve #5 graceful fallback — tidak boleh block followup
     # ── End Improve #5 ───────────────────────────────────────────────────

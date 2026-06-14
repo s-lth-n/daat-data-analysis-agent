@@ -680,6 +680,41 @@ class TestGenerateNarrativeNode:
         assert isinstance(result["narrative"], str)
         assert captured["lang"] == "id"       # single-language prompt selection intact
 
+    def test_domain_note_language_instruction_in_prompt(self, sample_state, valid_schema_json):
+        """Bagian B: the single-language system prompt explicitly tells the LLM which
+        language to write the (single, shared) domain_note field in."""
+        from tools.narrative_generator import generate_narrative
+
+        captured = {}
+
+        def factory(*args, **kwargs):
+            inst = MagicMock()
+
+            def invoke(messages):
+                captured["sys"] = messages[0].content   # SystemMessage content
+                resp = MagicMock()
+                resp.content = valid_schema_json
+                return resp
+
+            inst.invoke.side_effect = invoke
+            return inst
+
+        # English path
+        state_en = dict(sample_state)
+        state_en["language"] = "en"
+        with patch("tools.narrative_generator.ChatOllama", side_effect=factory):
+            generate_narrative(state_en)
+        assert "domain_note" in captured["sys"]
+        assert "ENGLISH" in captured["sys"].upper()
+
+        # Indonesian path
+        state_id = dict(sample_state)
+        state_id["language"] = "id"
+        with patch("tools.narrative_generator.ChatOllama", side_effect=factory):
+            generate_narrative(state_id)
+        assert "domain_note" in captured["sys"]
+        assert "INDONESIA" in captured["sys"].upper()
+
     def test_strong_correlations_injected(self, sample_state, valid_schema_json):
         """Strong correlations in statistics are surfaced without error."""
         from tools.narrative_generator import generate_narrative

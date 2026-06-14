@@ -45,8 +45,9 @@ def test_deterministic_percent_from_real_total():
     block = build_deterministic_block(DF, "persen kontribusi revenue per negara", PROFILE)
     assert "Angka kunci" in block
     assert "Total Revenue = 101,00" in block          # real total, computed in Python
-    assert "UK — 79,00 (78,22%)" in block             # value + % both deterministic
-    assert "Germany — 10,00 (9,90%)" in block
+    # Revisi #2: rendered as a markdown table — value + % both deterministic.
+    assert "| UK | 79,00 | 78,22% | 4 |" in block
+    assert "| Germany | 10,00 | 9,90% | 1 |" in block
     # No 10x-inflated total anywhere.
     assert "1.010,00" not in block and "1.634" not in block
 
@@ -64,7 +65,8 @@ def test_deterministic_transactions_count_share():
     block = build_deterministic_block(
         DF, "transaksi per negara", PROFILE, {"domain_type": "retail"}
     )
-    assert "UK — 4 transaksi (66,67%)" in block
+    assert "Total transaksi = 6" in block             # unit "transaksi" (head)
+    assert "| UK | 4 | 66,67% |" in block             # table row, count branch
 
 
 def test_deterministic_empty_for_non_groupby():
