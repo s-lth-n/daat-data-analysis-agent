@@ -176,43 +176,51 @@ def _build_stats_context(stats_result: dict) -> str:
 
 # ── Schema → String Formatter ─────────────────────────────────────────────────
 
-def _format_narrative_from_schema(schema: NarrativeSchema) -> str:
-    """Convert NarrativeSchema object to a formatted markdown narrative string."""
+def _format_narrative_from_schema(schema: NarrativeSchema, language: str = "id") -> str:
+    """
+    Render a NarrativeSchema as a SINGLE-language, streaming-style narrative.
+
+    Revisi #2 (Opsi A): the schema stays intact (both ID & EN fields exist); this
+    renderer only EMITS the side matching `language` and drops every formal section
+    heading (no "## Ringkasan/Summary/Temuan Utama/Key Findings/Kesimpulan/Conclusion").
+    Output flows like a chat message: concise title → opener sentence → finding
+    bullets → optional domain note → short closing line.
+
+    Presentation only — anti-hallucination is untouched: the returned string is fed
+    to _redact_unverified_numbers downstream just like before.
+    """
+    if language == "en":
+        opener   = schema.ringkasan_en
+        findings = schema.key_findings
+        closing  = schema.conclusion_en
+    else:
+        opener   = schema.ringkasan_id
+        findings = schema.temuan_utama
+        closing  = schema.kesimpulan_id
+
     lines: list[str] = []
 
-    lines.append(f"# {schema.judul}\n")
-
-    lines.append("## Ringkasan")
-    lines.append(schema.ringkasan_id)
-    lines.append("")
-
-    lines.append("## Summary")
-    lines.append(schema.ringkasan_en)
-    lines.append("")
-
-    lines.append("## Temuan Utama")
-    for item in schema.temuan_utama:
-        lines.append(f"- {item}")
-    lines.append("")
-
-    lines.append("## Key Findings")
-    for item in schema.key_findings:
-        lines.append(f"- {item}")
-    lines.append("")
-
-    if schema.domain_note:
-        lines.append("## Catatan Domain / Domain Note")
-        lines.append(schema.domain_note)
+    if schema.judul:
+        lines.append(f"**{schema.judul}**")
         lines.append("")
 
-    lines.append("## Kesimpulan")
-    lines.append(schema.kesimpulan_id)
-    lines.append("")
+    if opener:
+        lines.append(opener)
+        lines.append("")
 
-    lines.append("## Conclusion")
-    lines.append(schema.conclusion_en)
+    for item in findings:
+        lines.append(f"- {item}")
+    if findings:
+        lines.append("")
 
-    return "\n".join(lines)
+    if schema.domain_note:
+        lines.append(f"📊 {schema.domain_note}")
+        lines.append("")
+
+    if closing:
+        lines.append(closing)
+
+    return "\n".join(lines).rstrip()
 
 
 # ── Number Validator ──────────────────────────────────────────────────────────
@@ -324,21 +332,27 @@ def _constrained_narrative(state: dict, language: str) -> str:
 
     human_content = "\n".join(parts)
 
+    # Revisi #2: single-language. Hanya minta LLM menulis SATU bahasa sesuai
+    # `language` (hemat token + cegah Qwen3 thinking berlebih). Schema TETAP utuh
+    # (Opsi A): field bahasa-lawan tetap ada tapi tidak dirender (lihat
+    # _format_narrative_from_schema). Instruksi anti-mengarang-angka tetap ada.
     if language == "id":
         system_content = (
-            "Kamu adalah analis data expert. Tulis laporan analisis BILINGUAL "
-            "(Bahasa Indonesia dan English) berdasarkan statistik yang diberikan.\n"
+            "Kamu adalah analis data expert. Tulis laporan analisis dalam BAHASA "
+            "INDONESIA saja berdasarkan statistik yang diberikan.\n"
             "WAJIB: Gunakan angka PERSIS dari blok STATS_CONTEXT. "
             "JANGAN mengarang angka yang tidak ada di STATS_CONTEXT.\n"
-            "Isi setiap field JSON sesuai deskripsi field. Minimal 3 temuan per bahasa."
+            "Fokuskan isi pada field Bahasa Indonesia (ringkasan_id, temuan_utama, "
+            "kesimpulan_id) — minimal 3 temuan. Isi field lain seperlunya."
         )
     else:
         system_content = (
-            "You are a data analysis expert. Write a BILINGUAL analysis report "
-            "(Bahasa Indonesia and English) based on the provided statistics.\n"
+            "You are a data analysis expert. Write an analysis report in ENGLISH "
+            "only based on the provided statistics.\n"
             "MANDATORY: Use ONLY exact numbers from the STATS_CONTEXT block. "
             "Do NOT fabricate numbers absent from STATS_CONTEXT.\n"
-            "Fill each JSON field as described. At least 3 findings per language."
+            "Focus on the English fields (ringkasan_en, key_findings, conclusion_en) "
+            "— at least 3 findings. Fill the other fields minimally."
         )
 
     llm_structured = ChatOllama(
@@ -371,7 +385,7 @@ def _constrained_narrative(state: dict, language: str) -> str:
             mismatched[:5],
         )
 
-    return _format_narrative_from_schema(parsed)
+    return _format_narrative_from_schema(parsed, language)
 
 
 # ── Internal: Free-Form Fallback ──────────────────────────────────────────────
