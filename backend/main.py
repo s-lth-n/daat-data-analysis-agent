@@ -82,6 +82,40 @@ def _chart_caption_md(chart_keys: list[str], language: str = "id") -> str:
     return md
 
 
+def _assemble_analysis_response(
+    *,
+    file_name: str,
+    row_count: int,
+    narrative: str,
+    session_id: str,
+    deterministic_block: str = "",
+    chart_md: str = "",
+    source_note: str = "",
+) -> str:
+    """
+    Rakit balasan analisis dalam SATU urutan presentasi yang dipakai BERSAMA oleh
+    /analyze dan /analyze/followup (Revisi #3, Opsi B):
+
+        📄 banner file → blok deterministik (bila ada) → narasi LLM → grafik
+        → penanda [SESSION_ID].
+
+    Presentasi MURNI — tidak menghitung/memanggil apa pun. Blok deterministik &
+    chart_md dirakit di handler (sumber angka), helper ini hanya menyusun string.
+    `source_note` = anotasi banner (mis. "(data dari sesi sebelumnya)" untuk followup;
+    kosong untuk analisis pertama).
+    """
+    banner_suffix = f" {source_note}" if source_note else ""
+    det_md = f"{deterministic_block}\n\n---\n\n" if deterministic_block else ""
+    return (
+        f"📄 **{file_name}** — {row_count} baris{banner_suffix}\n\n"
+        f"---\n\n"
+        f"{det_md}"
+        f"{narrative}"
+        f"{chart_md}"
+        f"\n\n[SESSION_ID: {session_id}]"
+    )
+
+
 # ── Lifespan ────────────────────────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -293,7 +327,8 @@ async def analyze_data(request: AnalysisRequest):
                 # Render chart specs → PNG files, collect keys for follow-up URLs
                 chart_keys = _render_charts_to_png(result.get("charts") or [])
 
-                domain = (result.get("domain_context") or {}).get("domain_type", "unknown")
+                domain_context = result.get("domain_context")
+                domain = (domain_context or {}).get("domain_type", "unknown")
                 session_id = make_session_id(file_name, file_size)
                 save_session(SessionData(
                     session_id      = session_id,
@@ -304,6 +339,7 @@ async def analyze_data(request: AnalysisRequest):
                     chart_keys      = chart_keys,
                     file_name       = file_name,
                     domain          = domain,
+                    domain_context  = domain_context,   # Revisi #3: dict penuh utk followup
                 ))
 
                 # Revisi #1 (chart on-demand): SEMUA chart sudah dirender & disimpan
@@ -473,7 +509,7 @@ async def analyze_followup(req: FollowUpRequest):
                 session.dataframe,
                 req.query,
                 session.column_profile or {},
-                getattr(session, "domain_context", None),
+                session.domain_context,
                 language=req.language,
             )
             if spec:
@@ -522,7 +558,7 @@ async def analyze_followup(req: FollowUpRequest):
         from tools.groupby_analyzer import build_followup_context, build_deterministic_block
         _df     = session.dataframe
         _prof   = session.column_profile or {}
-        _domain = getattr(session, "domain_context", None)
+        _domain = session.domain_context
 
         if _df is not None:
             _ctx = build_followup_context(_df, req.query, _prof, _domain)
@@ -552,16 +588,16 @@ async def analyze_followup(req: FollowUpRequest):
 
     # Fase 1.7: blok angka deterministik (kalau ada) tampil DULU sebagai sumber
     # angka otoritatif, baru narasi LLM (yang angka nyasarnya sudah diredaksi).
-    det_md = f"{deterministic_block}\n\n---\n\n" if deterministic_block else ""
-
-    full_response = (
-        f"📄 **{session.file_name}** — {len(session.dataframe)} baris "
-        f"(data dari sesi sebelumnya)\n\n"
-        f"---\n\n"
-        f"{det_md}"
-        f"{narrative}"
-        f"{chart_md}"
-        f"\n\n[SESSION_ID: {req.session_id}]"
+    # Revisi #3 (Commit 1): perakitan dipindah ke _assemble_analysis_response
+    # (presentasi bersama dgn /analyze). Output BYTE-IDENTIK dengan sebelumnya.
+    full_response = _assemble_analysis_response(
+        file_name           = session.file_name,
+        row_count           = len(session.dataframe),
+        narrative           = narrative,
+        session_id          = req.session_id,
+        deterministic_block = deterministic_block,
+        chart_md            = chart_md,
+        source_note         = "(data dari sesi sebelumnya)",
     )
 
     return {"result": full_response, "session_id": req.session_id}

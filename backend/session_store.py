@@ -9,7 +9,7 @@ Batas: 10 session aktif, TTL 2 jam.
 import hashlib
 import time
 import logging
-from typing import Any
+from typing import Any, Optional
 
 import pandas as pd
 
@@ -34,6 +34,7 @@ class SessionData:
         chart_keys: list[str],
         file_name: str,
         domain: str = "unknown",
+        domain_context: Optional[dict] = None,
     ):
         self.session_id      = session_id
         self.dataframe       = dataframe
@@ -43,6 +44,11 @@ class SessionData:
         self.chart_keys      = chart_keys
         self.file_name       = file_name
         self.domain          = domain
+        # Revisi #3 (Commit 1): simpan domain_context DICT penuh (bukan cuma string
+        # `domain`) supaya followup domain-aware — unit count retail jadi "transaksi",
+        # agregasi context mengikuti preferred_aggregation domain. Default None →
+        # backward-compat untuk session lama (fallback unit "baris", agg "sum").
+        self.domain_context  = domain_context
         self.created_at      = time.time()
         self.last_accessed   = time.time()
 
