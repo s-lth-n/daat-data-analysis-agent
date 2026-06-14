@@ -244,6 +244,12 @@ async def analyze_data(request: AnalysisRequest):
     Receives a natural language prompt and optionally a file_id,
     then uses the LangGraph agent to perform analysis.
     """
+    # Revisi #2: deteksi bahasa adaptif = SATU sumber kebenaran. Override
+    # request.language (default LLM bisa salah "id") sebelum mengalir ke agent,
+    # narasi, chart-label, & response. Default "en" bila ragu/pendek.
+    from tools.lang_detect import detect_language
+    request.language = detect_language(request.prompt)
+
     logger.info(f"Analysis request: '{request.prompt[:80]}...' (lang={request.language})")
 
     try:
@@ -414,7 +420,12 @@ async def analyze_followup(req: FollowUpRequest):
             },
         )
 
-    logger.info(f"[followup] session={req.session_id} query={req.query[:60]!r}")
+    # Revisi #2: deteksi bahasa adaptif (single source of truth) — override
+    # req.language sebelum mengalir ke state narasi, chart spec, & label grafik.
+    from tools.lang_detect import detect_language
+    req.language = detect_language(req.query)
+
+    logger.info(f"[followup] session={req.session_id} query={req.query[:60]!r} (lang={req.language})")
 
     # Revisi #1 (chart on-demand): tentukan DULU apakah balasan ini menampilkan
     # grafik — hanya bila user minta eksplisit ATAU intent groupby/temporal.
