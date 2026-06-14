@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# Environment
+.env
+
+# Data uploads (privacy: never commit user data)
+data/uploads/
+
+# Runtime output (chart PNG, uploads) — regenerated, never commit
+backend/data/
+
+# Datasets — large/private, kept locally only (privacy: never commit user data)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+# Exception: tiny sample committed as test fixture (required by tests/test_tools.py)
+!data/samples/penjualan_2024.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+ollama_data/
+open_webui_data/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# Catatan kerja pribadi — jangan ke git
+CLAUDE.md
+
+# Claude Code local settings (per-mesin) — jangan ke git
+.claude/settings.local.json
+
+# Folder arsip lokal — jangan ke git
+_archive/

@@ -1,0 +1,36 @@
+# ============================================================
+# Docker Compose — TA Data Analysis Agent
+# Services: Open WebUI (Frontend)
+# NOTE: Ollama runs natively on host (not as container)
+#       to avoid port conflicts with the host service.
+# ============================================================
+
+services:
+  # -----------------------------------------------------------
+  # Open WebUI — Frontend Chat Interface
+  # Connects to Ollama running natively on host (port 11434)
+  # -----------------------------------------------------------
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui-data:/app/backend/data
+      - /home/sulthan/ta-data-analyst/data/samples:/data/samples
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      # Point to Ollama running natively on host
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # Disable built-in RAG — file analysis handled by FastAPI backend tool
+      - ENABLE_RAG=false
+      # Default model
+      - DEFAULT_MODELS=qwen3:8b
+      # File upload limits (in MB)
+      - MAX_UPLOAD_SIZE=100
+
+volumes:
+  open-webui-data:
+    external: true
