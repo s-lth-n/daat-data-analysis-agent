@@ -1,12 +1,12 @@
 # 🤖 Agentic AI Data Analysis Agent
 
-> **Tugas Akhir** — Teknik Telekomunikasi, Institut Teknologi Bandung
+> **Tugas Akhir** Teknik Telekomunikasi, Institut Teknologi Bandung
 >
 > Pengembangan Prototipe Agentic AI (RAG/MCP) dengan Local-LLM Engine untuk Data Analysis Agent
 
 ## Overview
 
-Sistem analisis data berbasis AI yang berjalan **100% lokal** — tanpa cloud, tanpa data yang keluar dari mesin. Pengguna berinteraksi melalui chat bahasa alami untuk menganalisis file data (CSV/Excel) dan mendapatkan insight berupa statistik, visualisasi interaktif, dan laporan naratif.
+Sistem analisis data berbasis AI yang berjalan **100% lokal** tanpa cloud, tanpa data yang keluar dari mesin. Pengguna berinteraksi melalui chat bahasa alami untuk menganalisis file data (CSV/Excel) dan mendapatkan insight berupa statistik, visualisasi interaktif, dan laporan naratif.
 
 ## Tech Stack
 
