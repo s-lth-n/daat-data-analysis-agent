@@ -83,7 +83,6 @@ Claude Code will automatically read `CLAUDE.md` for project context.
 
 ```
 ta-data-analyst/
-├── CLAUDE.md              # Claude Code project context
 ├── docker-compose.yml     # Ollama + Open WebUI
 ├── backend/
 │   ├── main.py            # FastAPI app
