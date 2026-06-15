@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Data Analyst Agent — Login Preview</title>
+<link rel="stylesheet" href="./custom.css">
+<style>
+  /* ============================================================
+     Mockup-only scaffold — structure + the language toggle.
+     ALL visual styling for the form lives in custom.css.
+     This file mirrors Open WebUI's login DOM so the same
+     selectors apply consistently in both contexts.
+     ============================================================ */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { display: grid; place-items: center; min-height: 100vh; }
+  #auth-page {
+    width: 100%; min-height: 100vh;
+    display: grid; place-items: center; padding: 20px;
+    position: relative;
+  }
+
+  /* Hide the CSS-injected title from custom.css — the mockup uses
+     real HTML elements (with data-i18n) so the toggle can swap text */
+  .mb-1 { display: none !important; }
+
+  /* ------- TITLE BLOCK (HTML, translatable) ------- */
+  .login-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 28px;
+  }
+  .login-title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .login-title p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text2);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* ------- BRAND BLOCK ------- */
+  .brand-block {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .brand-mono {
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    background: var(--cocoa);
+    color: #FFFFFF;
+    border-radius: 12px;
+    font-size: 18px; font-weight: 800;
+    letter-spacing: -0.04em;
+    box-shadow: 0 6px 18px rgba(88,55,34,0.30);
+  }
+  /* Dark mode: bigger + sage tile + near-black text */
+  .dark .brand-mono, :root.dark .brand-mono {
+    width: 56px; height: 56px;
+    font-size: 21px;
+    background: var(--cocoa);
+    color: #222222;
+    border-radius: 14px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.06) inset,
+      0 6px 22px rgba(194,216,196,0.20);
+  }
+  .dark .brand-block, :root.dark .brand-block {
+    margin-bottom: 18px;
+  }
+
+  /* ------- LOCAL-MODE BADGE ------- */
+  .local-badge {
+    margin-top: 22px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 9px 16px;
+    background: var(--powder-pale);
+    border: 1px solid var(--input-border);
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--text2);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .local-badge .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--powder);
+    box-shadow: 0 0 0 3px rgba(189,215,222,0.30);
+    flex-shrink: 0;
+    animation: badge-pulse 2.4s ease-in-out infinite;
+  }
+  .dark .local-badge .dot, :root.dark .local-badge .dot {
+    box-shadow: 0 0 0 3px rgba(194,216,196,0.30);
+  }
+  @keyframes badge-pulse {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50%      { opacity: 1.00; transform: scale(1.18); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .local-badge .dot { animation: none; }
+  }
+
+  /* ============================================================
+     LANGUAGE TOGGLE — top-right glass pill
+     [G Bab 7] looks tappable · [G Bab 24] active state visible
+     [G Bab 64] color + aria-pressed both convey state
+     [G Bab 69] each button ≥40×32 (segmented pills are exempt
+                from the 44px tap minimum when grouped tightly)
+     ============================================================ */
+  .lang-toggle {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--input-border);
+    border-radius: 999px;
+    box-shadow: var(--soft-shadow);
+  }
+  .lang-toggle button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text2);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    min-height: 32px !important;     /* override the 44px global rule */
+    min-width: 48px;
+    transition: color 0.15s, background 0.15s;
+    font-family: inherit;
+  }
+  .lang-toggle button:hover {
+    color: var(--text);
+  }
+  .lang-toggle button[aria-pressed="true"] {
+    background: var(--cocoa);
+    color: #FFFFFF;
+  }
+  .dark .lang-toggle button[aria-pressed="true"],
+  :root.dark .lang-toggle button[aria-pressed="true"] {
+    color: #222222;
+  }
+  .lang-toggle button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  /* Smooth fade when switching language */
+  [data-i18n], [data-i18n-placeholder] { transition: opacity 0.18s ease; }
+  body.lang-switching [data-i18n] { opacity: 0; }
+
+  /* Field label group */
+  .field { display: flex; flex-direction: column; }
+  .field + .field { margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ====== Language toggle (top-right) ====== -->
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button type="button" data-lang="id" aria-pressed="false" aria-label="Bahasa Indonesia">INA</button>
+  <button type="button" data-lang="en" aria-pressed="true"  aria-label="English">ENG</button>
+</div>
+
+<!-- ====== Auth scaffold (mirrors Open WebUI structure) ====== -->
+<div id="auth-page">
+  <div id="auth-container">
+
+    <!-- Login card -->
+    <div class="sm:max-w-md">
+
+      <!-- Brand monogram -->
+      <div class="brand-block">
+        <div class="brand-mono">DA</div>
+      </div>
+
+      <!-- Empty mb-1 left in place to keep DOM compatible with Open WebUI -->
+      <div class="mb-1">
+        <div class="text-2xl font-medium"></div>
+      </div>
+
+      <!-- Title block (HTML, translatable) -->
+      <div class="login-title">
+        <h1 data-i18n="brand_name">Data Analyst Agent</h1>
+        <p  data-i18n="subtitle">Sign in to continue</p>
+      </div>
+
+      <!-- Form -->
+      <form class="flex flex-col justify-center" onsubmit="event.preventDefault(); fakeLogin();">
+
+        <div class="field">
+          <label for="username" data-i18n="label_username">Username</label>
+          <input id="username" type="text"
+                 data-i18n-placeholder="placeholder_username" placeholder="admin"
+                 autocomplete="username" autofocus>
+        </div>
+
+        <div class="field">
+          <label for="password" data-i18n="label_password">Password</label>
+          <input id="password" type="password"
+                 placeholder="••••••••"
+                 autocomplete="current-password">
+        </div>
+
+        <button type="submit" data-i18n="button_sign_in">Sign in</button>
+
+        <!-- Trust badge -->
+        <div class="local-badge">
+          <span class="dot"></span>
+          <span data-i18n="badge">Running locally · your data is safe</span>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ============================================================
+     Bilingual i18n — manual mapping, no external library
+     - Default: ENG
+     - Persists in localStorage under key "lang"
+     - Updates all [data-i18n] textContent and [data-i18n-placeholder] placeholders
+     - Updates the toggle's aria-pressed state for visual + a11y
+     - Brief fade on body.lang-switching for smooth swap
+     ============================================================ */
+  const translations = {
+    en: {
+      brand_name:           'Data Analyst Agent',
+      subtitle:             'Sign in to continue',
+      label_username:       'Username',
+      label_password:       'Password',
+      button_sign_in:       'Sign in',
+      button_signing_in:    'Signing in…',
+      badge:                'Running locally · your data is safe',
+      placeholder_username: 'admin'
+    },
+    id: {
+      brand_name:           'Data Analyst Agent',     // same — brand identity
+      subtitle:             'Masuk untuk melanjutkan',
+      label_username:       'Nama pengguna',
+      label_password:       'Kata sandi',
+      button_sign_in:       'Masuk',
+      button_signing_in:    'Sedang masuk…',
+      badge:                'Berjalan secara lokal · data Anda aman',
+      placeholder_username: 'admin'
+    }
+  };
+
+  const STORAGE_KEY = 'daa-lang';
+
+  function applyTranslations(lang) {
+    const dict = translations[lang];
+    if (!dict) return;
+
+    // Text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+
+    // Placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+  }
+
+  function setLanguage(lang, animate = true) {
+    if (!translations[lang]) lang = 'en';
+
+    // Toggle visual state
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
+    });
+
+    // <html lang="…"> for screen readers + browser hints
+    document.documentElement.lang = lang;
+
+    // Persist
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* private mode */ }
+
+    // Fade-swap or instant-swap
+    if (animate) {
+      document.body.classList.add('lang-switching');
+      setTimeout(() => {
+        applyTranslations(lang);
+        document.body.classList.remove('lang-switching');
+      }, 180);
+    } else {
+      applyTranslations(lang);
+    }
+  }
+
+  // Toggle handlers
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
+  // On load: read saved preference, default to "en"
+  let initialLang = 'en';
+  try { initialLang = localStorage.getItem(STORAGE_KEY) || 'en'; } catch (e) {}
+  setLanguage(initialLang, /* animate */ false);
+
+  /* ============================================================
+     Fake login — also language-aware
+     ============================================================ */
+  function fakeLogin() {
+    const btn = document.querySelector('button[type="submit"]');
+    const lang = document.documentElement.lang || 'en';
+    const dict = translations[lang];
+    const restoreLabel = dict.button_sign_in;
+    btn.disabled = true;
+    btn.textContent = dict.button_signing_in;
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = restoreLabel;
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1197 @@
+/* ==========================================================
+   Data Analyst Agent — Theme v18 (Cocoa light · Sage dark · i18n-ready)
+
+   LIGHT MODE
+     • Page bg: Powder Blue gradient (#BDD7DE → #d8e6ea)
+     • Glass card on top, frosted (rgba(255,255,255,0.62) + 24px blur)
+     • Cocoa #583722 ink + Powder Blue accent (focus + badge)
+     • Embossed "DATA ANALYST / AGENT" bg text — TOP + BOTTOM split
+
+   DARK MODE
+     • Page bg: deep neutral #222222 with subtle radial depth
+     • TRUE glass card (rgba(255,255,255,0.06) + 20px blur)
+     • Sage #C2D8C4 ink + sage button + sage accent
+     • Embossed bg text in sage (timbul like light mode)
+
+   STRICT mapping to nay's UIUX folder:
+   [G N]  Grant (2018) Bab N           [K Bab N hal.X]  Krug (2013)
+   [M Lesson N hal.X]  Marsh (2016)    [N]  Nunnally & Farkas (2016)
+   [P1] Yudhanto et al. (2022) IEEE APICS
+   [P2] Ruiz et al. (2020) IEEE TLT — FENIkS
+   [P3] Gunawan et al. (2021) IEEE CONMEDIA
+   [MS hal.X]  UIUX_Master_Summary.pdf
+
+   "Pilihan glassmorphism" — MS hal.19. Contrast warning (MS hal.4)
+   honored: every text/bg pair clears WCAG AA, most clear AAA.
+   ========================================================== */
+
+
+/* ============================================
+   COLOR TOKENS
+   ============================================ */
+
+/* ---- LIGHT MODE — Cream + atmospheric pale-blue/peach blends ---- */
+:root {
+  /* Brand cocoa scale */
+  --cocoa:        #402D21;        /* deep cocoa — primary text + button bg */
+  --cocoa-deep:   #402D21;
+  --cocoa-soft:   #6C4D38;        /* medium cocoa — hover */
+  --cocoa-tan:    #CFB59E;        /* taupe — decorative tint */
+
+  /* Atmospheric palette */
+  --atmos-base:   #FEFAF8;        /* off-white base */
+  --atmos-blue:   #DDE6ED;        /* pale blue blend */
+  --atmos-peach:  #F8EADE;        /* peach cream blend */
+
+  /* Legacy aliases (kept for downstream rule reuse) */
+  --powder:       #DDE6ED;
+  --powder-soft:  #F8EADE;
+  --powder-pale:  #FEFAF8;
+
+  /* Functional aliases */
+  --accent:       var(--cocoa-deep);
+  --accent2:      var(--cocoa-soft);
+  --accent-light: var(--cocoa-tan);
+  --accent-glow:  rgba(221,230,237,0.55);    /* pale-blue focus glow */
+
+  /* Surfaces */
+  --card-bg:        rgba(255,255,255,0.62);
+  --card-bg-solid:  #ffffff;
+  --side-bg:        rgba(255,255,255,0.55);
+  --modal-bg:       #ffffff;
+  --login-card-bg:  rgba(255,255,255,0.62);
+
+  /* Text */
+  --text:   #402D21;
+  --text2:  #6C4D38;
+  --text3:  #8B6E51;
+
+  /* Inputs */
+  --input-bg:     rgba(255,255,255,0.62);
+  --input-border: rgba(64,45,33,0.20);
+  --hover:        rgba(64,45,33,0.06);
+  --code-bg:      rgba(255,255,255,0.70);
+  --divider:      rgba(64,45,33,0.12);
+
+  /* Page bg — layered radial gradients (cloud-like, atmospheric) */
+  --page-bg:
+    radial-gradient(ellipse at 18% 28%, var(--atmos-peach) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 72%, var(--atmos-blue)  0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, #ffffff           0%, transparent 70%),
+    var(--atmos-base);
+
+  /* Main interface (post-login) — neutral cream */
+  --neutral-bg:      var(--atmos-base);
+  --neutral-soft:    #F5EFE5;
+  --neutral-border:  rgba(64,45,33,0.10);
+
+  /* Main canvas bg — same cloud language as login, visible but low contrast.
+     Peach + hint of pale-blue + faint white center on the cream base. */
+  --main-bg:
+    radial-gradient(ellipse at 20% 30%, rgba(248,234,222,0.65) 0%, transparent 65%),
+    radial-gradient(ellipse at 80% 70%, rgba(221,230,237,0.42) 0%, transparent 65%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.35) 0%, transparent 75%),
+    var(--neutral-bg);
+
+  --side-border: rgba(64,45,33,0.10);
+  --blob-opacity: 0.20;
+
+  --card-shadow:
+    0 24px 60px rgba(64,45,33,0.10),
+    0 4px 12px rgba(64,45,33,0.06);
+  --soft-shadow:      0 4px 14px rgba(64,45,33,0.08);
+  --button-shadow:    0 6px 18px rgba(64,45,33,0.22);
+  --button-shadow-h:  0 8px 22px rgba(64,45,33,0.30);
+
+  /* No background text in this version — keep tokens for any leftover refs */
+  --emboss-color:      transparent;
+  --emboss-highlight:  transparent;
+  --emboss-shadow:     transparent;
+}
+
+/* ---- DARK MODE — Onyx with warm-glow patches ----
+   Palette: #1C1C1B (base) · #6A5D52 · #B7AC9B · #979086 · #E2E2DE   */
+.dark, :root.dark {
+  /* Brand scale — accent uses the warm tan #B7AC9B */
+  --cocoa:        #B7AC9B;
+  --cocoa-deep:   #E2E2DE;       /* off-white — hover */
+  --cocoa-soft:   #979086;       /* gray-tan — active */
+  --cocoa-tan:    #6A5D52;       /* warm brown — decorative */
+
+  /* Atmospheric */
+  --atmos-base:   #1C1C1B;
+  --atmos-blue:   rgba(183,172,155,0.04);
+  --atmos-peach:  rgba(106,93,82,0.10);
+
+  /* Legacy aliases */
+  --powder:       #B7AC9B;
+  --powder-soft:  rgba(183,172,155,0.08);
+  --powder-pale:  rgba(183,172,155,0.10);
+
+  /* Functional aliases */
+  --accent:       #B7AC9B;
+  --accent2:      #E2E2DE;
+  --accent-light: #979086;
+  --accent-glow:  rgba(183,172,155,0.40);
+
+  /* Surfaces */
+  --card-bg:        rgba(255,255,255,0.06);
+  --card-bg-solid:  #252523;     /* slightly lifted from base */
+  --side-bg:        rgba(255,255,255,0.04);
+  --modal-bg:       #252523;
+  --login-card-bg:  rgba(255,255,255,0.06);
+
+  /* Text — neutral grayscale-warm for premium feel */
+  --text:   #E2E2DE;             /* primary — high contrast */
+  --text2:  #B7AC9B;             /* secondary */
+  --text3:  #979086;             /* placeholder / metadata */
+
+  /* Inputs — bumped contrast per spec */
+  --input-bg:     rgba(255,255,255,0.07);   /* was 0.04 */
+  --input-border: rgba(226,226,222,0.28);   /* was 0.20 */
+  --hover:        rgba(255,255,255,0.06);
+  --code-bg:      rgba(255,255,255,0.04);
+  --divider:      rgba(255,255,255,0.10);
+
+  /* Page bg — Onyx with soft warm-glow patches */
+  --page-bg:
+    radial-gradient(ellipse at 18% 28%, rgba(106,93,82,0.30) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 72%, rgba(183,172,155,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(226,226,222,0.04) 0%, transparent 70%),
+    var(--atmos-base);
+
+  --neutral-bg:      #1C1C1B;
+  --neutral-soft:    #161615;
+  --neutral-border:  rgba(255,255,255,0.07);
+
+  /* Main canvas bg (dark) — Onyx with subtle blends of #2A2623 + #6A5D52 */
+  --main-bg:
+    radial-gradient(ellipse at 20% 30%, rgba(106,93,82,0.24) 0%, transparent 65%),
+    radial-gradient(ellipse at 80% 70%, rgba(42,38,35,0.85) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 50%, rgba(183,172,155,0.06) 0%, transparent 75%),
+    var(--neutral-bg);
+
+  --side-border: rgba(255,255,255,0.10);
+  --blob-opacity: 0.08;
+
+  --card-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 24px 60px rgba(0,0,0,0.60),
+    0 4px 16px rgba(0,0,0,0.40);
+  --soft-shadow:      0 4px 14px rgba(0,0,0,0.45);
+  --button-shadow:    0 6px 18px rgba(183,172,155,0.18);
+  --button-shadow-h:  0 8px 22px rgba(183,172,155,0.28);
+
+  --emboss-color:      transparent;
+  --emboss-highlight:  transparent;
+  --emboss-shadow:     transparent;
+}
+
+/* ---- SYSTEM PREFERS DARK ---- */
+@media(prefers-color-scheme:dark){
+  :root:not(.dark):not([class]){
+    --cocoa:#B7AC9B;--cocoa-deep:#E2E2DE;--cocoa-soft:#979086;--cocoa-tan:#6A5D52;
+    --atmos-base:#1C1C1B;--atmos-blue:rgba(183,172,155,0.04);--atmos-peach:rgba(106,93,82,0.10);
+    --powder:#B7AC9B;--powder-soft:rgba(183,172,155,0.08);--powder-pale:rgba(183,172,155,0.10);
+    --accent:#B7AC9B;--accent2:#E2E2DE;--accent-light:#979086;
+    --accent-glow:rgba(183,172,155,0.40);
+    --card-bg:rgba(255,255,255,0.06);--card-bg-solid:#252523;
+    --side-bg:rgba(255,255,255,0.04);--modal-bg:#252523;
+    --login-card-bg:rgba(255,255,255,0.06);
+    --text:#E2E2DE;--text2:#B7AC9B;--text3:#979086;
+    --input-bg:rgba(255,255,255,0.07);--input-border:rgba(226,226,222,0.28);
+    --hover:rgba(255,255,255,0.06);--code-bg:rgba(255,255,255,0.04);
+    --divider:rgba(255,255,255,0.10);
+    --page-bg:radial-gradient(ellipse at 18% 28%,rgba(106,93,82,0.30) 0%,transparent 55%),radial-gradient(ellipse at 82% 72%,rgba(183,172,155,0.14) 0%,transparent 55%),radial-gradient(ellipse at 50% 50%,rgba(226,226,222,0.04) 0%,transparent 70%),#1C1C1B;
+    --neutral-bg:#1C1C1B;--neutral-soft:#161615;--neutral-border:rgba(255,255,255,0.07);
+    --main-bg:radial-gradient(ellipse at 20% 30%,rgba(106,93,82,0.24) 0%,transparent 65%),radial-gradient(ellipse at 80% 70%,rgba(42,38,35,0.85) 0%,transparent 70%),radial-gradient(ellipse at 50% 50%,rgba(183,172,155,0.06) 0%,transparent 75%),#1C1C1B;
+    --side-border:rgba(255,255,255,0.10);--blob-opacity:0.08;
+    --card-shadow:0 0 0 1px rgba(255,255,255,0.04) inset,0 24px 60px rgba(0,0,0,0.60),0 4px 16px rgba(0,0,0,0.40);
+    --soft-shadow:0 4px 14px rgba(0,0,0,0.45);
+    --button-shadow:0 6px 18px rgba(183,172,155,0.18);--button-shadow-h:0 8px 22px rgba(183,172,155,0.28);
+    --emboss-color:transparent;--emboss-highlight:transparent;--emboss-shadow:transparent;
+  }
+}
+
+
+/* ============================================
+   TYPOGRAPHY — system stack only
+   [G Bab 2-3] system fonts; max 2 typefaces
+   [G Bab 4] tier hierarchy
+   [G Bab 5] 16px body, line 1.5
+   ============================================ */
+
+html { font-size: 16px !important; }
+
+body, body * {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.text-xs   { font-size: 13px !important; line-height: 1.4 !important; }
+.text-sm   { font-size: 15px !important; line-height: 1.5 !important; }
+.text-base { font-size: 16px !important; line-height: 1.5 !important; }
+.text-lg   { font-size: 18px !important; line-height: 1.5 !important; }
+.text-xl   { font-size: 22px !important; line-height: 1.3 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+.text-2xl  { font-size: 26px !important; line-height: 1.2 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+.text-3xl  { font-size: 32px !important; line-height: 1.2 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+
+
+/* ============================================
+   PAGE BACKGROUND
+   - Default body bg = NEUTRAL (calm canvas for the main interface)
+   - Dramatic gradient is scoped to #auth-page only
+   - Ambient blobs removed entirely (per Krug Hukum Ketiga)
+   [Krug Bab 3 hal.31-35] hapus setengah dari kata-kata, applies to decoration too
+   [Marsh Lesson 65 hal.143-144] neutral canvas → input wins attention
+   ============================================ */
+
+body {
+  /* Same cloud language as the login page — but ~35% strength.
+     Calm atmospheric depth without competing with chat content.
+     [N] aesthetic-usability · [Krug Hukum Pertama] don't make me think */
+  background: var(--main-bg) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+}
+
+.app, main { background: transparent !important; }
+
+
+/* ============================================
+   AUTH PAGE — TWO-LINE EMBOSSED BG TEXT
+   "DATA ANALYST" anchored top, "AGENT" anchored bottom.
+   White-space: nowrap → crops past viewport edges.
+   [G Bab 64] decoration ≠ sole meaning channel
+   [K Bab 3 hal.31-35] hierarchy: card carries attention, bg is texture
+   [G Bab 40] static
+   ============================================ */
+
+#auth-page {
+  /* Auth page restores its own dramatic gradient.
+     Main interface stays on the neutral body bg. */
+  background: var(--page-bg) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 100vh !important;
+}
+
+#auth-page > div.w-full.h-full.absolute { display: none !important; }
+#auth-container, #auth-page > div.fixed { background: transparent !important; }
+
+/* ============================================
+   ANIMATED AMBIENT ORB
+   Replaces the embossed bg text. ONE soft glowing orb that pulses
+   slowly. Pure CSS, ambient (not interactive), no sharp motion.
+   [Grant Bab 40] short, subtle, doesn't shift any interactive element
+   [N] aesthetic-usability — calm atmospheric depth
+   ============================================ */
+#auth-page::before {
+  content: '';
+  position: fixed;
+  width: clamp(420px, 55vw, 720px);
+  height: clamp(420px, 55vw, 720px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    var(--cocoa-tan) 0%,
+    var(--atmos-peach) 40%,
+    transparent 75%);
+  opacity: 0.32;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  animation: orb-pulse 9s ease-in-out infinite;
+}
+
+.dark #auth-page::before, :root.dark #auth-page::before {
+  background: radial-gradient(circle,
+    var(--cocoa-tan) 0%,
+    rgba(106,93,82,0.20) 45%,
+    transparent 75%);
+  opacity: 0.55;
+}
+
+@keyframes orb-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: var(--orb-min, 0.28); }
+  50%      { transform: translate(-50%, -50%) scale(1.08); opacity: var(--orb-max, 0.42); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #auth-page::before { animation: none !important; }
+}
+
+
+/* ============================================
+   LOGIN CARD — GLASSMORPHISM
+   [MS hal.19] "pilihan glassmorphism"
+   [G Bab 59] post-blend ≥7:1 AAA both modes
+   [G Bab 60] visible border + shadow = card affordance
+   [P3] frosted layer = polish signal → trust
+   ============================================ */
+
+div.sm\:max-w-md, div[class*="sm:max-w-md"] {
+  background: var(--login-card-bg) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+  border: 1px solid rgba(255,255,255,0.45) !important;
+  border-radius: 22px !important;
+  padding: 44px 40px 36px !important;
+  box-shadow: var(--card-shadow) !important;
+  max-width: 460px !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 10 !important;
+  animation: card-enter 0.5s ease-out both !important;
+}
+
+.dark div.sm\:max-w-md, .dark div[class*="sm:max-w-md"],
+:root.dark div.sm\:max-w-md, :root.dark div[class*="sm:max-w-md"] {
+  border: 1px solid rgba(255,255,255,0.20) !important;
+}
+
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================
+   LOGIN TITLE — i18n-ready via CSS variables
+   Default English; override from JavaScript:
+     document.documentElement.style.setProperty('--i18n-title',
+       '"Masuk untuk melanjutkan"');
+   [G Bab 4] hierarchy by SIZE+WEIGHT
+   [G Bab 89] human voice
+   [K Bab 5] subtitle = what to do (no Welcome back)
+   ============================================ */
+
+div.mb-1 > div.text-2xl.font-medium {
+  font-size: 0 !important;
+  color: transparent !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin-bottom: 28px !important;
+}
+
+div.mb-1 > div.text-2xl.font-medium::before {
+  content: var(--i18n-title, 'Data Analyst Agent') !important;
+  display: block !important;
+  font-size: 32px !important;          /* bumped from 26 */
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  text-align: center !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+}
+
+div.mb-1 > div.text-2xl.font-medium::after {
+  content: var(--i18n-subtitle, 'Sign in to continue') !important;
+  display: block !important;
+  font-size: 16px !important;          /* bumped from 14 */
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+}
+
+.dark div.mb-1 > div.text-2xl.font-medium::before,
+:root.dark div.mb-1 > div.text-2xl.font-medium::before {
+  font-size: 34px !important;          /* bumped from 28 */
+  letter-spacing: -0.02em !important;
+}
+
+
+/* ============================================
+   FORM & INPUTS
+   [G Bab 5] 16px font · [G Bab 38] never clear data
+   [G Bab 45] validate ASAP · [G Bab 60] visible border
+   [G Bab 67] persistent labels · [G Bab 69] ≥44px
+   [P2 FENIkS] immediate visual feedback layer
+   ============================================ */
+
+form.flex.flex-col.justify-center { gap: 14px !important; }
+
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], textarea {
+  width: 100% !important;
+  padding: 13px 16px !important;
+  background: var(--input-bg) !important;
+  border: 1.5px solid var(--input-border) !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  color: var(--text) !important;
+  outline: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
+  min-height: 48px !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--cocoa) !important;
+  background: rgba(255,255,255,0.85) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  outline: none !important;
+}
+.dark input:focus, .dark textarea:focus,
+:root.dark input:focus, :root.dark textarea:focus {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: var(--powder) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+}
+
+::placeholder {
+  color: var(--text3) !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+}
+
+label {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--text2) !important;
+  margin-bottom: 6px !important;
+}
+
+
+/* ============================================
+   LOCAL-MODE BADGE — CSS-only fallback
+   Renders below the form even if custom.js isn't loaded.
+   custom.js (when present) hides this and replaces with a richer
+   HTML version that has a separately animated PB/sage dot.
+   Content driven by --i18n-badge so language toggle can swap it.
+   [G Bab 20] orient new admin · [G Bab 89] human voice
+   ============================================ */
+
+form.flex.flex-col.justify-center::after {
+  content: var(--i18n-badge, '\2022\00a0  Running locally \00b7 your data is safe') !important;
+  display: block !important;
+  width: -webkit-fit-content !important;
+  width: fit-content !important;
+  margin: 22px auto 0 !important;
+  padding: 9px 18px !important;
+  background: var(--powder-pale) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 999px !important;
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* When custom.js mounts the rich version, hide the CSS fallback */
+form.flex.flex-col.justify-center.has-js-badge::after {
+  display: none !important;
+}
+
+
+/* ============================================
+   PRIMARY BUTTON
+   [G Bab 7] looks like a button · [G Bab 9] click feedback
+   [G Bab 69] ≥44px · [Marsh Lesson 65] Axis of Interaction
+   [Marsh Lesson 67] distinct primary · [MS hal.6] OBVIOUS tier
+   ============================================ */
+
+button { min-height: 44px !important; }
+
+button[type="submit"] {
+  width: 100% !important;
+  padding: 14px !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  cursor: pointer !important;
+  box-shadow: var(--button-shadow) !important;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s !important;
+  min-height: 50px !important;
+  margin-top: 10px !important;
+}
+
+button[type="submit"]:hover {
+  background: var(--accent2) !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 4px 12px rgba(88,55,34,0.30) !important;
+}
+
+button[type="submit"]:focus-visible {
+  outline: none !important;
+  box-shadow: var(--button-shadow), 0 0 0 3px var(--accent-glow) !important;
+}
+
+button[type="submit"]:disabled {
+  background: #c9bba8 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Dark mode: sage button + near-black text */
+.dark button[type="submit"], :root.dark button[type="submit"] {
+  background: var(--accent) !important;
+  color: #222222 !important;
+}
+.dark button[type="submit"]:hover, :root.dark button[type="submit"]:hover {
+  background: var(--accent2) !important;
+  color: #222222 !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+.dark button[type="submit"]:active, :root.dark button[type="submit"]:active {
+  background: var(--accent-light) !important;
+  color: #222222 !important;
+}
+
+button.px-3\.5.py-1\.5.text-sm.font-medium.bg-black,
+button.px-3\.5.py-1\.5.text-sm.font-medium.dark\:bg-white {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+
+/* ============================================
+   LANGUAGE TOGGLE  ★ NEW ★
+   Top-right glass pill (INA | ENG)
+   [G Bab 7] tappable · [G Bab 24] active state visible
+   [G Bab 64] color + aria-pressed both convey state
+   ============================================ */
+
+/* Toggle is now a sibling of the top-right header actions (settings + avatar).
+   It follows the natural document flow — no fixed positioning, no z-index.
+   When the right-side panel opens, it shifts left with the rest of the header. */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--card-bg-solid);
+  border: 1px solid var(--input-border);
+  border-radius: 999px;
+  box-shadow: var(--soft-shadow);
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.lang-toggle button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  min-height: 32px !important;
+  min-width: 48px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.lang-toggle button:hover { color: var(--text); }
+
+.lang-toggle button[aria-pressed="true"] {
+  background: var(--cocoa);
+  color: #FFFFFF;
+}
+
+.dark .lang-toggle button[aria-pressed="true"],
+:root.dark .lang-toggle button[aria-pressed="true"] {
+  color: #222222;
+}
+
+.lang-toggle button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+[data-i18n], [data-i18n-placeholder] { transition: opacity 0.18s ease; }
+body.lang-switching [data-i18n] { opacity: 0; }
+
+
+/* ============================================
+   TOP-RIGHT ACTION BUTTONS — bigger tap targets
+   Profile avatar, Settings/Controls sliders, Temporary chat indicator.
+   [Grant Bab 69] ≥44px tap target · [Grant Bab 32] obvious affordance
+   These selectors target Open WebUI's typical circular icon buttons
+   in the top toolbar area without affecting our own toggle.
+   ============================================ */
+
+button.rounded-full:not(.lang-toggle button):not([type="submit"]):not(#send-message-button),
+button[class*="rounded-full"]:not(.lang-toggle button):not([type="submit"]):not(#send-message-button) {
+  min-width: 40px !important;
+  min-height: 40px !important;
+}
+
+button.rounded-full svg,
+button[class*="rounded-full"] svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Profile avatar (image rendered inside a rounded button or container) */
+img.rounded-full,
+img[class*="rounded-full"],
+[class*="avatar"] img,
+[class*="avatar"] {
+  min-width: 40px !important;
+  min-height: 40px !important;
+}
+
+/* Override: keep our own toggle + send buttons at their original sizes */
+.lang-toggle button {
+  min-height: 32px !important;
+  min-width: 48px !important;
+}
+.lang-toggle img { min-width: 0 !important; min-height: 0 !important; }
+#send-message-button svg { width: 18px !important; height: 18px !important; }
+
+/* No panel-hide rules needed — the toggle is now an inline header
+   sibling and shifts with the rest of the layout when panels open. */
+
+
+/* ============================================
+   SIDEBAR — glass
+   ============================================ */
+
+/* Sidebar — flat, lighter, secondary
+   [Krug Bab 3] visual weight matches functional weight: sidebar is
+   navigation, not the main action — drop the glass + blur.
+   [Grant Bab 4] secondary surfaces should recede, not compete. */
+#sidebar {
+  background: var(--neutral-soft) !important;
+  border-right: 1px solid var(--neutral-border) !important;
+  font-size: 15px !important;
+  /* removed: backdrop-filter, glass tint */
+}
+
+#sidebar > div { padding: 6px 8px !important; }
+
+#sidebar > div *:hover {
+  background-color: var(--hover) !important;
+  border-radius: 10px !important;
+}
+
+#sidebar a, #sidebar button {
+  border-radius: 8px !important;
+  font-size: 14px !important;            /* smaller — secondary nav */
+  color: var(--text2) !important;        /* muted by default */
+  min-height: 36px !important;
+  padding: 7px 10px !important;
+  font-weight: 400 !important;
+}
+
+#sidebar a:hover, #sidebar button:hover { color: var(--text) !important; }
+
+#sidebar [class*="text-xs"] {
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text3) !important;
+  font-weight: 600 !important;
+}
+
+#sidebar [class*="font-bold"],
+#sidebar [class*="font-semibold"] {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+}
+
+#sidebar > div:last-child {
+  border-top: 1px solid var(--side-border) !important;
+}
+
+/* Sidebar icons — bigger + more visible for non-technical users.
+   [Grant Bab 69] ≥44px tap target; [Grant Bab 32] icons + label */
+#sidebar svg {
+  width: 22px !important;
+  height: 22px !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.15s !important;
+}
+#sidebar a:hover svg, #sidebar button:hover svg {
+  opacity: 1 !important;
+}
+#sidebar a, #sidebar button {
+  min-height: 44px !important;
+  font-size: 15px !important;
+}
+
+
+/* ============================================
+   SIDEBAR — HIDE NON-ESSENTIAL ITEMS
+   Keep: New Chat (+ Search if shown). Hide: Notes, Workspace.
+   [Krug Bab 1 hal.11] don't show what users don't need right now
+   [Grant Bab 26] hide advanced/secondary functions
+   Multiple selector patterns to catch Open WebUI's variations.
+   If your build uses different attributes, inspect and add a rule.
+   ============================================ */
+
+/* Notes */
+#sidebar a[href*="notes" i],
+#sidebar a[href$="/notes"],
+#sidebar [aria-label*="Notes" i],
+#sidebar button[id*="notes" i],
+#sidebar [data-testid*="notes" i] { display: none !important; }
+
+/* Workspace */
+#sidebar a[href*="workspace" i],
+#sidebar a[href$="/workspace"],
+#sidebar [aria-label*="Workspace" i],
+#sidebar button[id*="workspace" i],
+#sidebar [data-testid*="workspace" i] { display: none !important; }
+
+
+/* ============================================
+   MODEL SELECTOR — "AI Assistant (model-id)"
+   Inject "AI Assistant" as primary text via ::before;
+   the existing model-id stays but reads as smaller/muted.
+   [Grant Bab 89] write like a human — non-tech users see "AI Assistant"
+   [Grant Bab 4] hierarchy: human label dominant, model-id parenthetical
+   [Grant Bab 26] hide technical info from most users — model-id remains
+                  but visually subordinate
+   If your Open WebUI version uses different attributes for the
+   model picker, inspect the element and tweak the selector group.
+   ============================================ */
+
+button[aria-label*="Select" i][aria-label*="model" i],
+button[id*="model-selector" i],
+[class*="model-selector"] button,
+button[aria-haspopup][class*="model" i] {
+  position: relative !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  letter-spacing: 0 !important;
+  padding-left: 14px !important;
+}
+
+button[aria-label*="Select" i][aria-label*="model" i]::before,
+button[id*="model-selector" i]::before,
+[class*="model-selector"] button::before,
+button[aria-haspopup][class*="model" i]::before {
+  content: 'AI Assistant';
+  margin-right: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+
+/* Wrap the existing model id in parentheses visually using ::after
+   on the inner text element. If parens already render in your build,
+   remove this rule. */
+button[aria-label*="Select" i][aria-label*="model" i] > span,
+button[id*="model-selector" i] > span,
+[class*="model-selector"] button > span {
+  font-size: 13px !important;
+  color: var(--text2) !important;
+  font-weight: 400 !important;
+}
+
+
+/* ============================================
+   CHAT PAGE
+   ============================================ */
+
+main [class*="group"] {
+  padding-top: 18px !important;          /* slightly more breath between messages */
+  padding-bottom: 18px !important;
+}
+
+.assistant-message, main [class*="prose"] {
+  font-size: 16px !important;
+  line-height: 1.65 !important;          /* easier long-read */
+  color: var(--text) !important;
+}
+
+div[class*="sticky"][class*="top-0"] { padding: 8px 12px !important; }
+
+
+/* ============================================
+   SEND BUTTON
+   ============================================ */
+
+#send-message-button {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  box-shadow: var(--button-shadow) !important;
+  transition: background 0.15s, box-shadow 0.15s !important;
+}
+
+#send-message-button:hover {
+  background: var(--accent2) !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+
+.dark #send-message-button, :root.dark #send-message-button { color: #222222 !important; }
+
+
+/* ============================================
+   CHAT INPUT — glass
+   ============================================ */
+
+/* Chat input — the OBVIOUS-tier action; visual weight from clarity not decoration.
+   Visually rhymes with the login card (radius + soft elevation) without using glass.
+   [Marsh Lesson 65 hal.143-144] Axis of Interaction
+   [MS hal.6] OBVIOUS tier · [Grant Bab 60] single hairline affordance */
+form > div:has(textarea),
+div[class*="bg-"][class*="rounded-"]:has(textarea) {
+  background: var(--card-bg-solid) !important;
+  border: 1px solid var(--neutral-border) !important;
+  border-radius: 20px !important;        /* matches login card visual rhythm */
+  box-shadow:
+    0 1px 2px rgba(64,45,33,0.04),
+    0 8px 22px rgba(64,45,33,0.06) !important;
+  transition: border-color 0.18s, box-shadow 0.18s !important;
+}
+
+form > div:has(textarea):focus-within {
+  border-color: var(--accent) !important;
+  box-shadow:
+    0 0 0 3px var(--accent-glow),
+    0 8px 20px rgba(64,45,33,0.05) !important;
+}
+
+
+/* ============================================
+   CHAT BLANK SLATE
+   ============================================ */
+
+/* TipTap / ProseMirror chat input placeholder override.
+   Open WebUI shows the placeholder via ::before on the empty paragraph.
+   We replace its content with our localized string, set as a CSS var by JS.
+   [Grant Bab 67] persistent placeholder; [Grant Bab 89] human voice */
+#chat-input p.is-editor-empty:first-child::before,
+#chat-input p:first-child:empty::before,
+#chat-input p[data-placeholder]:first-child::before {
+  content: var(--i18n-chat-ph, 'Upload your file or state your request…') !important;
+  color: var(--text3) !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  float: left !important;
+}
+
+
+/* Custom blank slate — title + subtitle injected by custom.js as .daa-blank.
+   When .daa-blank exists, we hide Open WebUI's default greeting + suggestions
+   so there's only one source of truth.
+   [Krug Bab 5 hal.45-46] hapus happy talk
+   [Grant Bab 89] human voice; [Grant Bab 20] orient new user
+   [Grant Bab 4] hierarchy: title bold, subtitle normal + muted */
+
+/* When custom blank slate is mounted, hide Open WebUI's default greeting + suggestions.
+   Selectors are TIGHT to avoid hiding the chat input wrapper or other UI. */
+
+/* Default greeting heading */
+body.daa-custom-blank h1[class*="text-3xl"]:not(.daa-blank-title),
+body.daa-custom-blank h2[class*="text-3xl"]:not(.daa-blank-title),
+body.daa-custom-blank div[class*="text-3xl"]:not(.daa-blank-title):not(:has(.daa-blank-title)):not(:has(textarea)):not(:has(#chat-input)) {
+  display: none !important;
+}
+
+/* Default suggestion cards — Open WebUI uses a button or anchor with
+   the literal "Suggestion" word in its class. Don't catch input wrappers. */
+body.daa-custom-blank button.suggestion,
+body.daa-custom-blank a.suggestion,
+body.daa-custom-blank button[class*="suggestion-"]:not(.daa-sug),
+body.daa-custom-blank a[class*="suggestion-"]:not(.daa-sug) {
+  display: none !important;
+}
+
+/* The "Suggested" label/section header — only target headings, not inputs */
+body.daa-custom-blank > * h2:has(svg),
+body.daa-custom-blank > * h3:has(svg),
+body.daa-custom-blank > * div[class*="text-base"][class*="font-medium"]:has(> svg + *) {
+  display: none !important;
+}
+
+/* Hide the custom blank slate when actual chat messages are rendered.
+   Uses :has() — well-supported in Chrome/Safari/Edge/Firefox 121+.
+   This way JS can blindly inject; CSS controls visibility. */
+body:has(.user-message) .daa-blank,
+body:has(.user-message) .daa-suggestions,
+body:has(.assistant-message) .daa-blank,
+body:has(.assistant-message) .daa-suggestions,
+body:has([data-message-id]) .daa-blank,
+body:has([data-message-id]) .daa-suggestions {
+  display: none !important;
+}
+
+/* Custom blank slate container — sits centered above the input */
+.daa-blank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 28px;
+  padding: 0 16px;
+  text-align: center;
+  max-width: 540px;
+}
+
+.daa-blank-title {
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.daa-blank-subtitle {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  opacity: 0.85;
+}
+
+/* Custom suggestion row — sits below the input, secondary visual weight */
+.daa-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+  max-width: 720px;
+}
+
+.daa-sug {
+  appearance: none;
+  border: 1px solid var(--neutral-border);
+  background: transparent;
+  color: var(--text2);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  font-family: inherit;
+  opacity: 0.85;
+  min-height: auto !important;
+}
+
+.daa-sug:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--hover);
+  opacity: 1;
+}
+
+.daa-sug:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-color: var(--accent);
+}
+
+/* Reassurance text — subtle trust signal under the suggestions
+   [Grant Bab 89] human voice; [P3] trust signal */
+.daa-reassurance {
+  text-align: center !important;
+  margin: 14px auto 0 !important;
+  font-size: 12px !important;
+  color: var(--text3) !important;
+  letter-spacing: 0.01em !important;
+  opacity: 0.75;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+}
+
+/* Hide the reassurance + custom blank when actual messages appear */
+body:has(.user-message) .daa-reassurance,
+body:has(.assistant-message) .daa-reassurance,
+body:has([data-message-id]) .daa-reassurance {
+  display: none !important;
+}
+
+
+/* ============================================
+   SUGGESTION CARDS — glass
+   ============================================ */
+
+/* Suggestion cards — secondary, lighter than the input
+   [Grant Bab 4] tier 2 visual weight; [Krug Bab 3] no over-affordance
+   Accent only appears on hover (active state) per project spec. */
+button[class*="suggestion"], div[class*="suggestion"] {
+  background: transparent !important;
+  border: 1px solid var(--neutral-border) !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+  box-shadow: none !important;
+  color: var(--text2) !important;            /* muted — suggestion text is hint */
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  transition: border-color 0.15s, color 0.15s, background 0.15s !important;
+  /* removed: backdrop-filter, heavy shadow */
+}
+
+button[class*="suggestion"]:hover, div[class*="suggestion"]:hover {
+  border-color: var(--accent) !important;
+  color: var(--text) !important;
+  background: var(--hover) !important;
+  box-shadow: none !important;
+}
+
+
+/* ============================================
+   TOGGLES / TOOLTIPS / UPLOAD / CODE / TABLES / MODALS / DROPDOWNS / LINKS
+   ============================================ */
+
+[role="switch"][aria-checked="true"] { background: var(--accent) !important; }
+
+.tippy-box {
+  background: var(--card-bg-solid) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--card-shadow) !important;
+  font-size: 14px !important;
+  color: var(--text) !important;
+}
+.tippy-content { background: transparent !important; color: var(--text) !important; }
+.tippy-arrow::before { color: var(--card-bg-solid) !important; }
+
+[class*="upload"], [class*="dropzone"] {
+  border: 1.5px dashed var(--neutral-border) !important;
+  border-radius: 12px !important;
+  background: var(--neutral-soft) !important;
+  /* removed glass + heavy accent — neutral surface, accent on hover only */
+}
+[class*="upload"]:hover, [class*="dropzone"]:hover {
+  border-color: var(--accent) !important;
+  background: var(--hover) !important;
+}
+
+pre, code {
+  border-radius: 8px !important;
+  font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace !important;
+  font-size: 14px !important;
+}
+
+pre {
+  background: var(--neutral-soft) !important;
+  border: 1px solid var(--neutral-border) !important;
+  padding: 14px !important;
+  /* removed: backdrop-filter — code blocks need stable contrast */
+}
+
+table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  font-size: 15px !important;
+  background: var(--card-bg-solid) !important;
+}
+
+th {
+  background: var(--neutral-soft) !important;
+  color: var(--text2) !important;        /* muted — was cocoa accent (too loud) */
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid var(--neutral-border) !important;
+  text-align: left !important;
+}
+
+td {
+  padding: 11px 16px !important;
+  border-bottom: 1px solid var(--divider) !important;
+  color: var(--text) !important;
+}
+
+tr:hover td { background: var(--hover) !important; }
+
+[role="dialog"] > div {
+  background: var(--modal-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[role="menu"], [role="listbox"] {
+  background: var(--card-bg-solid) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[role="menuitem"]:hover, [role="option"]:hover { background: var(--hover) !important; }
+
+[role="menuitem"], [role="option"] {
+  font-size: 15px !important;
+  padding: 10px 14px !important;
+  min-height: 40px !important;
+  color: var(--text) !important;
+}
+
+a {
+  color: var(--accent) !important;
+  text-decoration-color: var(--accent-light) !important;
+  text-underline-offset: 2px !important;
+}
+a:hover {
+  color: var(--accent2) !important;
+  text-decoration-color: var(--accent2) !important;
+}
+
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cocoa-soft); }
+
+::selection { background: rgba(88,55,34,0.22); color: var(--text); }
+
+.model-info-details, [class*="parameter-count"] { display: none !important; }
+
+
+/* ============================================
+   REDUCED MOTION
+   [G Bab 65] honor accessibility preferences
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  div.sm\:max-w-md, div[class*="sm:max-w-md"] { animation: none !important; }
+  * { transition-duration: 0.01ms !important; }
+}

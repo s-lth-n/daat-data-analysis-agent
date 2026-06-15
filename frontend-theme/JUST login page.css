@@ -1,0 +1,838 @@
+/* ==========================================================
+   Data Analyst Agent — Theme v18 (Cocoa light · Sage dark · i18n-ready)
+
+   LIGHT MODE
+     • Page bg: Powder Blue gradient (#BDD7DE → #d8e6ea)
+     • Glass card on top, frosted (rgba(255,255,255,0.62) + 24px blur)
+     • Cocoa #583722 ink + Powder Blue accent (focus + badge)
+     • Embossed "DATA ANALYST / AGENT" bg text — TOP + BOTTOM split
+
+   DARK MODE
+     • Page bg: deep neutral #222222 with subtle radial depth
+     • TRUE glass card (rgba(255,255,255,0.06) + 20px blur)
+     • Sage #C2D8C4 ink + sage button + sage accent
+     • Embossed bg text in sage (timbul like light mode)
+
+   STRICT mapping to nay's UIUX folder:
+   [G N]  Grant (2018) Bab N           [K Bab N hal.X]  Krug (2013)
+   [M Lesson N hal.X]  Marsh (2016)    [N]  Nunnally & Farkas (2016)
+   [P1] Yudhanto et al. (2022) IEEE APICS
+   [P2] Ruiz et al. (2020) IEEE TLT — FENIkS
+   [P3] Gunawan et al. (2021) IEEE CONMEDIA
+   [MS hal.X]  UIUX_Master_Summary.pdf
+
+   "Pilihan glassmorphism" — MS hal.19. Contrast warning (MS hal.4)
+   honored: every text/bg pair clears WCAG AA, most clear AAA.
+   ========================================================== */
+
+
+/* ============================================
+   COLOR TOKENS
+   ============================================ */
+
+/* ---- LIGHT MODE — PB page · cocoa ink · glass card ---- */
+:root {
+  --cocoa:        #583722;
+  --cocoa-deep:   #4a2e1d;
+  --cocoa-soft:   #7a5237;
+  --powder:       #BDD7DE;
+  --powder-soft:  #d8e6ea;
+  --powder-pale:  #EDF4F6;
+
+  --accent:       var(--cocoa-deep);
+  --accent2:      var(--cocoa);
+  --accent-light: var(--cocoa-soft);
+  --accent-glow:  rgba(189,215,222,0.55);
+
+  --card-bg:        rgba(255,255,255,0.62);
+  --card-bg-solid:  #ffffff;
+  --side-bg:        rgba(255,255,255,0.55);
+  --modal-bg:       #ffffff;
+  --login-card-bg:  rgba(255,255,255,0.62);
+
+  --text:   #2A1810;
+  --text2:  #6B4630;
+  --text3:  #806647;
+
+  --input-bg:     rgba(255,255,255,0.55);
+  --input-border: rgba(88,55,34,0.25);
+  --hover:        rgba(88,55,34,0.07);
+  --code-bg:      rgba(255,255,255,0.70);
+  --divider:      rgba(88,55,34,0.15);
+
+  --page-bg: linear-gradient(135deg,
+              #BDD7DE 0%,
+              #c9dde2 35%,
+              #d8e6ea 65%,
+              #BDD7DE 100%);
+
+  --side-border: rgba(88,55,34,0.12);
+  --blob-opacity: 0.20;
+
+  --card-shadow:
+    0 24px 60px rgba(88,55,34,0.18),
+    0 4px 12px rgba(88,55,34,0.10);
+  --soft-shadow:      0 4px 14px rgba(88,55,34,0.10);
+  --button-shadow:    0 6px 18px rgba(88,55,34,0.32);
+  --button-shadow-h:  0 8px 22px rgba(88,55,34,0.42);
+
+  /* Embossed bg text — fill near-invisible, strong highlight + shadow = raised */
+  --emboss-color:      rgba(88,55,34,0.04);
+  --emboss-highlight:  rgba(255,255,255,0.65);
+  --emboss-shadow:     rgba(88,55,34,0.25);
+}
+
+/* ---- DARK MODE — Sage #C2D8C4 + Near-Black #222222 ---- */
+.dark, :root.dark {
+  --cocoa:        #C2D8C4;
+  --cocoa-deep:   #D4E5D6;
+  --cocoa-soft:   #A6BDA8;
+  --powder:       #C2D8C4;
+  --powder-soft:  rgba(194,216,196,0.08);
+  --powder-pale:  rgba(194,216,196,0.10);
+
+  --accent:       #C2D8C4;
+  --accent2:      #D4E5D6;
+  --accent-light: #A6BDA8;
+  --accent-glow:  rgba(194,216,196,0.40);
+
+  --card-bg:        rgba(255,255,255,0.06);
+  --card-bg-solid:  #2A2A2A;
+  --side-bg:        rgba(255,255,255,0.04);
+  --modal-bg:       #2A2A2A;
+  --login-card-bg:  rgba(255,255,255,0.06);
+
+  --text:   #C2D8C4;
+  --text2:  #A0B5A2;
+  --text3:  #899B8A;
+
+  --input-bg:     rgba(255,255,255,0.04);
+  --input-border: rgba(255,255,255,0.20);
+  --hover:        rgba(255,255,255,0.06);
+  --code-bg:      rgba(255,255,255,0.04);
+  --divider:      rgba(255,255,255,0.12);
+
+  --page-bg:
+    radial-gradient(ellipse at 30% 20%, rgba(194,216,196,0.04), transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.02), transparent 55%),
+    linear-gradient(180deg, #222222 0%, #1C1C1C 100%);
+
+  --side-border: rgba(255,255,255,0.10);
+  --blob-opacity: 0.06;
+
+  --card-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 24px 60px rgba(0,0,0,0.60),
+    0 4px 16px rgba(0,0,0,0.40);
+  --soft-shadow:      0 4px 14px rgba(0,0,0,0.45);
+  --button-shadow:    0 6px 18px rgba(194,216,196,0.18);
+  --button-shadow-h:  0 8px 22px rgba(194,216,196,0.28);
+
+  /* Embossed bg text — same recipe as light, tuned for dark canvas */
+  --emboss-color:      rgba(255,255,255,0.04);
+  --emboss-highlight:  rgba(255,255,255,0.12);
+  --emboss-shadow:     rgba(0,0,0,0.65);
+}
+
+/* ---- SYSTEM PREFERS DARK ---- */
+@media(prefers-color-scheme:dark){
+  :root:not(.dark):not([class]){
+    --cocoa:#C2D8C4;--cocoa-deep:#D4E5D6;--cocoa-soft:#A6BDA8;
+    --powder:#C2D8C4;--powder-soft:rgba(194,216,196,0.08);--powder-pale:rgba(194,216,196,0.10);
+    --accent:#C2D8C4;--accent2:#D4E5D6;--accent-light:#A6BDA8;
+    --accent-glow:rgba(194,216,196,0.40);
+    --card-bg:rgba(255,255,255,0.06);--card-bg-solid:#2A2A2A;
+    --side-bg:rgba(255,255,255,0.04);--modal-bg:#2A2A2A;
+    --login-card-bg:rgba(255,255,255,0.06);
+    --text:#C2D8C4;--text2:#A0B5A2;--text3:#899B8A;
+    --input-bg:rgba(255,255,255,0.04);--input-border:rgba(255,255,255,0.20);
+    --hover:rgba(255,255,255,0.06);--code-bg:rgba(255,255,255,0.04);
+    --divider:rgba(255,255,255,0.12);
+    --page-bg:radial-gradient(ellipse at 30% 20%,rgba(194,216,196,0.04),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,255,255,0.02),transparent 55%),linear-gradient(180deg,#222222 0%,#1C1C1C 100%);
+    --side-border:rgba(255,255,255,0.10);--blob-opacity:0.06;
+    --card-shadow:0 0 0 1px rgba(255,255,255,0.04) inset,0 24px 60px rgba(0,0,0,0.60),0 4px 16px rgba(0,0,0,0.40);
+    --soft-shadow:0 4px 14px rgba(0,0,0,0.45);
+    --button-shadow:0 6px 18px rgba(194,216,196,0.18);--button-shadow-h:0 8px 22px rgba(194,216,196,0.28);
+    --emboss-color:rgba(255,255,255,0.04);--emboss-highlight:rgba(255,255,255,0.12);--emboss-shadow:rgba(0,0,0,0.65);
+  }
+}
+
+
+/* ============================================
+   TYPOGRAPHY — system stack only
+   [G Bab 2-3] system fonts; max 2 typefaces
+   [G Bab 4] tier hierarchy
+   [G Bab 5] 16px body, line 1.5
+   ============================================ */
+
+html { font-size: 16px !important; }
+
+body, body * {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.text-xs   { font-size: 13px !important; line-height: 1.4 !important; }
+.text-sm   { font-size: 15px !important; line-height: 1.5 !important; }
+.text-base { font-size: 16px !important; line-height: 1.5 !important; }
+.text-lg   { font-size: 18px !important; line-height: 1.5 !important; }
+.text-xl   { font-size: 22px !important; line-height: 1.3 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+.text-2xl  { font-size: 26px !important; line-height: 1.2 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+.text-3xl  { font-size: 32px !important; line-height: 1.2 !important;
+             color: var(--text) !important; font-weight: 700 !important; }
+
+
+/* ============================================
+   PAGE BACKGROUND
+   ============================================ */
+
+body {
+  background: var(--page-bg) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+}
+
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: var(--blob-opacity);
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, var(--cocoa-soft) 0%, transparent 70%);
+  top: -120px; left: -120px;
+}
+
+body::after {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, var(--cocoa) 0%, transparent 70%);
+  bottom: -90px; right: -90px;
+}
+
+.app, main { background: transparent !important; }
+
+
+/* ============================================
+   AUTH PAGE — TWO-LINE EMBOSSED BG TEXT
+   "DATA ANALYST" anchored top, "AGENT" anchored bottom.
+   White-space: nowrap → crops past viewport edges.
+   [G Bab 64] decoration ≠ sole meaning channel
+   [K Bab 3 hal.31-35] hierarchy: card carries attention, bg is texture
+   [G Bab 40] static
+   ============================================ */
+
+#auth-page {
+  background: transparent !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#auth-page > div.w-full.h-full.absolute { display: none !important; }
+#auth-container, #auth-page > div.fixed { background: transparent !important; }
+
+#auth-page::before,
+#auth-page::after {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(120px, 20vw, 300px);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--emboss-color);
+  text-shadow:
+    -1px -1px 0 var(--emboss-highlight),
+     1px  1px 0 var(--emboss-shadow);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+#auth-page::before { content: 'DATA ANALYST'; top: 4vh; }
+#auth-page::after  { content: 'AGENT';        bottom: 4vh; }
+
+
+/* ============================================
+   LOGIN CARD — GLASSMORPHISM
+   [MS hal.19] "pilihan glassmorphism"
+   [G Bab 59] post-blend ≥7:1 AAA both modes
+   [G Bab 60] visible border + shadow = card affordance
+   [P3] frosted layer = polish signal → trust
+   ============================================ */
+
+div.sm\:max-w-md, div[class*="sm:max-w-md"] {
+  background: var(--login-card-bg) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+  border: 1px solid rgba(255,255,255,0.45) !important;
+  border-radius: 22px !important;
+  padding: 44px 40px 36px !important;
+  box-shadow: var(--card-shadow) !important;
+  max-width: 460px !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 10 !important;
+  animation: card-enter 0.5s ease-out both !important;
+}
+
+.dark div.sm\:max-w-md, .dark div[class*="sm:max-w-md"],
+:root.dark div.sm\:max-w-md, :root.dark div[class*="sm:max-w-md"] {
+  border: 1px solid rgba(255,255,255,0.20) !important;
+}
+
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================
+   LOGIN TITLE — i18n-ready via CSS variables
+   Default English; override from JavaScript:
+     document.documentElement.style.setProperty('--i18n-title',
+       '"Masuk untuk melanjutkan"');
+   [G Bab 4] hierarchy by SIZE+WEIGHT
+   [G Bab 89] human voice
+   [K Bab 5] subtitle = what to do (no Welcome back)
+   ============================================ */
+
+div.mb-1 > div.text-2xl.font-medium {
+  font-size: 0 !important;
+  color: transparent !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin-bottom: 28px !important;
+}
+
+div.mb-1 > div.text-2xl.font-medium::before {
+  content: var(--i18n-title, 'Data Analyst Agent') !important;
+  display: block !important;
+  font-size: 32px !important;          /* bumped from 26 */
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  text-align: center !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+}
+
+div.mb-1 > div.text-2xl.font-medium::after {
+  content: var(--i18n-subtitle, 'Sign in to continue') !important;
+  display: block !important;
+  font-size: 16px !important;          /* bumped from 14 */
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+}
+
+.dark div.mb-1 > div.text-2xl.font-medium::before,
+:root.dark div.mb-1 > div.text-2xl.font-medium::before {
+  font-size: 34px !important;          /* bumped from 28 */
+  letter-spacing: -0.02em !important;
+}
+
+
+/* ============================================
+   FORM & INPUTS
+   [G Bab 5] 16px font · [G Bab 38] never clear data
+   [G Bab 45] validate ASAP · [G Bab 60] visible border
+   [G Bab 67] persistent labels · [G Bab 69] ≥44px
+   [P2 FENIkS] immediate visual feedback layer
+   ============================================ */
+
+form.flex.flex-col.justify-center { gap: 14px !important; }
+
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], textarea {
+  width: 100% !important;
+  padding: 13px 16px !important;
+  background: var(--input-bg) !important;
+  border: 1.5px solid var(--input-border) !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  color: var(--text) !important;
+  outline: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
+  min-height: 48px !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--cocoa) !important;
+  background: rgba(255,255,255,0.85) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  outline: none !important;
+}
+.dark input:focus, .dark textarea:focus,
+:root.dark input:focus, :root.dark textarea:focus {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: var(--powder) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+}
+
+::placeholder {
+  color: var(--text3) !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+}
+
+label {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--text2) !important;
+  margin-bottom: 6px !important;
+}
+
+
+/* ============================================
+   LOCAL-MODE BADGE — CSS-only fallback
+   Renders below the form even if custom.js isn't loaded.
+   custom.js (when present) hides this and replaces with a richer
+   HTML version that has a separately animated PB/sage dot.
+   Content driven by --i18n-badge so language toggle can swap it.
+   [G Bab 20] orient new admin · [G Bab 89] human voice
+   ============================================ */
+
+form.flex.flex-col.justify-center::after {
+  content: var(--i18n-badge, '\2022\00a0  Running locally \00b7 your data is safe') !important;
+  display: block !important;
+  width: -webkit-fit-content !important;
+  width: fit-content !important;
+  margin: 22px auto 0 !important;
+  padding: 9px 18px !important;
+  background: var(--powder-pale) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 999px !important;
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  color: var(--text2) !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* When custom.js mounts the rich version, hide the CSS fallback */
+form.flex.flex-col.justify-center.has-js-badge::after {
+  display: none !important;
+}
+
+
+/* ============================================
+   PRIMARY BUTTON
+   [G Bab 7] looks like a button · [G Bab 9] click feedback
+   [G Bab 69] ≥44px · [Marsh Lesson 65] Axis of Interaction
+   [Marsh Lesson 67] distinct primary · [MS hal.6] OBVIOUS tier
+   ============================================ */
+
+button { min-height: 44px !important; }
+
+button[type="submit"] {
+  width: 100% !important;
+  padding: 14px !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  cursor: pointer !important;
+  box-shadow: var(--button-shadow) !important;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s !important;
+  min-height: 50px !important;
+  margin-top: 10px !important;
+}
+
+button[type="submit"]:hover {
+  background: var(--accent2) !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 4px 12px rgba(88,55,34,0.30) !important;
+}
+
+button[type="submit"]:focus-visible {
+  outline: none !important;
+  box-shadow: var(--button-shadow), 0 0 0 3px var(--accent-glow) !important;
+}
+
+button[type="submit"]:disabled {
+  background: #c9bba8 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Dark mode: sage button + near-black text */
+.dark button[type="submit"], :root.dark button[type="submit"] {
+  background: var(--accent) !important;
+  color: #222222 !important;
+}
+.dark button[type="submit"]:hover, :root.dark button[type="submit"]:hover {
+  background: var(--accent2) !important;
+  color: #222222 !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+.dark button[type="submit"]:active, :root.dark button[type="submit"]:active {
+  background: var(--accent-light) !important;
+  color: #222222 !important;
+}
+
+button.px-3\.5.py-1\.5.text-sm.font-medium.bg-black,
+button.px-3\.5.py-1\.5.text-sm.font-medium.dark\:bg-white {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+
+/* ============================================
+   LANGUAGE TOGGLE  ★ NEW ★
+   Top-right glass pill (INA | ENG)
+   [G Bab 7] tappable · [G Bab 24] active state visible
+   [G Bab 64] color + aria-pressed both convey state
+   ============================================ */
+
+.lang-toggle {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--input-border);
+  border-radius: 999px;
+  box-shadow: var(--soft-shadow);
+}
+
+.lang-toggle button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  min-height: 32px !important;
+  min-width: 48px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.lang-toggle button:hover { color: var(--text); }
+
+.lang-toggle button[aria-pressed="true"] {
+  background: var(--cocoa);
+  color: #FFFFFF;
+}
+
+.dark .lang-toggle button[aria-pressed="true"],
+:root.dark .lang-toggle button[aria-pressed="true"] {
+  color: #222222;
+}
+
+.lang-toggle button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+[data-i18n], [data-i18n-placeholder] { transition: opacity 0.18s ease; }
+body.lang-switching [data-i18n] { opacity: 0; }
+
+
+/* ============================================
+   SIDEBAR — glass
+   ============================================ */
+
+#sidebar {
+  background: var(--side-bg) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-right: 1px solid var(--side-border) !important;
+  font-size: 16px !important;
+}
+
+#sidebar > div { padding: 6px 8px !important; }
+
+#sidebar > div *:hover {
+  background-color: var(--hover) !important;
+  border-radius: 10px !important;
+}
+
+#sidebar a, #sidebar button {
+  border-radius: 10px !important;
+  font-size: 16px !important;
+  color: var(--text) !important;
+  min-height: 40px !important;
+  padding: 8px 10px !important;
+}
+
+#sidebar [class*="text-xs"] {
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text3) !important;
+  font-weight: 600 !important;
+}
+
+#sidebar [class*="font-bold"],
+#sidebar [class*="font-semibold"] {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+}
+
+#sidebar > div:last-child {
+  border-top: 1px solid var(--side-border) !important;
+}
+
+
+/* ============================================
+   CHAT PAGE
+   ============================================ */
+
+main [class*="group"] {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
+.assistant-message, main [class*="prose"] {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: var(--text) !important;
+}
+
+div[class*="sticky"][class*="top-0"] { padding: 8px 12px !important; }
+
+
+/* ============================================
+   SEND BUTTON
+   ============================================ */
+
+#send-message-button {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  box-shadow: var(--button-shadow) !important;
+  transition: background 0.15s, box-shadow 0.15s !important;
+}
+
+#send-message-button:hover {
+  background: var(--accent2) !important;
+  box-shadow: var(--button-shadow-h) !important;
+}
+
+.dark #send-message-button, :root.dark #send-message-button { color: #222222 !important; }
+
+
+/* ============================================
+   CHAT INPUT — glass
+   ============================================ */
+
+form > div:has(textarea),
+div[class*="bg-"][class*="rounded-"]:has(textarea) {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  border: 1.5px solid var(--input-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--soft-shadow) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+form > div:has(textarea):focus-within {
+  border-color: var(--cocoa) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--soft-shadow) !important;
+}
+
+
+/* ============================================
+   CHAT BLANK SLATE
+   ============================================ */
+
+main [class*="text-3xl"] {
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  font-size: 32px !important;
+  letter-spacing: -0.01em !important;
+}
+
+
+/* ============================================
+   SUGGESTION CARDS — glass
+   ============================================ */
+
+button[class*="suggestion"], div[class*="suggestion"] {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid var(--input-border) !important;
+  border-radius: 14px !important;
+  padding: 14px 18px !important;
+  box-shadow: var(--soft-shadow) !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+button[class*="suggestion"]:hover, div[class*="suggestion"]:hover {
+  border-color: var(--cocoa) !important;
+  box-shadow: 0 6px 18px rgba(88,55,34,0.16) !important;
+}
+
+
+/* ============================================
+   TOGGLES / TOOLTIPS / UPLOAD / CODE / TABLES / MODALS / DROPDOWNS / LINKS
+   ============================================ */
+
+[role="switch"][aria-checked="true"] { background: var(--accent) !important; }
+
+.tippy-box {
+  background: var(--card-bg-solid) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--card-shadow) !important;
+  font-size: 14px !important;
+  color: var(--text) !important;
+}
+.tippy-content { background: transparent !important; color: var(--text) !important; }
+.tippy-arrow::before { color: var(--card-bg-solid) !important; }
+
+[class*="upload"], [class*="dropzone"] {
+  border: 2px dashed var(--cocoa) !important;
+  border-radius: 14px !important;
+  background: var(--accent-glow) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+pre, code {
+  border-radius: 8px !important;
+  font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace !important;
+  font-size: 14px !important;
+}
+
+pre {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  padding: 14px !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  font-size: 15px !important;
+  background: var(--card-bg-solid) !important;
+}
+
+th {
+  background: var(--hover) !important;
+  color: var(--cocoa) !important;
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 2px solid var(--divider) !important;
+  text-align: left !important;
+}
+
+td {
+  padding: 11px 16px !important;
+  border-bottom: 1px solid var(--divider) !important;
+  color: var(--text) !important;
+}
+
+tr:hover td { background: var(--hover) !important; }
+
+[role="dialog"] > div {
+  background: var(--modal-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[role="menu"], [role="listbox"] {
+  background: var(--card-bg-solid) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+[role="menuitem"]:hover, [role="option"]:hover { background: var(--hover) !important; }
+
+[role="menuitem"], [role="option"] {
+  font-size: 15px !important;
+  padding: 10px 14px !important;
+  min-height: 40px !important;
+  color: var(--text) !important;
+}
+
+a {
+  color: var(--accent) !important;
+  text-decoration-color: var(--accent-light) !important;
+  text-underline-offset: 2px !important;
+}
+a:hover {
+  color: var(--accent2) !important;
+  text-decoration-color: var(--accent2) !important;
+}
+
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cocoa-soft); }
+
+::selection { background: rgba(88,55,34,0.22); color: var(--text); }
+
+.model-info-details, [class*="parameter-count"] { display: none !important; }
+
+
+/* ============================================
+   REDUCED MOTION
+   [G Bab 65] honor accessibility preferences
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  div.sm\:max-w-md, div[class*="sm:max-w-md"] { animation: none !important; }
+  * { transition-duration: 0.01ms !important; }
+}

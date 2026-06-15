@@ -20,6 +20,10 @@ services:
       - open-webui-data:/app/backend/data
       # Relative to this compose file → portable, no host-specific absolute path
       - ./data/samples:/data/samples
+      # Hanan frontend theme (presentation layer only) — OWUI v0.9.6 static slots.
+      # NOTE: source custom.js is mounted AS loader.js (v0.9.6 loads custom JS via loader.js).
+      - ./frontend-theme/custom.css:/app/backend/open_webui/static/custom.css:ro
+      - ./frontend-theme/custom.js:/app/backend/open_webui/static/loader.js:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
@@ -35,3 +39,6 @@ services:
 volumes:
   open-webui-data:
     external: true
+    # Point to the live data volume (active, Jun 15) instead of the stale "open-webui-data".
+    # The running container was created via `docker run` against this volume.
+    name: open-webui
