@@ -64,6 +64,64 @@ def _render_charts_to_png(charts: list[dict]) -> list[str]:
     return keys
 
 
+def _chart_caption_md(chart_keys: list[str], language: str = "id") -> str:
+    """
+    Build markdown captions + images for rendered chart PNGs, in a SINGLE language.
+
+    Revisi #2: the caption word follows `language` ("Grafik" for id, "Chart"
+    otherwise — default EN, consistent with the global language default). Numbering
+    is omitted when there is exactly one chart. Never bilingual.
+    """
+    word = "Grafik" if language == "id" else "Chart"
+    total = len(chart_keys)
+    md = ""
+    for i, key in enumerate(chart_keys):
+        label = word if total == 1 else f"{word} {i + 1}"
+        url = f"{settings.public_url}/chart/image/{key}.png"
+        md += f"\n\n**📊 {label}**\n\n![{label}]({url})"
+    return md
+
+
+def _assemble_analysis_response(
+    *,
+    file_name: str,
+    row_count: int,
+    narrative: str,
+    session_id: str,
+    deterministic_block: str = "",
+    chart_md: str = "",
+    source_note: str = "",
+    language: str = "id",
+) -> str:
+    """
+    Rakit balasan analisis dalam SATU urutan presentasi yang dipakai BERSAMA oleh
+    /analyze dan /analyze/followup (Revisi #3, Opsi B):
+
+        📄 banner file → blok deterministik (bila ada) → narasi LLM (termasuk
+        **judul** bold, jadi SUB-judul di bawah blok — bukan header puncak) →
+        grafik → penanda [SESSION_ID].
+
+    Presentasi MURNI — tidak menghitung/memanggil apa pun. Blok deterministik &
+    chart_md dirakit di handler (sumber angka), helper ini hanya menyusun string.
+    `source_note` = anotasi banner (mis. "(data dari sesi sebelumnya)" untuk followup;
+    kosong untuk analisis pertama).
+
+    Revisi #3 (Commit 4): kata "baris"/"rows" pada banner mengikuti `language` agar
+    laporan SINGLE-LANGUAGE (default "id" → byte-identik dgn perilaku sebelumnya).
+    """
+    rows_word = "baris" if language == "id" else "rows"
+    banner_suffix = f" {source_note}" if source_note else ""
+    det_md = f"{deterministic_block}\n\n---\n\n" if deterministic_block else ""
+    return (
+        f"📄 **{file_name}** — {row_count} {rows_word}{banner_suffix}\n\n"
+        f"---\n\n"
+        f"{det_md}"
+        f"{narrative}"
+        f"{chart_md}"
+        f"\n\n[SESSION_ID: {session_id}]"
+    )
+
+
 # ── Lifespan ────────────────────────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -244,6 +302,12 @@ async def analyze_data(request: AnalysisRequest):
     Receives a natural language prompt and optionally a file_id,
     then uses the LangGraph agent to perform analysis.
     """
+    # Revisi #2: deteksi bahasa adaptif = SATU sumber kebenaran. Override
+    # request.language (default LLM bisa salah "id") sebelum mengalir ke agent,
+    # narasi, chart-label, & response. Default "en" bila ragu/pendek.
+    from tools.lang_detect import detect_language
+    request.language = detect_language(request.prompt)
+
     logger.info(f"Analysis request: '{request.prompt[:80]}...' (lang={request.language})")
 
     try:
@@ -255,8 +319,10 @@ async def analyze_data(request: AnalysisRequest):
         )
 
         session_id: str | None = None
-        chart_keys: list[str] = []
+        chart_keys: list[str] = []          # overview cache (disimpan ke session)
         emit_charts = False  # Revisi #1: gerbang chart on-demand (default teks-saja)
+        chart_keys_to_emit: list[str] = []  # Revisi #3: chart yang DITAMPILKAN balasan ini
+        relevant_spec: dict | None = None   # spec chart relevan (bila berhasil dibangun)
 
         # Save session when a file was analysed and the DataFrame is available
         if request.file_id and result.get("dataframe") is not None:
@@ -269,7 +335,8 @@ async def analyze_data(request: AnalysisRequest):
                 # Render chart specs → PNG files, collect keys for follow-up URLs
                 chart_keys = _render_charts_to_png(result.get("charts") or [])
 
-                domain = (result.get("domain_context") or {}).get("domain_type", "unknown")
+                domain_context = result.get("domain_context")
+                domain = (domain_context or {}).get("domain_type", "unknown")
                 session_id = make_session_id(file_name, file_size)
                 save_session(SessionData(
                     session_id      = session_id,
@@ -280,6 +347,7 @@ async def analyze_data(request: AnalysisRequest):
                     chart_keys      = chart_keys,
                     file_name       = file_name,
                     domain          = domain,
+                    domain_context  = domain_context,   # Revisi #3: dict penuh utk followup
                 ))
 
                 # Revisi #1 (chart on-demand): SEMUA chart sudah dirender & disimpan
@@ -296,19 +364,91 @@ async def analyze_data(request: AnalysisRequest):
                 except Exception:
                     emit_charts = False
 
-        # Embed session_id as an HTML comment so the LLM can read it from
-        # conversation context and pass it back on follow-up queries.
-        text = result["text"]
-        if session_id:
-            text += f"\n\n[SESSION_ID: {session_id}]"
+                # Revisi #3 (Commit 3): chart on-demand 1-RELEVAN — pola IDENTIK
+                # dengan followup. Overview (3 chart) tetap dirender & disimpan ke
+                # session di atas sebagai CACHE; yang diemisi di balasan INI hanya:
+                #   - intent groupby/temporal → SATU chart relevan dari resolver
+                #     agregasi yang SAMA dengan blok deterministik (Revenue-default
+                #     retail ikut) → chart = tabel by-construction; atau
+                #   - minta grafik eksplisit tanpa intent → fallback overview cache.
+                # Gagal apa pun → fallback cache → tak pernah crash.
+                if emit_charts:
+                    chart_keys_to_emit = list(chart_keys)   # default: overview cache
+                    try:
+                        from tools.groupby_analyzer import build_followup_chart_spec
+                        spec = build_followup_chart_spec(
+                            result.get("dataframe"),
+                            request.prompt,
+                            result.get("column_profile") or {},
+                            result.get("domain_context"),
+                            language=request.language,
+                        )
+                        if spec:
+                            rendered = _render_charts_to_png([spec])
+                            if rendered:
+                                chart_keys_to_emit = rendered   # 1 chart relevan GANTI cache
+                                relevant_spec = spec
+                    except Exception as _ce:
+                        logger.warning(f"[analyze] chart relevan gagal, fallback cache: {_ce}")
+                        # chart_keys_to_emit tetap = overview cache (aman, tak crash)
 
+        # Revisi #3 (Commit 2): saat sebuah file dianalisis, rakit balasan dgn pola
+        # yang SAMA dengan followup — blok angka deterministik (sumber otoritatif,
+        # 100% Python) MEMIMPIN, lalu narasi LLM dari graph sebagai prosa. Ini yang
+        # menggantikan headline Σ Price (163.401) yang menyesatkan dengan metrik benar
+        # (mis. Revenue 1.058.314 utk "produk terlaris" retail). Helper presentasi &
+        # build_deterministic_block identik dengan /analyze/followup → konsisten.
+        if session_id:
+            deterministic_block = ""
+            try:
+                from tools.groupby_analyzer import build_deterministic_block
+                _df_clean = result.get("dataframe")
+                if _df_clean is not None:
+                    # request.prompt mengarahkan metrik/dimensi; domain_context dict
+                    # mengaktifkan Revenue-default retail + label unit "transaksi".
+                    deterministic_block = build_deterministic_block(
+                        _df_clean,
+                        request.prompt,
+                        result.get("column_profile") or {},
+                        result.get("domain_context"),
+                        request.language,
+                    )
+            except Exception as _de:
+                # Fallback aman: pertanyaan non-groupby (mis. "ringkas data ini") atau
+                # error apa pun → blok kosong → balasan tetap memakai narasi deskriptif.
+                logger.warning(f"[analyze] blok deterministik dilewati: {_de}")
+                deterministic_block = ""
+
+            # Urutan: banner → blok deterministik → narasi (**judul** jadi sub-judul
+            # di bawah blok, bukan header puncak) → grafik. Single-language via
+            # request.language (hasil detect_language). chart_md diisi di Commit 3.
+            text = _assemble_analysis_response(
+                file_name           = file_name,
+                row_count           = len(result["dataframe"]),
+                narrative           = result["text"],
+                session_id          = session_id,
+                deterministic_block = deterministic_block,
+                chart_md            = "",
+                source_note         = "",   # /analyze: banner tanpa "sesi sebelumnya"
+                language            = request.language,
+            )
+        else:
+            # Tanpa file (pertanyaan umum) → narasi graph apa adanya, tanpa banner.
+            text = result["text"]
+
+        # Revisi #3 (Commit 3): charts & chart_keys mencerminkan chart yang DIEMISI
+        # (1 relevan bila ada, selain itu fallback overview cache) — konsisten,
+        # bukan lagi 3 overview generik. Teks-saja bila tak digerbang.
         return AnalysisResponse(
             text       = text,
-            charts     = result.get("charts") if emit_charts else None,
+            charts     = (
+                ([relevant_spec] if relevant_spec else result.get("charts"))
+                if emit_charts else None
+            ),
             statistics = result.get("statistics"),
             language   = request.language,
             session_id = session_id,
-            chart_keys = (chart_keys or None) if emit_charts else None,
+            chart_keys = (chart_keys_to_emit or None) if emit_charts else None,
         )
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
@@ -414,7 +554,12 @@ async def analyze_followup(req: FollowUpRequest):
             },
         )
 
-    logger.info(f"[followup] session={req.session_id} query={req.query[:60]!r}")
+    # Revisi #2: deteksi bahasa adaptif (single source of truth) — override
+    # req.language sebelum mengalir ke state narasi, chart spec, & label grafik.
+    from tools.lang_detect import detect_language
+    req.language = detect_language(req.query)
+
+    logger.info(f"[followup] session={req.session_id} query={req.query[:60]!r} (lang={req.language})")
 
     # Revisi #1 (chart on-demand): tentukan DULU apakah balasan ini menampilkan
     # grafik — hanya bila user minta eksplisit ATAU intent groupby/temporal.
@@ -444,7 +589,7 @@ async def analyze_followup(req: FollowUpRequest):
                 session.dataframe,
                 req.query,
                 session.column_profile or {},
-                getattr(session, "domain_context", None),
+                session.domain_context,
                 language=req.language,
             )
             if spec:
@@ -493,14 +638,17 @@ async def analyze_followup(req: FollowUpRequest):
         from tools.groupby_analyzer import build_followup_context, build_deterministic_block
         _df     = session.dataframe
         _prof   = session.column_profile or {}
-        _domain = getattr(session, "domain_context", None)
+        _domain = session.domain_context
 
         if _df is not None:
             _ctx = build_followup_context(_df, req.query, _prof, _domain)
             if _ctx and state.get("statistics") is not None:
                 state["statistics"]["__followup_context__"] = _ctx
             # Blok angka OTORITATIF (nilai+persen dihitung di Python, bukan LLM).
-            deterministic_block = build_deterministic_block(_df, req.query, _prof, _domain)
+            # Revisi #2: tabel markdown, header kolom hormati bahasa terdeteksi.
+            deterministic_block = build_deterministic_block(
+                _df, req.query, _prof, _domain, req.language
+            )
     except Exception as _e:
         pass  # Improve #5 graceful fallback — tidak boleh block followup
     # ── End Improve #5 ───────────────────────────────────────────────────
@@ -515,27 +663,26 @@ async def analyze_followup(req: FollowUpRequest):
     # inilah yang menghentikan "grafik identik berulang" di tiap followup.
     # Fallback (keputusan final): minta-eksplisit-tanpa-intent-groupby tetap
     # menampilkan chart overview cache (session.chart_keys), bukan teks/eror.
-    chart_md = ""
-    if show_charts:
-        total = len(chart_keys_to_show)
-        for i, key in enumerate(chart_keys_to_show):
-            # Label dinamis: jangan paksa "Grafik 1/2/3" saat cuma 1 grafik.
-            label = "Grafik" if total == 1 else f"Grafik {i + 1}"
-            url   = f"{settings.public_url}/chart/image/{key}.png"
-            chart_md += f"\n\n**📊 {label}**\n\n![{label}]({url})"
+    # Label dinamis (tunggal vs jamak) + bahasa mengikuti req.language (Revisi #2).
+    chart_md = _chart_caption_md(chart_keys_to_show, req.language) if show_charts else ""
 
     # Fase 1.7: blok angka deterministik (kalau ada) tampil DULU sebagai sumber
     # angka otoritatif, baru narasi LLM (yang angka nyasarnya sudah diredaksi).
-    det_md = f"{deterministic_block}\n\n---\n\n" if deterministic_block else ""
-
-    full_response = (
-        f"📄 **{session.file_name}** — {len(session.dataframe)} baris "
-        f"(data dari sesi sebelumnya)\n\n"
-        f"---\n\n"
-        f"{det_md}"
-        f"{narrative}"
-        f"{chart_md}"
-        f"\n\n[SESSION_ID: {req.session_id}]"
+    # Revisi #3 (Commit 1): perakitan dipindah ke _assemble_analysis_response
+    # (presentasi bersama dgn /analyze). Output BYTE-IDENTIK dengan sebelumnya.
+    # Revisi #3 (Commit 4): source_note & kata "baris"/"rows" ikut bahasa → laporan
+    # followup juga single-language (default ID byte-identik dgn sebelumnya).
+    _src_note = ("(data dari sesi sebelumnya)" if req.language == "id"
+                 else "(from a previous session)")
+    full_response = _assemble_analysis_response(
+        file_name           = session.file_name,
+        row_count           = len(session.dataframe),
+        narrative           = narrative,
+        session_id          = req.session_id,
+        deterministic_block = deterministic_block,
+        chart_md            = chart_md,
+        source_note         = _src_note,
+        language            = req.language,
     )
 
     return {"result": full_response, "session_id": req.session_id}

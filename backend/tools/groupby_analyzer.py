@@ -28,6 +28,13 @@ _GROUPBY_KEYWORDS = [
     r'\bterbanyak\b',
     r'\bterbesar\b',
     r'\btertinggi\b',
+    # Ranking penjualan (Revisi #3, Commit 2): "produk terbaik", "best-selling",
+    # "paling laris". Membuka gerbang groupby/ranking agar dimensi ter-resolve →
+    # baru _select_front_metrics bisa menerapkan Revenue-default retail. Selaras
+    # dengan _SALES_RANK_INTENT. "best" menangkup "best-selling"/"best seller".
+    r'\bterbaik\b',
+    r'\bbest\b',
+    r'\blaris\b',
     # Distribusi/frekuensi kategorik ID↔EN (Fase 1.8): "topik dominan", "sumber
     # yang paling sering", "distribusi/proporsi per kategori". Sama seperti ranking:
     # cuma PINTU MASUK — dimensi tetap di-resolve via sinonim → kolom NYATA, dan
@@ -182,6 +189,16 @@ _METRIC_UNCOMPUTABLE = re.compile(
 _METRIC_PRICE = re.compile(r"\b(harga|price|prices|unit\s*price|unitprice)\b", re.IGNORECASE)
 _METRIC_QTY = re.compile(
     r"\b(kuantitas|quantity|quantities|qty|units?|jumlah\s+(?:barang|unit|item|produk))\b",
+    re.IGNORECASE,
+)
+# Ranking/superlatif berorientasi PENJUALAN (Revisi #3, Commit 2) untuk Revenue-default
+# cerdas di domain RETAIL: "produk terlaris/terbaik/top/best-selling" TANPA metrik
+# eksplisit. SENGAJA tidak memuat revenue/sales/penjualan (sudah ditangani
+# _METRIC_REVENUE) — ini khusus kata ranking yang dulu jatuh ke numeric_now[0]=Quantity
+# (atau lebih buruk, Σ Price di narasi). Hanya pintu masuk; Revenue baru dipilih bila
+# domain=retail & Qty×Price bisa diturunkan (lihat _select_front_metrics).
+_SALES_RANK_INTENT = re.compile(
+    r"\b(terlaris|laris|terbaik|best|top)\b",
     re.IGNORECASE,
 )
 
@@ -395,7 +412,18 @@ def compute_groupby_stats(
 
 def format_groupby_for_context(groupby_result: dict) -> str:
     """
-    Format hasil groupby menjadi string untuk di-inject ke stats_context.
+    Format hasil groupby menjadi string untuk di-inject ke stats_context (blok
+    KONTEKS LLM saja — BUKAN tabel user-facing `build_deterministic_block`).
+
+    Diagnosa #6 — dirampingkan agar LLM tidak salah pilih/urut produk teratas:
+      - Buang metrik `mean_*` (DISTRACTOR: me-rank produk BERBEDA dari metrik
+        terpilih, mis. mean_Revenue tinggi untuk item high-ticket low-volume
+        seperti Memoboard 199,94 / Doorstop 144,80 yang sum_Revenue-nya rendah).
+        Kecuali agg memang "mean" → `mean_` ADALAH metrik utama, dipertahankan.
+      - Prefix `#1..#N` eksplisit + baris fakta "sudah diurutkan": `results` SUDAH
+        terurut menurun by metrik utama di `compute_groupby_stats` (deterministik).
+        Ini menyatakan FAKTA urutan, bukan instruksi perilaku.
+    Nilai metrik TIDAK diubah; hanya REPRESENTASI yang masuk ke konteks LLM.
     """
     if not groupby_result or "results" not in groupby_result:
         return ""
@@ -403,18 +431,33 @@ def format_groupby_for_context(groupby_result: dict) -> str:
     group_col = groupby_result["group_col"]
     agg_func = groupby_result["agg_func"]
     results = groupby_result["results"]
+    if not results:
+        return ""
+
+    def _metrics(row: dict) -> dict:
+        # Buang group/count + mean_* distractor (kecuali agg==mean → mean_ = utama).
+        return {
+            k: v for k, v in row.items()
+            if k not in ("group", "count")
+            and not (k.startswith("mean_") and agg_func != "mean")
+        }
+
+    # Metrik utama (kunci sort) = metrik pertama tersisa di baris #1 — selaras dgn
+    # primary_key compute_groupby_stats (urutan dict mengikuti numeric_cols[0]).
+    primary = next(iter(_metrics(results[0])), None)
+    n = len(results)
 
     lines = [f"BREAKDOWN PER {group_col.upper()} ({agg_func}):"]
-    for row in results:
+    if primary:
+        lines.append(
+            f"(Daftar SUDAH diurutkan #1..#{n} menurut {primary} / "
+            f"already ranked #1..#{n} by {primary}.)"
+        )
+    for rank, row in enumerate(results, 1):
         group_name = row["group"]
         count = row["count"]
-        # Ambil semua key kecuali group dan count
-        metrics = {k: v for k, v in row.items()
-                   if k not in ("group", "count")}
-        metric_str = ", ".join(
-            f"{k}={v:,.2f}" for k, v in metrics.items()
-        )
-        lines.append(f"  {group_name}: count={count}, {metric_str}")
+        metric_str = ", ".join(f"{k}={v:,.2f}" for k, v in _metrics(row).items())
+        lines.append(f"  #{rank} {group_name}: {metric_str}, count={count}")
 
     return "\n".join(lines)
 
@@ -451,32 +494,25 @@ def _build_breakdown_block(
     q = question or ""
     base_numeric = _base_numeric_metric_cols(df, prof, group_col)
 
-    work = df
-    front: list = []        # metrik DIMINTA → ditaruh depan (jadi kunci sort)
     notes: list = []        # metrik diminta tapi tak terhitung
     extra_lines: list = []  # klarifikasi (mis. count = transaksi)
 
-    # Revenue/penjualan → derive Quantity × Price kalau perlu.
-    if _METRIC_REVENUE.search(q):
-        work, rev_col = _maybe_add_revenue(work, base_numeric)
-        if rev_col:
-            front.append(rev_col)
-        else:
-            notes.append(
-                "'revenue/penjualan' (diminta): TIDAK TERSEDIA — tak ada kolom "
-                "revenue maupun Quantity & Price untuk menurunkannya. "
-                "JANGAN estimasi/hitung sendiri."
-            )
+    # Diagnosa #6: pakai resolver front-metric BERSAMA (_select_front_metrics) —
+    # IDENTIK dengan _resolve_followup_aggregation (tabel USER & chart). Ini membawa
+    # Revenue-default retail untuk "terlaris" POLOS (tanpa kata "revenue"), sehingga
+    # konteks-LLM & tabel SETUJU metrik + urutan (mis. produk terlaris → Revenue,
+    # Regency #1) — bukan diam-diam by Quantity. front = metrik DIMINTA (kunci sort).
+    work, front = _select_front_metrics(q, df, base_numeric, domain_context)
 
-    # Harga → kolom Price; Kuantitas/jumlah barang → kolom Quantity.
-    if _METRIC_PRICE.search(q):
-        pcol = _find_numeric(base_numeric, ("price", "harga", "unitprice"))
-        if pcol:
-            front.append(pcol)
-    if _METRIC_QTY.search(q):
-        qcol = _find_numeric(base_numeric, ("quantity", "qty", "kuantitas"))
-        if qcol:
-            front.append(qcol)
+    # Revenue diminta EKSPLISIT tapi tak bisa diturunkan → note jujur (tutup celah).
+    if _METRIC_REVENUE.search(q) and not _find_numeric(
+        front, ("revenue", "penjualan", "sales", "omzet", "omset")
+    ):
+        notes.append(
+            "'revenue/penjualan' (diminta): TIDAK TERSEDIA — tak ada kolom "
+            "revenue maupun Quantity & Price untuk menurunkannya. "
+            "JANGAN estimasi/hitung sendiri."
+        )
 
     # Count/transaksi → selalu tersedia (count = jumlah baris per grup).
     if _METRIC_COUNT.search(q):
@@ -546,6 +582,37 @@ def _resolve_followup_dimension(df: pd.DataFrame, question: str, column_profile:
     return None
 
 
+def _grand_total_context_line(
+    df: pd.DataFrame,
+    question: str,
+    column_profile: dict,
+    domain_context: Optional[dict] = None,
+) -> str:
+    """
+    Diagnosa #5 (Commit B'): SATU baris grand total deterministik untuk konteks LLM.
+
+    Dihitung dari _resolve_followup_aggregation — RESOLVER YANG SAMA yang dipakai
+    build_deterministic_block (tabel user). Nilainya IDENTIK dengan total di blok
+    tabel BY CONSTRUCTION (sumber sama: grp[primary].sum().sum() / gcount.sum()),
+    sehingga TIDAK memunculkan basis ketiga. Angka raw (titik desimal) — konteks
+    LLM internal; redactor meng-canonicalisasi ID/EN jadi format tak masalah.
+
+    Return "" bila bukan followup groupby/temporal. Tidak pernah raise.
+    """
+    try:
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
+        if not agg:
+            return ""
+        primary = agg["primary"]
+        if primary is not None:
+            total = float(agg["grp"][primary].sum().sum())   # == total head tabel
+            return f"TOTAL {primary} (all groups) = {total:.2f}"
+        total = int(agg["gcount"].sum())                     # cabang count
+        return f"TOTAL rows (all groups) = {total}"
+    except Exception:
+        return ""
+
+
 def build_followup_context(
     df: pd.DataFrame,
     question: str,
@@ -581,6 +648,12 @@ def build_followup_context(
             work, group_col, _is_temporal = resolved
             block = _build_breakdown_block(work, group_col, q, prof, domain_context)
             if block:
+                # Commit B': sertakan grand total deterministik (sumber SAMA dgn
+                # tabel) → prosa boleh menyebut total (mis. Revenue 1.058.314)
+                # tanpa diredaksi [?]; angka karangan tetap [?].
+                total_line = _grand_total_context_line(df, q, prof, domain_context)
+                if total_line:
+                    block = f"{block}\n{total_line}"
                 return block
 
         # Segmentasi diminta tapi tak bisa dihitung → backstop jujur.
@@ -608,7 +681,12 @@ _DISTRIB_INTENT = re.compile(
 )
 
 
-def _select_front_metrics(question: str, df: pd.DataFrame, base_numeric: list):
+def _select_front_metrics(
+    question: str,
+    df: pd.DataFrame,
+    base_numeric: list,
+    domain_context: Optional[dict] = None,
+):
     """Metrik yang diminta (revenue/harga/kuantitas) → diprioritaskan sbg kunci
     sort. Returns (work_df, front_cols). work bisa punya kolom Revenue turunan."""
     q = question or ""
@@ -626,6 +704,23 @@ def _select_front_metrics(question: str, df: pd.DataFrame, base_numeric: list):
         qn = _find_numeric(base_numeric, ("quantity", "qty", "kuantitas"))
         if qn:
             front.append(qn)
+    # Revisi #3 (Commit 2): Revenue-default CERDAS untuk domain RETAIL. Pertanyaan
+    # ranking "terlaris/top/terbaik/best-selling" TANPA metrik eksplisit (front masih
+    # kosong, bukan count/distribusi) → pakai Revenue (Qty×Price), bukan
+    # numeric_now[0]=Quantity. Ini yang membuat "produk terlaris" menjawab dgn
+    # kontribusi penjualan (1.058.314), bukan unit (648.922) apalagi Σ Price (163.401).
+    # Hanya bila Revenue bisa diturunkan; kalau tidak → fallback lama. _maybe_add_revenue
+    # dipakai ulang → derivasi TUNGGAL, jadi tabel & chart memakai angka yang sama.
+    if (
+        not front
+        and (domain_context or {}).get("domain_type") == "retail"
+        and _SALES_RANK_INTENT.search(q)
+        and not _METRIC_COUNT.search(q)
+        and not _DISTRIB_INTENT.search(q)
+    ):
+        work, rev = _maybe_add_revenue(work, base_numeric)
+        if rev:
+            front.append(rev)
     return work, front
 
 
@@ -646,16 +741,59 @@ def _fmt_int(n) -> str:
         return str(n)
 
 
+# ── Varian gaya Inggris + dispatcher locale-aware (Revisi #3, format ikut bahasa) ──
+# Python f"{x:,.2f}" SUDAH gaya EN (koma ribuan, titik desimal); jadi _fmt_en cukup
+# memformat tanpa translate. _fmt_id men-translate ke gaya ID. Nilai TIDAK berubah —
+# hanya representasi string. Dispatcher fallback ke gaya ID bila gagal (tak crash).
+
+def _fmt_en(x) -> str:
+    """Angka gaya Inggris: 1,003,551.44 (koma ribuan, titik desimal)."""
+    try:
+        return f"{float(x):,.2f}"
+    except (ValueError, TypeError):
+        return str(x)
+
+
+def _fmt_int_en(n) -> str:
+    """Bilangan bulat gaya Inggris: 45,525."""
+    try:
+        return f"{int(n):,}"
+    except (ValueError, TypeError):
+        return str(n)
+
+
+def _fmt_num(value, language: str = "id") -> str:
+    """2-desimal locale-aware: id → 1.058.314,21 ; en → 1,058,314.21.
+    Fallback ke gaya ID bila apa pun gagal (tak pernah raise)."""
+    try:
+        return _fmt_en(value) if language == "en" else _fmt_id(value)
+    except Exception:
+        return _fmt_id(value)
+
+
+def _fmt_intnum(n, language: str = "id") -> str:
+    """Integer locale-aware: id → 45.525 ; en → 45,525. Fallback gaya ID."""
+    try:
+        return _fmt_int_en(n) if language == "en" else _fmt_int(n)
+    except Exception:
+        return _fmt_int(n)
+
+
 def _resolve_followup_aggregation(
     df: pd.DataFrame,
     question: str,
     column_profile: dict,
+    domain_context: Optional[dict] = None,
 ):
     """
     Inti BERSAMA followup groupby/temporal: resolve dimensi + pilih metrik utama +
     siapkan groupby. Dipakai build_deterministic_block (angka USER) DAN
     build_followup_chart_spec (GRAFIK) → angka di teks & grafik dijamin konsisten
     karena keduanya membaca pemilihan metrik & groupby yang IDENTIK.
+
+    `domain_context` (Revisi #3): mengaktifkan Revenue-default cerdas untuk retail
+    (lihat _select_front_metrics). Tidak memengaruhi nilai metrik/persen di luar
+    pemilihan kolom primer.
 
     Returns None bila bukan followup groupby/temporal, atau dict:
       {work, group_col, is_temporal, primary(str|None), mean_intent(bool),
@@ -675,7 +813,7 @@ def _resolve_followup_aggregation(
         work, group_col, is_temporal = resolved
 
         base_numeric = _base_numeric_metric_cols(work, prof, group_col)
-        work, front = _select_front_metrics(q, work, base_numeric)
+        work, front = _select_front_metrics(q, work, base_numeric, domain_context)
         # Re-scan: `work` kini bisa punya kolom turunan (mis. Revenue) yang tak ada
         # di profil → tetap lolos sebagai metrik; YearStart/angkatan dkk tetap dibuang.
         numeric_now = _base_numeric_metric_cols(work, prof, group_col)
@@ -703,16 +841,81 @@ def _resolve_followup_aggregation(
         return None
 
 
+def _md_cell(val) -> str:
+    """Escape a value for a markdown table cell (guard stray pipes)."""
+    return str(val).replace("|", "\\|")
+
+
+def _format_groups_as_table(
+    rows: list,
+    dim_label: str,
+    value_header: str,
+    kind: str,
+    mean_intent: bool,
+    language: str,
+) -> str:
+    """
+    Render pre-computed group rows as a MARKDOWN TABLE (Revisi #2).
+    Header kolom hormati `language`; angka memakai format yang sudah jadi
+    (`_fmt_id`/`_fmt_int` di row dict) — fungsi ini murni presentasi, nol LLM.
+    """
+    en = language == "en"
+    if kind == "metric":
+        if mean_intent:
+            headers = [dim_label, value_header, "%",
+                       ("Mean" if en else "Rata-rata"), "n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["mean"], r["n"]]
+        else:
+            headers = [dim_label, value_header, "%", "n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["n"]]
+    else:  # count branch
+        headers = [dim_label, value_header, "%"]
+        row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"]
+
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join("---" for _ in headers) + " |",
+    ]
+    for r in rows:
+        lines.append("| " + " | ".join(_md_cell(c) for c in row_cells(r)) + " |")
+    return "\n".join(lines)
+
+
+def _format_groups_as_list(
+    rows: list,
+    kind: str,
+    value_unit: str,
+    mean_intent: bool,
+) -> str:
+    """Numbered-list fallback — the ORIGINAL format, used only if table render fails."""
+    out: list = []
+    for r in rows:
+        if kind == "metric":
+            seg = f"{r['i']}. {r['group']} — {r['value']} ({r['pct']}%)"
+            if mean_intent and r.get("mean") is not None:
+                seg += f"; rata-rata {r['mean']}"
+            seg += f"; n={r['n']}"
+        else:
+            seg = f"{r['i']}. {r['group']} — {r['value']} {value_unit} ({r['pct']}%)"
+        out.append(seg)
+    return "\n".join(out)
+
+
 def build_deterministic_block(
     df: pd.DataFrame,
     question: str,
     column_profile: dict,
     domain_context: Optional[dict] = None,
+    language: str = "id",
 ) -> str:
     """
     Blok ANGKA KUNCI deterministik untuk LAPORAN USER (BUKAN context LLM).
     Nilai per-grup, total, dan PERSEN dihitung di Python (persen = grup/total NYATA
     × 100). Inilah angka otoritatif yang masuk ke laporan — bukan angka tulisan LLM.
+
+    Revisi #2: dirender sebagai TABEL markdown (header kolom hormati `language`);
+    bila perakitan tabel gagal → fallback ke list bernomor lama. Angka & format
+    (via _fmt_id/_fmt_int) TIDAK berubah. Hanya dipakai di /analyze/followup.
 
     Return "" kalau followup bukan groupby/temporal (laporan tetap normal).
     Tidak pernah raise.
@@ -720,7 +923,8 @@ def build_deterministic_block(
     try:
         # Pemilihan dimensi + metrik + groupby di-share dengan build_followup_chart_spec
         # (lewat _resolve_followup_aggregation) → angka teks & grafik konsisten.
-        agg = _resolve_followup_aggregation(df, question, column_profile)
+        # domain_context diteruskan → Revenue-default retail (Commit 2).
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
         if not agg:
             return ""
         work        = agg["work"]
@@ -730,50 +934,86 @@ def build_deterministic_block(
         mean_intent = agg["mean_intent"]
         grp         = agg["grp"]
         gcount      = agg["gcount"]
-        dim_label = "BULAN" if is_temporal else group_col
+        en = language == "en"
+        dim_label = (("MONTH" if en else "BULAN") if is_temporal else group_col)
 
-        lines: list = []
+        rows: list = []
         if primary is not None:
             gsum = grp[primary].sum()
             gmean = grp[primary].mean()
             total = float(gsum.sum())
             order = gsum.sort_values(ascending=False).index[:15]
-            head = (
-                f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
-                f"(bukan estimasi LLM):**\n"
-                f"_Total {primary} = {_fmt_id(total)} dari {_fmt_int(len(work))} baris_"
-            )
+            if en:
+                head = (
+                    f"**📊 Key figures per {dim_label} — computed directly from the "
+                    f"data (not LLM estimates):**\n"
+                    f"_Total {primary} = {_fmt_num(total, language)} "
+                    f"from {_fmt_intnum(len(work), language)} rows_"
+                )
+            else:
+                head = (
+                    f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
+                    f"(bukan estimasi LLM):**\n"
+                    f"_Total {primary} = {_fmt_num(total, language)} "
+                    f"dari {_fmt_intnum(len(work), language)} baris_"
+                )
             for i, g in enumerate(order, 1):
                 s = float(gsum.get(g, 0.0))
                 pct = (s / total * 100.0) if total else 0.0
-                seg = f"{i}. {g} — {_fmt_id(s)} ({_fmt_id(pct)}%)"
-                if mean_intent:
-                    seg += f"; rata-rata {_fmt_id(float(gmean.get(g, 0.0)))}"
-                seg += f"; n={_fmt_int(int(gcount.get(g, 0)))}"
-                lines.append(seg)
+                rows.append({
+                    "i": i, "group": str(g),
+                    "value": _fmt_num(s, language), "pct": _fmt_num(pct, language),
+                    "mean": _fmt_num(float(gmean.get(g, 0.0)), language),
+                    "n": _fmt_intnum(int(gcount.get(g, 0)), language),
+                })
+            kind = "metric"
+            value_header = str(primary)
+            value_unit = ""
         else:
             # Unit count: "transaksi" hanya bila domain RETAIL terdeteksi; selain itu
             # "baris" (netral). "313 transaksi" untuk Topic CDC/epidemiologi menyesatkan.
             unit = (
-                "transaksi"
+                ("transactions" if en else "transaksi")
                 if (domain_context or {}).get("domain_type") == "retail"
-                else "baris"
+                else ("rows" if en else "baris")
             )
             total = float(int(gcount.sum()))
             order = gcount.sort_values(ascending=False).index[:15]
-            head = (
-                f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
-                f"(bukan estimasi LLM):**\n"
-                f"_Total {unit} = {_fmt_int(int(total))}_"
-            )
+            if en:
+                head = (
+                    f"**📊 Key figures per {dim_label} — computed directly from the "
+                    f"data (not LLM estimates):**\n_Total {unit} = {_fmt_intnum(int(total), language)}_"
+                )
+            else:
+                head = (
+                    f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
+                    f"(bukan estimasi LLM):**\n_Total {unit} = {_fmt_intnum(int(total), language)}_"
+                )
             for i, g in enumerate(order, 1):
                 cnt = int(gcount.get(g, 0))
                 pct = (cnt / total * 100.0) if total else 0.0
-                lines.append(f"{i}. {g} — {_fmt_int(cnt)} {unit} ({_fmt_id(pct)}%)")
+                rows.append({
+                    "i": i, "group": str(g),
+                    "value": _fmt_intnum(cnt, language), "pct": _fmt_num(pct, language),
+                    "mean": None, "n": None,
+                })
+            kind = "count"
+            value_header = ("Count" if en else "Jumlah")
+            value_unit = unit
 
-        if not lines:
+        if not rows:
             return ""
-        return head + "\n\n" + "\n".join(lines)
+
+        # Tabel markdown sebagai presentasi utama; list bernomor lama jadi fallback
+        # aman kalau perakitan tabel gagal (Revisi #2, Bagian A).
+        try:
+            body = _format_groups_as_table(
+                rows, dim_label, value_header, kind, mean_intent, language
+            )
+        except Exception:
+            body = _format_groups_as_list(rows, kind, value_unit, mean_intent)
+
+        return head + "\n\n" + body
     except Exception:
         return ""
 
@@ -802,7 +1042,9 @@ def build_followup_chart_spec(
     bila pembuatan gagal. Tidak pernah raise (Phase 2 fail-safe).
     """
     try:
-        agg = _resolve_followup_aggregation(df, question, column_profile)
+        # domain_context diteruskan → chart memakai Revenue-default retail yang SAMA
+        # dengan blok deterministik (Commit 2) → nilai grafik = nilai tabel.
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
         if not agg:
             return None
 

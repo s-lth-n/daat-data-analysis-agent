@@ -26,49 +26,66 @@ logger = logging.getLogger(__name__)
 # ── Schema ───────────────────────────────────────────────────────────────────
 
 class NarrativeSchema(BaseModel):
+    # Field descriptions kept language-NEUTRAL (English-meta) so they do not pull
+    # Qwen3 toward Indonesian when the report language is English (Commit A:
+    # anti language-bleed). Paired fields still name their target language because
+    # the schema is bilingual by design (Opsi A); only the rendered side is emitted.
     judul: str = Field(
-        description="Judul singkat analisis, max 10 kata"
+        description="Short analysis title, max 10 words, in the report language."
     )
     ringkasan_id: str = Field(
         description=(
-            "Ringkasan 2-3 kalimat Bahasa Indonesia. "
-            "WAJIB gunakan angka PERSIS dari STATS_CONTEXT yang diberikan, jangan karang angka."
+            "Executive summary, 2-3 sentences, written in Indonesian. "
+            "Use EXACT numbers from STATS_CONTEXT; do not fabricate numbers."
         )
     )
     ringkasan_en: str = Field(
         description=(
-            "Executive summary 2-3 sentences English. "
-            "MUST use EXACT numbers from STATS_CONTEXT provided."
+            "Executive summary, 2-3 sentences, written in English. "
+            "Use EXACT numbers from STATS_CONTEXT; do not fabricate numbers."
         )
     )
     temuan_utama: List[str] = Field(
         description=(
-            "List 3-5 temuan penting Bahasa Indonesia. "
-            "Tiap temuan HARUS sebut angka spesifik dari STATS_CONTEXT."
+            "List of 3-5 key findings, written in Indonesian. "
+            "Each finding must cite specific numbers from STATS_CONTEXT."
         )
     )
     key_findings: List[str] = Field(
         description=(
-            "List 3-5 key findings English. "
-            "Each MUST reference specific numbers from STATS_CONTEXT."
+            "List of 3-5 key findings, written in English. "
+            "Each finding must cite specific numbers from STATS_CONTEXT."
         )
     )
     domain_note: Optional[str] = Field(
         default=None,
         description=(
-            "Catatan interpretasi domain jika relevan (misal retail: revenue trend, "
-            "healthcare: rate per kapita). Kosongkan jika tidak relevan."
+            "Optional domain interpretation note (e.g., revenue trend, rate per capita), "
+            "written in the report language. Leave empty if not relevant."
         ),
     )
     kesimpulan_id: str = Field(
-        description="Kesimpulan 1-2 kalimat Bahasa Indonesia"
+        description="Conclusion, 1-2 sentences, written in Indonesian."
     )
     conclusion_en: str = Field(
-        description="Conclusion 1-2 sentences English"
+        description="Conclusion, 1-2 sentences, written in English."
     )
 
 
 # ── Stats Context Builder ─────────────────────────────────────────────────────
+
+# Diagnosa #5 (Commit B): kolom "harga satuan". Σ harga satuan = nonsens bisnis
+# (mis. Σ Price 163.401 yang dulu disalahartikan LLM sebagai "total penjualan").
+# Substring SAMA dengan _find_numeric(("price","harga","unitprice")) di
+# groupby_analyzer agar deteksi konsisten lintas modul.
+_PRICE_LIKE_KEYS = ("price", "harga", "unitprice")
+
+
+def _is_price_like(col: str) -> bool:
+    """True bila nama kolom menandakan harga satuan (price/harga/unitprice)."""
+    c = (col or "").lower()
+    return any(k in c for k in _PRICE_LIKE_KEYS)
+
 
 def _build_stats_context(stats_result: dict) -> str:
     """
@@ -106,7 +123,16 @@ def _build_stats_context(stats_result: dict) -> str:
             parts.append(f"q75={s['q75']}")
         if s.get("count") is not None:
             parts.append(f"count={s['count']}")
-        lines.append(f"[{col}]  {' | '.join(parts)}")
+        line = f"[{col}]  {' | '.join(parts)}"
+        # Diagnosa #5 (Commit B): LABEL (bukan suppress) Σ untuk kolom harga satuan.
+        # Angka total= tetap ada; penanda mengarahkan LLM agar TIDAK menyebutnya
+        # sebagai "total penjualan" (metrik penjualan = Revenue di blok BREAKDOWN).
+        if _is_price_like(col) and s.get("total_sum") is not None:
+            line += (
+                f" (NOTE: Σ {col} is NOT a sales total; "
+                f"sales total = Revenue in the BREAKDOWN block)"
+            )
+        lines.append(line)
 
     # ── Categorical stats ──
     categorical: dict = stats_result.get("categorical_stats") or {}
@@ -176,43 +202,51 @@ def _build_stats_context(stats_result: dict) -> str:
 
 # ── Schema → String Formatter ─────────────────────────────────────────────────
 
-def _format_narrative_from_schema(schema: NarrativeSchema) -> str:
-    """Convert NarrativeSchema object to a formatted markdown narrative string."""
+def _format_narrative_from_schema(schema: NarrativeSchema, language: str = "id") -> str:
+    """
+    Render a NarrativeSchema as a SINGLE-language, streaming-style narrative.
+
+    Revisi #2 (Opsi A): the schema stays intact (both ID & EN fields exist); this
+    renderer only EMITS the side matching `language` and drops every formal section
+    heading (no "## Ringkasan/Summary/Temuan Utama/Key Findings/Kesimpulan/Conclusion").
+    Output flows like a chat message: concise title → opener sentence → finding
+    bullets → optional domain note → short closing line.
+
+    Presentation only — anti-hallucination is untouched: the returned string is fed
+    to _redact_unverified_numbers downstream just like before.
+    """
+    if language == "en":
+        opener   = schema.ringkasan_en
+        findings = schema.key_findings
+        closing  = schema.conclusion_en
+    else:
+        opener   = schema.ringkasan_id
+        findings = schema.temuan_utama
+        closing  = schema.kesimpulan_id
+
     lines: list[str] = []
 
-    lines.append(f"# {schema.judul}\n")
-
-    lines.append("## Ringkasan")
-    lines.append(schema.ringkasan_id)
-    lines.append("")
-
-    lines.append("## Summary")
-    lines.append(schema.ringkasan_en)
-    lines.append("")
-
-    lines.append("## Temuan Utama")
-    for item in schema.temuan_utama:
-        lines.append(f"- {item}")
-    lines.append("")
-
-    lines.append("## Key Findings")
-    for item in schema.key_findings:
-        lines.append(f"- {item}")
-    lines.append("")
-
-    if schema.domain_note:
-        lines.append("## Catatan Domain / Domain Note")
-        lines.append(schema.domain_note)
+    if schema.judul:
+        lines.append(f"**{schema.judul}**")
         lines.append("")
 
-    lines.append("## Kesimpulan")
-    lines.append(schema.kesimpulan_id)
-    lines.append("")
+    if opener:
+        lines.append(opener)
+        lines.append("")
 
-    lines.append("## Conclusion")
-    lines.append(schema.conclusion_en)
+    for item in findings:
+        lines.append(f"- {item}")
+    if findings:
+        lines.append("")
 
-    return "\n".join(lines)
+    if schema.domain_note:
+        lines.append(f"📊 {schema.domain_note}")
+        lines.append("")
+
+    if closing:
+        lines.append(closing)
+
+    return "\n".join(lines).rstrip()
 
 
 # ── Number Validator ──────────────────────────────────────────────────────────
@@ -283,6 +317,25 @@ def _validate_numbers_in_narrative(
     return schema, validation_passed, mismatched
 
 
+# ── Domain metric_note language selector (Commit A: anti language-bleed) ──────
+
+def _select_metric_note(domain_ctx: dict, language: str) -> Optional[str]:
+    """Pilih varian metric_note sesuai bahasa laporan untuk dicegah dari bleed.
+
+    language=='en' → 'metric_note_en' bila tersedia; selain itu fallback ke
+    'metric_note' (ID). Tidak pernah raise — domain tak terdefinisi / dict kosong
+    → kembalikan metric_note ID bila ada, atau None.
+    """
+    try:
+        if not isinstance(domain_ctx, dict):
+            return None
+        if language == "en":
+            return domain_ctx.get("metric_note_en") or domain_ctx.get("metric_note")
+        return domain_ctx.get("metric_note")
+    except Exception:
+        return domain_ctx.get("metric_note") if isinstance(domain_ctx, dict) else None
+
+
 # ── Internal: Constrained Generation ─────────────────────────────────────────
 
 def _constrained_narrative(state: dict, language: str) -> str:
@@ -319,26 +372,35 @@ def _constrained_narrative(state: dict, language: str) -> str:
         parts.append(f"\nStrong correlations:\n{corr_lines}")
 
     domain_ctx: dict = state.get("domain_context") or {}
-    if domain_ctx.get("metric_note"):
-        parts.append(f"\nDomain guidance: {domain_ctx['metric_note']}")
+    _metric_note = _select_metric_note(domain_ctx, language)
+    if _metric_note:
+        parts.append(f"\nDomain guidance: {_metric_note}")
 
     human_content = "\n".join(parts)
 
+    # Revisi #2: single-language. Hanya minta LLM menulis SATU bahasa sesuai
+    # `language` (hemat token + cegah Qwen3 thinking berlebih). Schema TETAP utuh
+    # (Opsi A): field bahasa-lawan tetap ada tapi tidak dirender (lihat
+    # _format_narrative_from_schema). Instruksi anti-mengarang-angka tetap ada.
     if language == "id":
         system_content = (
-            "Kamu adalah analis data expert. Tulis laporan analisis BILINGUAL "
-            "(Bahasa Indonesia dan English) berdasarkan statistik yang diberikan.\n"
+            "Kamu adalah analis data expert. Tulis laporan analisis dalam BAHASA "
+            "INDONESIA saja berdasarkan statistik yang diberikan.\n"
             "WAJIB: Gunakan angka PERSIS dari blok STATS_CONTEXT. "
             "JANGAN mengarang angka yang tidak ada di STATS_CONTEXT.\n"
-            "Isi setiap field JSON sesuai deskripsi field. Minimal 3 temuan per bahasa."
+            "Fokuskan isi pada field Bahasa Indonesia (ringkasan_id, temuan_utama, "
+            "kesimpulan_id) — minimal 3 temuan. Isi field lain seperlunya.\n"
+            "Jika mengisi domain_note, tulis dalam BAHASA INDONESIA."
         )
     else:
         system_content = (
-            "You are a data analysis expert. Write a BILINGUAL analysis report "
-            "(Bahasa Indonesia and English) based on the provided statistics.\n"
+            "You are a data analysis expert. Write an analysis report in ENGLISH "
+            "only based on the provided statistics.\n"
             "MANDATORY: Use ONLY exact numbers from the STATS_CONTEXT block. "
             "Do NOT fabricate numbers absent from STATS_CONTEXT.\n"
-            "Fill each JSON field as described. At least 3 findings per language."
+            "Focus on the English fields (ringkasan_en, key_findings, conclusion_en) "
+            "— at least 3 findings. Fill the other fields minimally.\n"
+            "If you fill domain_note, write it in ENGLISH."
         )
 
     llm_structured = ChatOllama(
@@ -371,7 +433,7 @@ def _constrained_narrative(state: dict, language: str) -> str:
             mismatched[:5],
         )
 
-    return _format_narrative_from_schema(parsed)
+    return _format_narrative_from_schema(parsed, language)
 
 
 # ── Internal: Free-Form Fallback ──────────────────────────────────────────────
@@ -525,8 +587,9 @@ def _free_form_narrative(state: dict, language: str) -> str:
 
     system_content = get_system_prompt(language)
     domain_ctx: dict = state.get("domain_context") or {}
-    if domain_ctx.get("metric_note"):
-        system_content += f"\n\n## Domain Context\n{domain_ctx['metric_note']}"
+    _metric_note = _select_metric_note(domain_ctx, language)
+    if _metric_note:
+        system_content += f"\n\n## Domain Context\n{_metric_note}"
         avoid_items: list = domain_ctx.get("avoid") or []
         if avoid_items:
             avoid_str = "\n".join(f"- {a}" for a in avoid_items)

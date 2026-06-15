@@ -231,48 +231,90 @@ class TestBuildStatsContext:
 # ── TestFormatNarrativeFromSchema ─────────────────────────────────────────────
 
 class TestFormatNarrativeFromSchema:
-    """Unit tests for _format_narrative_from_schema helper."""
+    """Unit tests for _format_narrative_from_schema (Revisi #2: single-language,
+    streaming format, no formal headings)."""
 
+    # Field content deliberately AVOIDS the words Ringkasan/Summary/Temuan/Findings/
+    # Kesimpulan/Conclusion so the no-formal-heading assertions are unambiguous.
     def _make_schema(self, **overrides):
         from tools.narrative_generator import NarrativeSchema
         defaults = dict(
-            judul="Analisis Penjualan",
-            ringkasan_id="Ringkasan Bahasa Indonesia.",
-            ringkasan_en="English summary.",
-            temuan_utama=["Temuan 1", "Temuan 2", "Temuan 3"],
-            key_findings=["Finding 1", "Finding 2", "Finding 3"],
-            kesimpulan_id="Kesimpulan.",
-            conclusion_en="Conclusion.",
+            judul="Analisis Penjualan Q1",
+            ringkasan_id="Pembuka berbahasa Indonesia tentang dataset.",
+            ringkasan_en="English opener about the dataset.",
+            temuan_utama=["Poin ID satu", "Poin ID dua", "Poin ID tiga"],
+            key_findings=["EN point one", "EN point two", "EN point three"],
+            kesimpulan_id="Penutup singkat Indonesia.",
+            conclusion_en="Brief English closing.",
         )
         defaults.update(overrides)
         return NarrativeSchema(**defaults)
 
+    _FORMAL_HEADINGS = [
+        "## Ringkasan", "## Summary", "## Temuan Utama",
+        "## Key Findings", "## Kesimpulan", "## Conclusion",
+    ]
+
     def test_returns_string(self):
         from tools.narrative_generator import _format_narrative_from_schema
-        schema = self._make_schema()
-        assert isinstance(_format_narrative_from_schema(schema), str)
+        assert isinstance(_format_narrative_from_schema(self._make_schema()), str)
 
-    def test_title_present(self):
+    def test_default_language_is_id(self):
+        from tools.narrative_generator import _format_narrative_from_schema
+        result = _format_narrative_from_schema(self._make_schema())
+        assert "Pembuka berbahasa Indonesia" in result
+        assert "English opener" not in result
+
+    def test_title_present_as_bold(self):
         from tools.narrative_generator import _format_narrative_from_schema
         schema = self._make_schema(judul="Analisis Penjualan 2024")
-        result = _format_narrative_from_schema(schema)
-        assert "# Analisis Penjualan 2024" in result
+        result = _format_narrative_from_schema(schema, "id")
+        assert "Analisis Penjualan 2024" in result
+        assert "# Analisis" not in result          # no formal H1/H2 heading
 
-    def test_bilingual_sections_present(self):
+    def test_no_formal_headings_id(self):
         from tools.narrative_generator import _format_narrative_from_schema
-        schema = self._make_schema()
-        result = _format_narrative_from_schema(schema)
-        assert "## Ringkasan" in result
-        assert "## Summary" in result
-        assert "## Temuan Utama" in result
-        assert "## Key Findings" in result
-        assert "## Kesimpulan" in result
-        assert "## Conclusion" in result
+        result = _format_narrative_from_schema(self._make_schema(), "id")
+        for h in self._FORMAL_HEADINGS:
+            assert h not in result
+        # And none of the formal section WORDS leak into the output at all.
+        for w in ("Ringkasan", "Summary", "Temuan", "Findings", "Kesimpulan", "Conclusion"):
+            assert w not in result
 
-    def test_temuan_utama_as_list_items(self):
+    def test_no_formal_headings_en(self):
+        from tools.narrative_generator import _format_narrative_from_schema
+        result = _format_narrative_from_schema(self._make_schema(), "en")
+        for h in self._FORMAL_HEADINGS:
+            assert h not in result
+        for w in ("Ringkasan", "Summary", "Temuan", "Findings", "Kesimpulan", "Conclusion"):
+            assert w not in result
+
+    def test_id_renders_only_indonesian_side(self):
+        from tools.narrative_generator import _format_narrative_from_schema
+        result = _format_narrative_from_schema(self._make_schema(), "id")
+        assert "Pembuka berbahasa Indonesia tentang dataset." in result
+        assert "- Poin ID satu" in result
+        assert "Penutup singkat Indonesia." in result
+        # English side must NOT appear
+        assert "English opener" not in result
+        assert "EN point one" not in result
+        assert "Brief English closing." not in result
+
+    def test_en_renders_only_english_side(self):
+        from tools.narrative_generator import _format_narrative_from_schema
+        result = _format_narrative_from_schema(self._make_schema(), "en")
+        assert "English opener about the dataset." in result
+        assert "- EN point one" in result
+        assert "Brief English closing." in result
+        # Indonesian side must NOT appear
+        assert "Pembuka berbahasa Indonesia" not in result
+        assert "Poin ID satu" not in result
+        assert "Penutup singkat Indonesia." not in result
+
+    def test_findings_as_list_items(self):
         from tools.narrative_generator import _format_narrative_from_schema
         schema = self._make_schema(temuan_utama=["Alpha", "Beta", "Gamma"])
-        result = _format_narrative_from_schema(schema)
+        result = _format_narrative_from_schema(schema, "id")
         assert "- Alpha" in result
         assert "- Beta" in result
         assert "- Gamma" in result
@@ -280,23 +322,23 @@ class TestFormatNarrativeFromSchema:
     def test_domain_note_present_when_set(self):
         from tools.narrative_generator import _format_narrative_from_schema
         schema = self._make_schema(domain_note="Catatan domain spesifik.")
-        result = _format_narrative_from_schema(schema)
+        result = _format_narrative_from_schema(schema, "id")
         assert "Catatan domain spesifik." in result
+        assert "📊" in result
 
-    def test_domain_note_section_absent_when_none(self):
+    def test_domain_note_absent_when_none(self):
         from tools.narrative_generator import _format_narrative_from_schema
         schema = self._make_schema(domain_note=None)
-        result = _format_narrative_from_schema(schema)
-        assert "Catatan Domain" not in result
+        result = _format_narrative_from_schema(schema, "id")
+        assert "📊" not in result
 
-    def test_order_title_before_ringkasan_before_kesimpulan(self):
+    def test_order_title_before_opener_before_closing(self):
         from tools.narrative_generator import _format_narrative_from_schema
-        schema = self._make_schema()
-        result = _format_narrative_from_schema(schema)
-        title_pos = result.index("# Analisis")
-        ringkasan_pos = result.index("## Ringkasan")
-        kesimpulan_pos = result.index("## Kesimpulan")
-        assert title_pos < ringkasan_pos < kesimpulan_pos
+        result = _format_narrative_from_schema(self._make_schema(), "id")
+        title_pos = result.index("Analisis Penjualan Q1")
+        opener_pos = result.index("Pembuka berbahasa Indonesia")
+        closing_pos = result.index("Penutup singkat Indonesia.")
+        assert title_pos < opener_pos < closing_pos
 
 
 # ── TestValidateNumbers ───────────────────────────────────────────────────────
@@ -532,6 +574,146 @@ class TestGenerateNarrativeNode:
             MockLLM.return_value = self._mock_llm(valid_schema_json)
             result = generate_narrative(state)
         assert isinstance(result["narrative"], str)
+
+    # ── Revisi #2: single-language output + no formal headings + redactor regress ─
+
+    def test_id_output_excludes_english(self, sample_state, valid_schema_json):
+        """language='id' → only Indonesian narrative content, never the EN side."""
+        from tools.narrative_generator import generate_narrative
+        state = dict(sample_state)
+        state["language"] = "id"
+        with patch("tools.narrative_generator.ChatOllama") as MockLLM:
+            MockLLM.return_value = self._mock_llm(valid_schema_json)
+            result = generate_narrative(state)
+        narrative = result["narrative"]
+        # ID opener present; EN opener absent
+        assert "Dataset memiliki" in narrative
+        assert "The dataset contains" not in narrative
+        assert "Mean quantity of" not in narrative   # key_findings (EN) not rendered
+
+    def test_en_output_excludes_indonesian(self, valid_schema_json):
+        """language='en' → only English narrative content, never the ID side."""
+        from tools.narrative_generator import generate_narrative
+        state = {
+            "prompt": "Analyze sales data",
+            "language": "en",
+            "statistics": {"descriptive": {}, "correlation": {}},
+            "data_summary": "100 rows",
+            "cleaning_report": None,
+            "domain_context": None,
+            "charts": [],
+            "existing_chart_urls": None,
+            "step": "init",
+        }
+        with patch("tools.narrative_generator.ChatOllama") as MockLLM:
+            MockLLM.return_value = self._mock_llm(valid_schema_json)
+            result = generate_narrative(state)
+        narrative = result["narrative"]
+        assert "The dataset contains" in narrative
+        assert "Dataset memiliki" not in narrative
+        assert "Rata-rata kuantitas per pesanan" not in narrative  # temuan_utama (ID)
+
+    def test_no_formal_headings_in_node_output(self, sample_state, valid_schema_json):
+        """The streaming output must carry no '## Ringkasan/Summary/...' headings."""
+        from tools.narrative_generator import generate_narrative
+        with patch("tools.narrative_generator.ChatOllama") as MockLLM:
+            MockLLM.return_value = self._mock_llm(valid_schema_json)
+            result = generate_narrative(sample_state)
+        narrative = result["narrative"]
+        for h in ("## Ringkasan", "## Summary", "## Temuan Utama",
+                  "## Key Findings", "## Kesimpulan", "## Conclusion"):
+            assert h not in narrative
+
+    def test_redactor_still_removes_fake_numbers(self, sample_state):
+        """REGRESSION (most important): with the new presentation, a fabricated
+        number absent from STATS_CONTEXT is STILL redacted to '[?]'. Removing the
+        formal headers must not weaken anti-hallucination."""
+        from tools.narrative_generator import generate_narrative
+        fake = json.dumps({
+            "judul": "Analisis",
+            "ringkasan_id": "Dataset berisi data penjualan online.",
+            "ringkasan_en": "The dataset contains online sales data.",
+            "temuan_utama": [
+                "Terdapat 987654 transaksi anomali yang tidak ada di data.",
+                "Rata-rata kuantitas adalah 10.94 sesuai statistik.",
+                "Median kuantitas 3.0 mengindikasikan skew.",
+            ],
+            "key_findings": ["Fabricated 987654 anomalies appear here."],
+            "domain_note": None,
+            "kesimpulan_id": "Penutup analisis.",
+            "conclusion_en": "Analysis closing.",
+        })
+        state = dict(sample_state)
+        state["language"] = "id"
+        with patch("tools.narrative_generator.ChatOllama") as MockLLM:
+            MockLLM.return_value = self._mock_llm(fake)
+            result = generate_narrative(state)
+        narrative = result["narrative"]
+        assert "987654" not in narrative      # fabricated number removed
+        assert "[?]" in narrative             # replaced, not guessed
+        assert "10.94" in narrative           # legit stat preserved
+
+    def test_fallback_is_single_language(self, sample_state):
+        """Free-form fallback path still works and stays single-language: it must
+        request the language-specific system prompt (not a bilingual one)."""
+        from tools.narrative_generator import generate_narrative
+
+        call_count = {"n": 0}
+
+        def llm_factory(*args, **kwargs):
+            call_count["n"] += 1
+            if call_count["n"] == 1:
+                return self._mock_llm("BROKEN JSON {{{")   # force fallback
+            return self._mock_llm("Narasi fallback Bahasa Indonesia.")
+
+        captured = {"lang": None}
+
+        def fake_prompt(language="id"):
+            captured["lang"] = language
+            return "SYS"
+
+        state = dict(sample_state)
+        state["language"] = "id"
+        with patch("tools.narrative_generator.ChatOllama", side_effect=llm_factory):
+            with patch("tools.narrative_generator.get_system_prompt", side_effect=fake_prompt):
+                result = generate_narrative(state)
+        assert isinstance(result["narrative"], str)
+        assert captured["lang"] == "id"       # single-language prompt selection intact
+
+    def test_domain_note_language_instruction_in_prompt(self, sample_state, valid_schema_json):
+        """Bagian B: the single-language system prompt explicitly tells the LLM which
+        language to write the (single, shared) domain_note field in."""
+        from tools.narrative_generator import generate_narrative
+
+        captured = {}
+
+        def factory(*args, **kwargs):
+            inst = MagicMock()
+
+            def invoke(messages):
+                captured["sys"] = messages[0].content   # SystemMessage content
+                resp = MagicMock()
+                resp.content = valid_schema_json
+                return resp
+
+            inst.invoke.side_effect = invoke
+            return inst
+
+        # English path
+        state_en = dict(sample_state)
+        state_en["language"] = "en"
+        with patch("tools.narrative_generator.ChatOllama", side_effect=factory):
+            generate_narrative(state_en)
+        assert "domain_note" in captured["sys"]
+        assert "ENGLISH" in captured["sys"].upper()
+
+        # Indonesian path
+        state_id = dict(sample_state)
+        state_id["language"] = "id"
+        with patch("tools.narrative_generator.ChatOllama", side_effect=factory):
+            generate_narrative(state_id)
+        assert "domain_note" in captured["sys"]
+        assert "INDONESIA" in captured["sys"].upper()
 
     def test_strong_correlations_injected(self, sample_state, valid_schema_json):
         """Strong correlations in statistics are surfaced without error."""

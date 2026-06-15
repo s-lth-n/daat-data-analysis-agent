@@ -69,9 +69,9 @@ def test_detect_jenis_nilai_maps_datavaluetype():
 def test_distribusi_topic_count_share():
     block = build_deterministic_block(DF, "distribusi topik", PROFILE, HEALTHCARE)
     assert "Angka kunci per Topic" in block
-    assert "Cardiovascular Disease — 10 baris (50,00%)" in block
-    assert "Diabetes — 6 baris (30,00%)" in block
-    assert "Asthma — 4 baris (20,00%)" in block
+    assert "| Cardiovascular Disease | 10 | 50,00% |" in block
+    assert "| Diabetes | 6 | 30,00% |" in block
+    assert "| Asthma | 4 | 20,00% |" in block
     assert "Total baris = 20" in block
 
 
@@ -79,21 +79,21 @@ def test_dominan_topic_count_share():
     """'paling dominan' (no numeric metric) → same count+proporsi branch."""
     block = build_deterministic_block(DF, "topik apa yang paling dominan", PROFILE, HEALTHCARE)
     assert "Angka kunci per Topic" in block
-    assert "Cardiovascular Disease — 10 baris (50,00%)" in block
+    assert "| Cardiovascular Disease | 10 | 50,00% |" in block
 
 
 def test_distribusi_datasource_count_share():
     block = build_deterministic_block(DF, "sumber data yang paling sering", PROFILE, HEALTHCARE)
     assert "Angka kunci per DataSource" in block
-    assert "BRFSS — 12 baris (60,00%)" in block
-    assert "NVSS — 8 baris (40,00%)" in block
+    assert "| BRFSS | 12 | 60,00% |" in block
+    assert "| NVSS | 8 | 40,00% |" in block
 
 
 def test_distribusi_datavaluetype_count_share():
     block = build_deterministic_block(DF, "proporsi jenis nilai", PROFILE, HEALTHCARE)
     assert "Angka kunci per DataValueType" in block
-    assert "Crude Prevalence — 14 baris (70,00%)" in block
-    assert "Age-adjusted Prevalence — 6 baris (30,00%)" in block
+    assert "| Crude Prevalence | 14 | 70,00% |" in block
+    assert "| Age-adjusted Prevalence | 6 | 30,00% |" in block
 
 
 # ── the core regression: NO year is ever summed ──────────────────────────────
@@ -124,8 +124,8 @@ def test_paling_banyak_jumlah_baris_topic():
     block = build_deterministic_block(DF, q, PROFILE, HEALTHCARE)
     assert block, "expected a deterministic block, not an empty→fabrication fallback"
     assert "Angka kunci per Topic" in block
-    assert "Cardiovascular Disease — 10 baris (50,00%)" in block
-    assert "Diabetes — 6 baris (30,00%)" in block
+    assert "| Cardiovascular Disease | 10 | 50,00% |" in block
+    assert "| Diabetes | 6 | 30,00% |" in block
     assert "Total baris = 20" in block
     assert "YearStart" not in block                       # still no year-sum
 
