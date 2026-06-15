@@ -74,6 +74,19 @@ class NarrativeSchema(BaseModel):
 
 # ── Stats Context Builder ─────────────────────────────────────────────────────
 
+# Diagnosa #5 (Commit B): kolom "harga satuan". Σ harga satuan = nonsens bisnis
+# (mis. Σ Price 163.401 yang dulu disalahartikan LLM sebagai "total penjualan").
+# Substring SAMA dengan _find_numeric(("price","harga","unitprice")) di
+# groupby_analyzer agar deteksi konsisten lintas modul.
+_PRICE_LIKE_KEYS = ("price", "harga", "unitprice")
+
+
+def _is_price_like(col: str) -> bool:
+    """True bila nama kolom menandakan harga satuan (price/harga/unitprice)."""
+    c = (col or "").lower()
+    return any(k in c for k in _PRICE_LIKE_KEYS)
+
+
 def _build_stats_context(stats_result: dict) -> str:
     """
     Format stats_result dict into a structured reference string for prompt injection.
@@ -110,7 +123,16 @@ def _build_stats_context(stats_result: dict) -> str:
             parts.append(f"q75={s['q75']}")
         if s.get("count") is not None:
             parts.append(f"count={s['count']}")
-        lines.append(f"[{col}]  {' | '.join(parts)}")
+        line = f"[{col}]  {' | '.join(parts)}"
+        # Diagnosa #5 (Commit B): LABEL (bukan suppress) Σ untuk kolom harga satuan.
+        # Angka total= tetap ada; penanda mengarahkan LLM agar TIDAK menyebutnya
+        # sebagai "total penjualan" (metrik penjualan = Revenue di blok BREAKDOWN).
+        if _is_price_like(col) and s.get("total_sum") is not None:
+            line += (
+                f" (NOTE: Σ {col} is NOT a sales total; "
+                f"sales total = Revenue in the BREAKDOWN block)"
+            )
+        lines.append(line)
 
     # ── Categorical stats ──
     categorical: dict = stats_result.get("categorical_stats") or {}
