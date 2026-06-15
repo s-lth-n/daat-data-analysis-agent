@@ -412,7 +412,18 @@ def compute_groupby_stats(
 
 def format_groupby_for_context(groupby_result: dict) -> str:
     """
-    Format hasil groupby menjadi string untuk di-inject ke stats_context.
+    Format hasil groupby menjadi string untuk di-inject ke stats_context (blok
+    KONTEKS LLM saja — BUKAN tabel user-facing `build_deterministic_block`).
+
+    Diagnosa #6 — dirampingkan agar LLM tidak salah pilih/urut produk teratas:
+      - Buang metrik `mean_*` (DISTRACTOR: me-rank produk BERBEDA dari metrik
+        terpilih, mis. mean_Revenue tinggi untuk item high-ticket low-volume
+        seperti Memoboard 199,94 / Doorstop 144,80 yang sum_Revenue-nya rendah).
+        Kecuali agg memang "mean" → `mean_` ADALAH metrik utama, dipertahankan.
+      - Prefix `#1..#N` eksplisit + baris fakta "sudah diurutkan": `results` SUDAH
+        terurut menurun by metrik utama di `compute_groupby_stats` (deterministik).
+        Ini menyatakan FAKTA urutan, bukan instruksi perilaku.
+    Nilai metrik TIDAK diubah; hanya REPRESENTASI yang masuk ke konteks LLM.
     """
     if not groupby_result or "results" not in groupby_result:
         return ""
@@ -420,18 +431,33 @@ def format_groupby_for_context(groupby_result: dict) -> str:
     group_col = groupby_result["group_col"]
     agg_func = groupby_result["agg_func"]
     results = groupby_result["results"]
+    if not results:
+        return ""
+
+    def _metrics(row: dict) -> dict:
+        # Buang group/count + mean_* distractor (kecuali agg==mean → mean_ = utama).
+        return {
+            k: v for k, v in row.items()
+            if k not in ("group", "count")
+            and not (k.startswith("mean_") and agg_func != "mean")
+        }
+
+    # Metrik utama (kunci sort) = metrik pertama tersisa di baris #1 — selaras dgn
+    # primary_key compute_groupby_stats (urutan dict mengikuti numeric_cols[0]).
+    primary = next(iter(_metrics(results[0])), None)
+    n = len(results)
 
     lines = [f"BREAKDOWN PER {group_col.upper()} ({agg_func}):"]
-    for row in results:
+    if primary:
+        lines.append(
+            f"(Daftar SUDAH diurutkan #1..#{n} menurut {primary} / "
+            f"already ranked #1..#{n} by {primary}.)"
+        )
+    for rank, row in enumerate(results, 1):
         group_name = row["group"]
         count = row["count"]
-        # Ambil semua key kecuali group dan count
-        metrics = {k: v for k, v in row.items()
-                   if k not in ("group", "count")}
-        metric_str = ", ".join(
-            f"{k}={v:,.2f}" for k, v in metrics.items()
-        )
-        lines.append(f"  {group_name}: count={count}, {metric_str}")
+        metric_str = ", ".join(f"{k}={v:,.2f}" for k, v in _metrics(row).items())
+        lines.append(f"  #{rank} {group_name}: {metric_str}, count={count}")
 
     return "\n".join(lines)
 
@@ -468,32 +494,25 @@ def _build_breakdown_block(
     q = question or ""
     base_numeric = _base_numeric_metric_cols(df, prof, group_col)
 
-    work = df
-    front: list = []        # metrik DIMINTA → ditaruh depan (jadi kunci sort)
     notes: list = []        # metrik diminta tapi tak terhitung
     extra_lines: list = []  # klarifikasi (mis. count = transaksi)
 
-    # Revenue/penjualan → derive Quantity × Price kalau perlu.
-    if _METRIC_REVENUE.search(q):
-        work, rev_col = _maybe_add_revenue(work, base_numeric)
-        if rev_col:
-            front.append(rev_col)
-        else:
-            notes.append(
-                "'revenue/penjualan' (diminta): TIDAK TERSEDIA — tak ada kolom "
-                "revenue maupun Quantity & Price untuk menurunkannya. "
-                "JANGAN estimasi/hitung sendiri."
-            )
+    # Diagnosa #6: pakai resolver front-metric BERSAMA (_select_front_metrics) —
+    # IDENTIK dengan _resolve_followup_aggregation (tabel USER & chart). Ini membawa
+    # Revenue-default retail untuk "terlaris" POLOS (tanpa kata "revenue"), sehingga
+    # konteks-LLM & tabel SETUJU metrik + urutan (mis. produk terlaris → Revenue,
+    # Regency #1) — bukan diam-diam by Quantity. front = metrik DIMINTA (kunci sort).
+    work, front = _select_front_metrics(q, df, base_numeric, domain_context)
 
-    # Harga → kolom Price; Kuantitas/jumlah barang → kolom Quantity.
-    if _METRIC_PRICE.search(q):
-        pcol = _find_numeric(base_numeric, ("price", "harga", "unitprice"))
-        if pcol:
-            front.append(pcol)
-    if _METRIC_QTY.search(q):
-        qcol = _find_numeric(base_numeric, ("quantity", "qty", "kuantitas"))
-        if qcol:
-            front.append(qcol)
+    # Revenue diminta EKSPLISIT tapi tak bisa diturunkan → note jujur (tutup celah).
+    if _METRIC_REVENUE.search(q) and not _find_numeric(
+        front, ("revenue", "penjualan", "sales", "omzet", "omset")
+    ):
+        notes.append(
+            "'revenue/penjualan' (diminta): TIDAK TERSEDIA — tak ada kolom "
+            "revenue maupun Quantity & Price untuk menurunkannya. "
+            "JANGAN estimasi/hitung sendiri."
+        )
 
     # Count/transaksi → selalu tersedia (count = jumlah baris per grup).
     if _METRIC_COUNT.search(q):
