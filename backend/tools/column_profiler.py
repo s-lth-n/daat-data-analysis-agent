@@ -87,6 +87,11 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "(sum), bukan rata-rata per transaksi. Gunakan sum untuk Revenue/Quantity; "
             "gunakan mean untuk harga satuan. Soroti produk/segmen dengan kontribusi terbesar."
         ),
+        "metric_note_en": (
+            "This is retail/transaction data. The main metric is total sales (sum), not the "
+            "average per transaction. Use sum for Revenue/Quantity; use mean for unit price. "
+            "Highlight the products/segments with the largest contribution."
+        ),
         "avoid": [
             "Jangan ratakan revenue tanpa segmentasi produk atau periode",
             "Hindari interpretasi kode invoice/order sebagai metrik kuantitatif",
@@ -99,6 +104,11 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "amount/nilai transaksi. Perhatikan outlier pada nilai transaksi yang ekstrem. "
             "Gunakan konteks waktu saat membandingkan antar periode."
         ),
+        "metric_note_en": (
+            "Financial dataset. Total (sum) is more meaningful than the average for "
+            "transaction amounts/values. Watch for outliers in extreme transaction values. "
+            "Use time context when comparing across periods."
+        ),
         "avoid": [
             "Hindari membandingkan absolut tanpa konteks periode waktu",
             "Jangan sum saldo (balance) antar entitas yang berbeda",
@@ -110,6 +120,11 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "Dataset HR/SDM. Gunakan median untuk gaji (lebih robust terhadap outlier "
             "eksekutif). Segmentasikan per departemen/jabatan untuk insight yang bermakna. "
             "Perhatikan distribusi tenure dan komposisi workforce."
+        ),
+        "metric_note_en": (
+            "HR/workforce dataset. Use the median for salary (more robust to executive "
+            "outliers). Segment by department/role for meaningful insight. Watch the tenure "
+            "distribution and workforce composition."
         ),
         "avoid": [
             "Jangan sum gaji tanpa konteks yang jelas",
@@ -125,6 +140,13 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "dan insidensi, bandingkan antar lokasi menggunakan rate yang sudah dinormalisasi, "
             "bukan angka absolut."
         ),
+        "metric_note_en": (
+            "Healthcare/epidemiology dataset. Prefer rate per 100,000 population or "
+            "age-adjusted rate, not total count or sum. If a population column is available, "
+            "compute rate = (cases / population) × 100000. For indicators such as prevalence "
+            "and incidence, compare across locations using normalized rates, not absolute "
+            "numbers."
+        ),
         "avoid": [
             "sum_total raw counts tanpa normalisasi populasi",
             "membandingkan angka absolut antar state/wilayah dengan populasi berbeda",
@@ -137,6 +159,11 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "Analisis distribusi per mata kuliah, jurusan, atau angkatan untuk "
             "insight yang bermakna tentang performa akademik."
         ),
+        "metric_note_en": (
+            "Education/academic dataset. Use mean/median for scores and GPA. Analyze the "
+            "distribution per course, major, or cohort for meaningful insight into academic "
+            "performance."
+        ),
         "avoid": [
             "Hindari sum untuk nilai akademis",
             "Jangan abaikan nilai minimum/maksimum — menunjukkan rentang performa",
@@ -148,6 +175,11 @@ _DOMAIN_CONFIG: dict[str, dict] = {
             "Dataset umum. Gunakan mean sebagai agregasi default. "
             "Periksa distribusi setiap kolom numerik sebelum interpretasi. "
             "Perhatikan skewness untuk memilih antara mean dan median."
+        ),
+        "metric_note_en": (
+            "General dataset. Use mean as the default aggregation. Inspect the distribution "
+            "of each numeric column before interpretation. Consider skewness when choosing "
+            "between mean and median."
         ),
         "avoid": [],
     },

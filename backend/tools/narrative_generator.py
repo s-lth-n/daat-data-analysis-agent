@@ -26,45 +26,49 @@ logger = logging.getLogger(__name__)
 # ── Schema ───────────────────────────────────────────────────────────────────
 
 class NarrativeSchema(BaseModel):
+    # Field descriptions kept language-NEUTRAL (English-meta) so they do not pull
+    # Qwen3 toward Indonesian when the report language is English (Commit A:
+    # anti language-bleed). Paired fields still name their target language because
+    # the schema is bilingual by design (Opsi A); only the rendered side is emitted.
     judul: str = Field(
-        description="Judul singkat analisis, max 10 kata"
+        description="Short analysis title, max 10 words, in the report language."
     )
     ringkasan_id: str = Field(
         description=(
-            "Ringkasan 2-3 kalimat Bahasa Indonesia. "
-            "WAJIB gunakan angka PERSIS dari STATS_CONTEXT yang diberikan, jangan karang angka."
+            "Executive summary, 2-3 sentences, written in Indonesian. "
+            "Use EXACT numbers from STATS_CONTEXT; do not fabricate numbers."
         )
     )
     ringkasan_en: str = Field(
         description=(
-            "Executive summary 2-3 sentences English. "
-            "MUST use EXACT numbers from STATS_CONTEXT provided."
+            "Executive summary, 2-3 sentences, written in English. "
+            "Use EXACT numbers from STATS_CONTEXT; do not fabricate numbers."
         )
     )
     temuan_utama: List[str] = Field(
         description=(
-            "List 3-5 temuan penting Bahasa Indonesia. "
-            "Tiap temuan HARUS sebut angka spesifik dari STATS_CONTEXT."
+            "List of 3-5 key findings, written in Indonesian. "
+            "Each finding must cite specific numbers from STATS_CONTEXT."
         )
     )
     key_findings: List[str] = Field(
         description=(
-            "List 3-5 key findings English. "
-            "Each MUST reference specific numbers from STATS_CONTEXT."
+            "List of 3-5 key findings, written in English. "
+            "Each finding must cite specific numbers from STATS_CONTEXT."
         )
     )
     domain_note: Optional[str] = Field(
         default=None,
         description=(
-            "Catatan interpretasi domain jika relevan (misal retail: revenue trend, "
-            "healthcare: rate per kapita). Kosongkan jika tidak relevan."
+            "Optional domain interpretation note (e.g., revenue trend, rate per capita), "
+            "written in the report language. Leave empty if not relevant."
         ),
     )
     kesimpulan_id: str = Field(
-        description="Kesimpulan 1-2 kalimat Bahasa Indonesia"
+        description="Conclusion, 1-2 sentences, written in Indonesian."
     )
     conclusion_en: str = Field(
-        description="Conclusion 1-2 sentences English"
+        description="Conclusion, 1-2 sentences, written in English."
     )
 
 
@@ -291,6 +295,25 @@ def _validate_numbers_in_narrative(
     return schema, validation_passed, mismatched
 
 
+# ── Domain metric_note language selector (Commit A: anti language-bleed) ──────
+
+def _select_metric_note(domain_ctx: dict, language: str) -> Optional[str]:
+    """Pilih varian metric_note sesuai bahasa laporan untuk dicegah dari bleed.
+
+    language=='en' → 'metric_note_en' bila tersedia; selain itu fallback ke
+    'metric_note' (ID). Tidak pernah raise — domain tak terdefinisi / dict kosong
+    → kembalikan metric_note ID bila ada, atau None.
+    """
+    try:
+        if not isinstance(domain_ctx, dict):
+            return None
+        if language == "en":
+            return domain_ctx.get("metric_note_en") or domain_ctx.get("metric_note")
+        return domain_ctx.get("metric_note")
+    except Exception:
+        return domain_ctx.get("metric_note") if isinstance(domain_ctx, dict) else None
+
+
 # ── Internal: Constrained Generation ─────────────────────────────────────────
 
 def _constrained_narrative(state: dict, language: str) -> str:
@@ -327,8 +350,9 @@ def _constrained_narrative(state: dict, language: str) -> str:
         parts.append(f"\nStrong correlations:\n{corr_lines}")
 
     domain_ctx: dict = state.get("domain_context") or {}
-    if domain_ctx.get("metric_note"):
-        parts.append(f"\nDomain guidance: {domain_ctx['metric_note']}")
+    _metric_note = _select_metric_note(domain_ctx, language)
+    if _metric_note:
+        parts.append(f"\nDomain guidance: {_metric_note}")
 
     human_content = "\n".join(parts)
 
@@ -541,8 +565,9 @@ def _free_form_narrative(state: dict, language: str) -> str:
 
     system_content = get_system_prompt(language)
     domain_ctx: dict = state.get("domain_context") or {}
-    if domain_ctx.get("metric_note"):
-        system_content += f"\n\n## Domain Context\n{domain_ctx['metric_note']}"
+    _metric_note = _select_metric_note(domain_ctx, language)
+    if _metric_note:
+        system_content += f"\n\n## Domain Context\n{_metric_note}"
         avoid_items: list = domain_ctx.get("avoid") or []
         if avoid_items:
             avoid_str = "\n".join(f"- {a}" for a in avoid_items)
