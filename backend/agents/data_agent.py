@@ -237,6 +237,26 @@ def compute_statistics(state: AgentState) -> AgentState:
             "descriptive": stats,
             "correlation": corr,
         }
+
+        # Diagnosa #5 (Commit A): samakan /analyze dengan /analyze/followup —
+        # inject hasil GROUP BY (mis. Revenue total + produk teratas) ke
+        # STATS_CONTEXT narasi LEWAT key __followup_context__ yang SAMA dengan
+        # followup. Tanpa ini, prosa LLM /analyze hanya melihat statistik
+        # deskriptif global (Σ/max Price) lalu mengarang "total penjualan" dari
+        # angka yang salah. build_followup_context murni pandas (TANPA LLM call)
+        # & hanya mengeluarkan blok bila ada intent groupby/ranking/temporal;
+        # pertanyaan non-groupby → "" → tak ada injeksi (no regresi). Pakai data
+        # yang sudah ada di state pada node ini (prompt/df/profile/domain) →
+        # tanpa field state baru. _build_stats_context sudah membaca key ini.
+        try:
+            from tools.groupby_analyzer import build_followup_context
+            ctx = build_followup_context(
+                df, state.get("prompt", ""), column_profile, domain_context
+            )
+            if ctx and isinstance(state.get("statistics"), dict):
+                state["statistics"]["__followup_context__"] = ctx
+        except Exception as _ge:
+            logger.warning(f"[compute_statistics] groupby context dilewati: {_ge}")
     except Exception as e:
         logger.error(f"Statistics computation failed: {e}")
         state["statistics"] = {"error": str(e)}
