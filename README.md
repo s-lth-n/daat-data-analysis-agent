@@ -31,7 +31,7 @@ Sistem analisis data berbasis AI yang berjalan **100% lokal** tanpa cloud, tanpa
 - NVIDIA drivers + CUDA installed
 - Docker & Docker Compose
 - Python 3.11+
-- Node.js 18+ (for Claude Code, optional)
+- Node.js 18+ 
 
 ### 1. Clone & Setup
 
@@ -67,19 +67,6 @@ uvicorn main:app --reload --port 8000
 - **Open WebUI (Chat):** http://localhost:3000
 - **Backend API Docs:** http://localhost:8000/docs
 - **Health Check:** http://localhost:8000/health
-
-## Development with Claude Code
-
-```bash
-# Install Claude Code
-npm install -g @anthropic-ai/claude-code
-
-# Start Claude Code in the project root
-cd ta-data-analyst
-claude
-```
-
-Claude Code will automatically read `CLAUDE.md` for project context.
 
 ## Project Structure
 
