@@ -7,6 +7,8 @@ from tools.groupby_analyzer import (
     detect_groupby_intent,
     compute_groupby_stats,
     format_groupby_for_context,
+    build_summary_revenue_line,
+    _fmt_num,
 )
 
 MOCK_PROFILE = {
@@ -50,3 +52,63 @@ def test_compute_output_structure():
 def test_compute_sorted_descending():
     r = compute_groupby_stats(MOCK_DF, "Country")
     assert r["results"][0]
+
+
+# ── build_summary_revenue_line (fallback paritas /analyze non-groupby) ──────
+
+# Retail df TANPA kolom revenue → Revenue WAJIB diturunkan Quantity×Price.
+RETAIL_NO_REV_DF = pd.DataFrame({
+    "Country":  ["UK", "UK", "Germany", "France"],
+    "Quantity": [6, 3, 2, 4],
+    "Price":    [2.0, 4.0, 5.0, 1.0],
+})
+RETAIL_NO_REV_PROFILE = {
+    "Country":  "kategorik",
+    "Quantity": "numerik_valid",
+    "Price":    "numerik_valid",
+}
+
+# CDC-like df: kolom numerik yang BUKAN quantity/price/revenue (YearStart kategorik).
+CDC_DF = pd.DataFrame({
+    "Topic":     ["A", "B", "A"],
+    "YearStart": [2018, 2019, 2020],
+    "DataValue": [12.5, 33.1, 7.0],
+})
+CDC_PROFILE = {
+    "Topic":     "kategorik",
+    "YearStart": "kategorik",
+    "DataValue": "numerik_valid",
+}
+
+
+def test_summary_revenue_line_derived_retail():
+    """Qty×Price disumkan jadi Revenue (bukan Σ Price)."""
+    line = build_summary_revenue_line(
+        RETAIL_NO_REV_DF, RETAIL_NO_REV_PROFILE, language="id"
+    )
+    assert line  # non-empty
+    expected_total = float((RETAIL_NO_REV_DF["Quantity"] * RETAIL_NO_REV_DF["Price"]).sum())
+    assert expected_total == 6 * 2 + 3 * 4 + 2 * 5 + 4 * 1  # 12+12+10+4 = 38
+    assert _fmt_num(expected_total, "id") in line          # 38,00 muncul
+    # Σ Price (12,00) BUKAN total penjualan → tak boleh sama dengan total Revenue.
+    sum_price = float(RETAIL_NO_REV_DF["Price"].sum())
+    assert sum_price != expected_total
+    assert "Revenue" in line
+
+
+def test_summary_revenue_line_cdc_returns_empty():
+    """Tanpa Quantity/Price/revenue → "" (jangan karang metrik penjualan)."""
+    line = build_summary_revenue_line(CDC_DF, CDC_PROFILE, language="id")
+    assert line == ""
+
+
+def test_summary_revenue_line_english():
+    """language='en' → kalimat Inggris + angka gaya EN."""
+    line = build_summary_revenue_line(
+        RETAIL_NO_REV_DF, RETAIL_NO_REV_PROFILE, language="en"
+    )
+    assert line
+    assert "from" in line and "rows" in line
+    assert "total sales" in line.lower()
+    expected_total = float((RETAIL_NO_REV_DF["Quantity"] * RETAIL_NO_REV_DF["Price"]).sum())
+    assert _fmt_num(expected_total, "en") in line          # 38.00 muncul

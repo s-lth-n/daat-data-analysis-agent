@@ -8,8 +8,9 @@ state["statistics"]["__followup_context__"], persis seperti /analyze/followup.
 Memverifikasi:
   1. compute_statistics meng-set __followup_context__ untuk query groupby/ranking
      (mis. "top products by revenue") — pakai data yang sudah ada di state.
-  2. Query non-groupby (mis. "ringkas data ini") → TIDAK ada __followup_context__
-     → STATS_CONTEXT seperti semula (no regresi).
+  2. Query non-groupby retail (mis. "ringkas data ini") → __followup_context__ kini
+     berisi SATU baris "Total Revenue" (fallback paritas non-groupby), TANPA
+     BREAKDOWN per-grup (no regresi breakdown).
   3. _build_stats_context atas statistics ber-__followup_context__ → nama produk
      teratas (REGENCY) + nilai per-grup Revenue ikut masuk konteks.
   4. Anti-halusinasi: nilai per-grup teratas (kini DI konteks) TIDAK diredaksi [?];
@@ -77,11 +78,16 @@ def test_compute_statistics_injects_groupby_context_for_ranking_query():
     assert "sum_Revenue=20,000.00" in ctx
 
 
-# ── 2. Query non-groupby → tidak ada injeksi (no regresi) ─────────────────────
+# ── 2. Query non-groupby retail → baris Revenue ringkas (tanpa BREAKDOWN) ─────
 
-def test_compute_statistics_no_context_for_non_groupby_query():
+def test_compute_statistics_injects_revenue_line_for_non_groupby_retail():
     out = _run_node("ringkas data ini")
-    assert "__followup_context__" not in out["statistics"]
+    # Fallback paritas: ringkasan polos retail kini dapat SATU baris Revenue yang sah
+    # (Qty×Price = 25.190), bukan Σ Price. Tapi BUKAN breakdown per-grup (no regresi).
+    ctx = out["statistics"]["__followup_context__"]
+    assert "Total Revenue" in ctx
+    assert "25,190.00" in ctx
+    assert "BREAKDOWN PER" not in ctx
     # Deskriptif tetap ada seperti semula.
     assert "descriptive" in out["statistics"]
     assert "correlation" in out["statistics"]

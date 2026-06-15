@@ -1089,3 +1089,50 @@ def build_followup_chart_spec(
         )
     except Exception:
         return None
+
+
+# ── Fallback paritas /analyze untuk pertanyaan NON-groupby ──────────────────
+def build_summary_revenue_line(
+    df: pd.DataFrame,
+    column_profile: dict,
+    domain_context: Optional[dict] = None,
+    language: str = "id",
+) -> str:
+    """
+    SATU baris konteks Revenue untuk ringkasan POLOS (mis. "ringkas data ini").
+
+    build_followup_context hanya mengeluarkan blok bila ada intent groupby/ranking/
+    temporal; untuk ringkasan tanpa segmentasi ia kembalikan "" → __followup_context__
+    kosong → narasi LLM /analyze tak punya angka Revenue yang sah dan bisa jatuh ke
+    Σ Price ("total penjualan" palsu), karena disclaimer _build_stats_context menunjuk
+    BREAKDOWN yang tak ada. Helper ini menambal celah itu dengan total Revenue yang
+    SAH: kolom revenue existing ATAU turunan Quantity×Price, lewat derivasi TUNGGAL
+    _maybe_add_revenue agar konsisten dengan tabel/chart/breakdown.
+
+    Return "" bila Revenue tak bisa ditentukan (mis. CDC tanpa Quantity×Price) — biar
+    narasi pakai statistik biasa, tanpa angka penjualan karangan. Tidak pernah raise.
+    Hormati `language` (id/en) via _fmt_num/_fmt_intnum. TIDAK menyentuh
+    build_deterministic_block / build_followup_context / _resolve_followup_aggregation.
+    """
+    try:
+        if df is None or len(df) == 0:
+            return ""
+        base_numeric = _base_numeric_metric_cols(df, column_profile or {}, None)
+        work, rev_col = _maybe_add_revenue(df, base_numeric)
+        if not rev_col or rev_col not in work.columns:
+            return ""
+        total = float(work[rev_col].sum())
+        n = len(work)
+        if language == "en":
+            return (
+                f"Total Revenue ({rev_col}) = {_fmt_num(total, language)} "
+                f"from {_fmt_intnum(n, language)} rows — this is the valid sales "
+                f"metric; the Σ of unit prices is NOT total sales."
+            )
+        return (
+            f"Total Revenue ({rev_col}) = {_fmt_num(total, language)} "
+            f"dari {_fmt_intnum(n, language)} baris — ini metrik penjualan yang "
+            f"sah; Σ harga satuan BUKAN total penjualan."
+        )
+    except Exception:
+        return ""

@@ -14,7 +14,8 @@ Memverifikasi:
   2. Nilai grand total konteks == nilai head blok deterministik tabel.
   3. Redactor: grand total lolos (tidak [?]); angka karangan tetap [?].
   4. Untuk retail "terlaris" → metrik = Revenue (basis sama dgn tabel).
-  5. Non-groupby → tak ada grand total inject (no regresi).
+  5. Non-groupby retail → baris Revenue ringkas (fallback paritas), TAPI tak ada
+     baris grand total "(all groups)" maupun BREAKDOWN (no regresi grand-total).
 """
 
 import re
@@ -132,14 +133,19 @@ def test_grand_total_in_stats_context_via_compute_statistics():
     assert _ctx_total(sc) is not None
 
 
-# ── 5. Non-groupby → tak ada grand total (no regresi) ─────────────────────────
+# ── 5. Non-groupby retail → baris Revenue ringkas, tanpa grand total (no regresi) ─
 
-def test_non_groupby_no_grand_total():
-    ctx = build_followup_context(DF, "ringkas data ini", PROFILE, RETAIL)
-    assert ctx == ""
+def test_non_groupby_revenue_line_no_grand_total():
+    # build_followup_context (layer groupby) tetap kosong → tak ada grand-total line.
+    assert build_followup_context(DF, "ringkas data ini", PROFILE, RETAIL) == ""
     out = compute_statistics({
         "prompt": "ringkas data ini", "language": "en", "dataframe_loaded": True,
         "file_path": "x.csv", "dataframe": DF, "column_profile": PROFILE,
         "domain_context": RETAIL,
     })
-    assert "__followup_context__" not in out["statistics"]
+    # Fallback node-level menyuntik SATU baris Revenue ringkas (25.190), TAPI tak ada
+    # baris grand total "(all groups)" maupun BREAKDOWN per-grup (no regresi).
+    ctx = out["statistics"]["__followup_context__"]
+    assert "Total Revenue" in ctx and "25,190.00" in ctx
+    assert _ctx_total(ctx) is None        # tak ada baris "(all groups)"
+    assert "all groups" not in ctx

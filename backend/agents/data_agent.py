@@ -257,6 +257,25 @@ def compute_statistics(state: AgentState) -> AgentState:
                 state["statistics"]["__followup_context__"] = ctx
         except Exception as _ge:
             logger.warning(f"[compute_statistics] groupby context dilewati: {_ge}")
+
+        # Paritas non-groupby: bila blok groupby di ATAS tidak menginjeksi apa pun
+        # (ringkasan polos "ringkas data ini" → ctx ""), __followup_context__ kosong →
+        # narasi LLM bisa menyebut Σ Price sebagai "total penjualan" (salah). Tambal
+        # dengan SATU baris total Revenue yang sah (derivasi sama dgn breakdown). Hanya
+        # cabang fallback — blok groupby di atas tak disentuh; cek lewat state agar
+        # robust bila try di atas gagal. build_summary_revenue_line return "" bila
+        # Revenue tak bisa ditentukan (mis. CDC) → tak ada injeksi, tak ada regresi.
+        try:
+            _stats = state.get("statistics")
+            if isinstance(_stats, dict) and not _stats.get("__followup_context__"):
+                from tools.groupby_analyzer import build_summary_revenue_line
+                rev_line = build_summary_revenue_line(
+                    df, column_profile, domain_context, state.get("language", "id")
+                )
+                if rev_line:
+                    _stats["__followup_context__"] = rev_line
+        except Exception as _re:
+            logger.warning(f"[compute_statistics] revenue summary fallback dilewati: {_re}")
     except Exception as e:
         logger.error(f"Statistics computation failed: {e}")
         state["statistics"] = {"error": str(e)}
