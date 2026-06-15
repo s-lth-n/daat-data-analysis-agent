@@ -252,6 +252,50 @@ def _maybe_add_revenue(df: pd.DataFrame, numeric_cols: list) -> tuple:
     return df, None
 
 
+def _unit_price_by_group(
+    df: pd.DataFrame,
+    group_col: str,
+    column_profile: dict,
+) -> dict:
+    """
+    Harga EFEKTIF per unit per kelompok = Σ Revenue(grup) / Σ Quantity(grup),
+    DETERMINISTIK (pandas) — supaya angka "per-unit" di laporan TIDAK lagi ditulis
+    LLM ("Manual", kandidat halusinasi) tapi dipaksa dari hitungan Python.
+
+    Reuse derivasi Revenue TUNGGAL (_maybe_add_revenue) + Σ via compute_groupby_stats
+    (bukan perkalian Qty×Price baru di sini). Bila Revenue ATAU Quantity tak tersedia
+    (mis. CDC tanpa Qty×Price) → {} = OMISSION JUJUR (tak ada kolom dipaksakan).
+
+    Returns {str(group): float_unit_price}. Tidak pernah raise.
+    """
+    try:
+        if df is None or len(df) == 0 or group_col not in df.columns:
+            return {}
+        base_numeric = _base_numeric_metric_cols(df, column_profile or {}, group_col)
+        work, rev_col = _maybe_add_revenue(df, base_numeric)
+        qty_col = _find_numeric(base_numeric, ("quantity", "qty"))
+        if not rev_col or not qty_col:
+            return {}
+        if rev_col not in work.columns or qty_col not in work.columns:
+            return {}
+        # Σ per grup lewat compute_groupby_stats (pandas, deterministik) — bukan
+        # narasi LLM. max_groups besar agar SEMUA grup punya entri (build_deterministic_block
+        # mungkin meng-cap/mengurut beda; lookup per nama grup tetap ketemu).
+        sub = work[[group_col, rev_col, qty_col]]
+        gb = compute_groupby_stats(
+            sub, group_col, {"preferred_aggregation": "sum"}, max_groups=10 ** 9
+        )
+        out: dict = {}
+        for r in gb.get("results", []):
+            rev = r.get(f"sum_{rev_col}")
+            qty = r.get(f"sum_{qty_col}")
+            if rev is not None and qty:  # qty truthy → bukan 0/None (hindari ÷0)
+                out[str(r["group"])] = float(rev) / float(qty)
+        return out
+    except Exception:
+        return {}
+
+
 def detect_groupby_intent(
     question: str,
     column_profile: dict,
@@ -860,14 +904,18 @@ def _format_groups_as_table(
     (`_fmt_id`/`_fmt_int` di row dict) — fungsi ini murni presentasi, nol LLM.
     """
     en = language == "en"
+    # Kolom harga/unit (ΣRevenue/ΣQuantity) muncul HANYA bila baris mengandung nilai
+    # per-unit deterministik (data punya Qty×Price); selain itu tabel byte-identik.
+    has_unit = kind == "metric" and any(r.get("unit") for r in rows)
+    _uh = ["Price/unit" if en else "Harga/unit"] if has_unit else []
+    _uc = (lambda r: [r.get("unit", "")]) if has_unit else (lambda r: [])
     if kind == "metric":
         if mean_intent:
-            headers = [dim_label, value_header, "%",
-                       ("Mean" if en else "Rata-rata"), "n"]
-            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["mean"], r["n"]]
+            headers = [dim_label, value_header, "%"] + _uh + [("Mean" if en else "Rata-rata"), "n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"] + _uc(r) + [r["mean"], r["n"]]
         else:
-            headers = [dim_label, value_header, "%", "n"]
-            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%", r["n"]]
+            headers = [dim_label, value_header, "%"] + _uh + ["n"]
+            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"] + _uc(r) + [r["n"]]
     else:  # count branch
         headers = [dim_label, value_header, "%"]
         row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"]
@@ -892,6 +940,8 @@ def _format_groups_as_list(
     for r in rows:
         if kind == "metric":
             seg = f"{r['i']}. {r['group']} — {r['value']} ({r['pct']}%)"
+            if r.get("unit"):
+                seg += f"; harga/unit {r['unit']}"
             if mean_intent and r.get("mean") is not None:
                 seg += f"; rata-rata {r['mean']}"
             seg += f"; n={r['n']}"
@@ -966,6 +1016,17 @@ def build_deterministic_block(
                     "mean": _fmt_num(float(gmean.get(g, 0.0)), language),
                     "n": _fmt_intnum(int(gcount.get(g, 0)), language),
                 })
+            # Harga efektif per unit (ΣRevenue/ΣQuantity) — DETERMINISTIK (pandas),
+            # dipaksa masuk tabel agar LLM tak perlu mengarang baris "Manual" per-unit.
+            # Graceful: bila Revenue/Quantity tak ada (mis. CDC) → {} → kolom di-omit.
+            try:
+                _unit_by_group = _unit_price_by_group(work, group_col, column_profile)
+                for _r in rows:
+                    _up = _unit_by_group.get(_r["group"])
+                    if _up is not None:
+                        _r["unit"] = _fmt_num(_up, language)
+            except Exception:
+                pass
             kind = "metric"
             value_header = str(primary)
             value_unit = ""
@@ -1123,14 +1184,22 @@ def build_summary_revenue_line(
             return ""
         total = float(work[rev_col].sum())
         n = len(work)
+        # Buang suffix sumber "(rev_col)" hanya saat redundan dengan label, mis.
+        # kolom existing/turunan bernama "Revenue" → "Total Revenue (Revenue)".
+        # Untuk kolom lain (Sales/Penjualan/Omzet) suffix tetap informatif.
+        rev_label = (
+            "Total Revenue"
+            if rev_col.strip().lower() == "revenue"
+            else f"Total Revenue ({rev_col})"
+        )
         if language == "en":
             return (
-                f"Total Revenue ({rev_col}) = {_fmt_num(total, language)} "
+                f"{rev_label} = {_fmt_num(total, language)} "
                 f"from {_fmt_intnum(n, language)} rows — this is the valid sales "
                 f"metric; the Σ of unit prices is NOT total sales."
             )
         return (
-            f"Total Revenue ({rev_col}) = {_fmt_num(total, language)} "
+            f"{rev_label} = {_fmt_num(total, language)} "
             f"dari {_fmt_intnum(n, language)} baris — ini metrik penjualan yang "
             f"sah; Σ harga satuan BUKAN total penjualan."
         )

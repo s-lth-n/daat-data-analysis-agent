@@ -46,8 +46,9 @@ def test_deterministic_percent_from_real_total():
     assert "Angka kunci" in block
     assert "Total Revenue = 101,00" in block          # real total, computed in Python
     # Revisi #2: rendered as a markdown table — value + % both deterministic.
-    assert "| UK | 79,00 | 78,22% | 4 |" in block
-    assert "| Germany | 10,00 | 9,90% | 1 |" in block
+    # Kolom Harga/unit deterministik (ΣRevenue/ΣQuantity): UK 79/24=3,29 ; Germany 10/2=5,00.
+    assert "| UK | 79,00 | 78,22% | 3,29 | 4 |" in block
+    assert "| Germany | 10,00 | 9,90% | 5,00 | 1 |" in block
     # No 10x-inflated total anywhere.
     assert "1.010,00" not in block and "1.634" not in block
 

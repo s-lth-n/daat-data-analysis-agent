@@ -50,8 +50,9 @@ def _table_rows(block: str) -> list:
 
 def test_metric_block_is_markdown_table():
     block = build_deterministic_block(DF, "revenue per negara", PROFILE)
-    assert "| Country | Revenue | % | n |" in block      # ID default headers
-    assert "| --- | --- | --- | --- |" in block
+    # Kolom Harga/unit deterministik (ΣRevenue/ΣQuantity) muncul karena DF punya Qty×Price.
+    assert "| Country | Revenue | % | Harga/unit | n |" in block   # ID default headers
+    assert "| --- | --- | --- | --- | --- |" in block
 
 
 def test_metric_one_row_per_group():
@@ -62,19 +63,20 @@ def test_metric_one_row_per_group():
 
 def test_metric_cells_match_gsum():
     block = build_deterministic_block(DF, "revenue per negara", PROFILE)
-    assert "| UK | 79,00 | 78,22% | 4 |" in block
-    assert "| France | 12,00 | 11,88% | 1 |" in block
-    assert "| Germany | 10,00 | 9,90% | 1 |" in block
+    # Harga/unit = ΣRevenue/ΣQuantity: UK 79/24=3,29 ; France 12/4=3,00 ; Germany 10/2=5,00.
+    assert "| UK | 79,00 | 78,22% | 3,29 | 4 |" in block
+    assert "| France | 12,00 | 11,88% | 3,00 | 1 |" in block
+    assert "| Germany | 10,00 | 9,90% | 5,00 | 1 |" in block
 
 
 def test_metric_mean_intent_adds_mean_column():
     block = build_deterministic_block(DF, "rata-rata revenue per negara", PROFILE)
-    assert "| Country | Revenue | % | Rata-rata | n |" in block
+    assert "| Country | Revenue | % | Harga/unit | Rata-rata | n |" in block
 
 
 def test_english_headers():
     block = build_deterministic_block(DF, "revenue per country", PROFILE, None, "en")
-    assert "| Country | Revenue | % | n |" in block
+    assert "| Country | Revenue | % | Price/unit | n |" in block
     assert "Key figures per Country" in block             # head in EN
     assert "from 6 rows" in block
 
@@ -105,8 +107,9 @@ def test_fallback_to_numbered_list_on_table_error(monkeypatch):
 
     monkeypatch.setattr(gb, "_format_groups_as_table", boom)
     block = gb.build_deterministic_block(DF, "revenue per negara", PROFILE)
-    # Numbered-list markers present; no table pipes.
-    assert "1. UK — 79,00 (78,22%); n=4" in block
+    # Numbered-list markers present; no table pipes. Harga/unit deterministik (79/24=3,29)
+    # ikut di fallback list — sumber angka per-unit yang SAMA dengan tabel.
+    assert "1. UK — 79,00 (78,22%); harga/unit 3,29; n=4" in block
     assert "|" not in block
     assert "Angka kunci per Country" in block              # head still intact
 
