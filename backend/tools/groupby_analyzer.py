@@ -685,6 +685,44 @@ def _fmt_int(n) -> str:
         return str(n)
 
 
+# ── Varian gaya Inggris + dispatcher locale-aware (Revisi #3, format ikut bahasa) ──
+# Python f"{x:,.2f}" SUDAH gaya EN (koma ribuan, titik desimal); jadi _fmt_en cukup
+# memformat tanpa translate. _fmt_id men-translate ke gaya ID. Nilai TIDAK berubah —
+# hanya representasi string. Dispatcher fallback ke gaya ID bila gagal (tak crash).
+
+def _fmt_en(x) -> str:
+    """Angka gaya Inggris: 1,003,551.44 (koma ribuan, titik desimal)."""
+    try:
+        return f"{float(x):,.2f}"
+    except (ValueError, TypeError):
+        return str(x)
+
+
+def _fmt_int_en(n) -> str:
+    """Bilangan bulat gaya Inggris: 45,525."""
+    try:
+        return f"{int(n):,}"
+    except (ValueError, TypeError):
+        return str(n)
+
+
+def _fmt_num(value, language: str = "id") -> str:
+    """2-desimal locale-aware: id → 1.058.314,21 ; en → 1,058,314.21.
+    Fallback ke gaya ID bila apa pun gagal (tak pernah raise)."""
+    try:
+        return _fmt_en(value) if language == "en" else _fmt_id(value)
+    except Exception:
+        return _fmt_id(value)
+
+
+def _fmt_intnum(n, language: str = "id") -> str:
+    """Integer locale-aware: id → 45.525 ; en → 45,525. Fallback gaya ID."""
+    try:
+        return _fmt_int_en(n) if language == "en" else _fmt_int(n)
+    except Exception:
+        return _fmt_int(n)
+
+
 def _resolve_followup_aggregation(
     df: pd.DataFrame,
     question: str,
@@ -853,22 +891,24 @@ def build_deterministic_block(
                 head = (
                     f"**📊 Key figures per {dim_label} — computed directly from the "
                     f"data (not LLM estimates):**\n"
-                    f"_Total {primary} = {_fmt_id(total)} from {_fmt_int(len(work))} rows_"
+                    f"_Total {primary} = {_fmt_num(total, language)} "
+                    f"from {_fmt_intnum(len(work), language)} rows_"
                 )
             else:
                 head = (
                     f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
                     f"(bukan estimasi LLM):**\n"
-                    f"_Total {primary} = {_fmt_id(total)} dari {_fmt_int(len(work))} baris_"
+                    f"_Total {primary} = {_fmt_num(total, language)} "
+                    f"dari {_fmt_intnum(len(work), language)} baris_"
                 )
             for i, g in enumerate(order, 1):
                 s = float(gsum.get(g, 0.0))
                 pct = (s / total * 100.0) if total else 0.0
                 rows.append({
                     "i": i, "group": str(g),
-                    "value": _fmt_id(s), "pct": _fmt_id(pct),
-                    "mean": _fmt_id(float(gmean.get(g, 0.0))),
-                    "n": _fmt_int(int(gcount.get(g, 0))),
+                    "value": _fmt_num(s, language), "pct": _fmt_num(pct, language),
+                    "mean": _fmt_num(float(gmean.get(g, 0.0)), language),
+                    "n": _fmt_intnum(int(gcount.get(g, 0)), language),
                 })
             kind = "metric"
             value_header = str(primary)
@@ -886,19 +926,19 @@ def build_deterministic_block(
             if en:
                 head = (
                     f"**📊 Key figures per {dim_label} — computed directly from the "
-                    f"data (not LLM estimates):**\n_Total {unit} = {_fmt_int(int(total))}_"
+                    f"data (not LLM estimates):**\n_Total {unit} = {_fmt_intnum(int(total), language)}_"
                 )
             else:
                 head = (
                     f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
-                    f"(bukan estimasi LLM):**\n_Total {unit} = {_fmt_int(int(total))}_"
+                    f"(bukan estimasi LLM):**\n_Total {unit} = {_fmt_intnum(int(total), language)}_"
                 )
             for i, g in enumerate(order, 1):
                 cnt = int(gcount.get(g, 0))
                 pct = (cnt / total * 100.0) if total else 0.0
                 rows.append({
                     "i": i, "group": str(g),
-                    "value": _fmt_int(cnt), "pct": _fmt_id(pct),
+                    "value": _fmt_intnum(cnt, language), "pct": _fmt_num(pct, language),
                     "mean": None, "n": None,
                 })
             kind = "count"
