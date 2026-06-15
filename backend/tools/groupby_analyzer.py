@@ -563,6 +563,37 @@ def _resolve_followup_dimension(df: pd.DataFrame, question: str, column_profile:
     return None
 
 
+def _grand_total_context_line(
+    df: pd.DataFrame,
+    question: str,
+    column_profile: dict,
+    domain_context: Optional[dict] = None,
+) -> str:
+    """
+    Diagnosa #5 (Commit B'): SATU baris grand total deterministik untuk konteks LLM.
+
+    Dihitung dari _resolve_followup_aggregation — RESOLVER YANG SAMA yang dipakai
+    build_deterministic_block (tabel user). Nilainya IDENTIK dengan total di blok
+    tabel BY CONSTRUCTION (sumber sama: grp[primary].sum().sum() / gcount.sum()),
+    sehingga TIDAK memunculkan basis ketiga. Angka raw (titik desimal) — konteks
+    LLM internal; redactor meng-canonicalisasi ID/EN jadi format tak masalah.
+
+    Return "" bila bukan followup groupby/temporal. Tidak pernah raise.
+    """
+    try:
+        agg = _resolve_followup_aggregation(df, question, column_profile, domain_context)
+        if not agg:
+            return ""
+        primary = agg["primary"]
+        if primary is not None:
+            total = float(agg["grp"][primary].sum().sum())   # == total head tabel
+            return f"TOTAL {primary} (all groups) = {total:.2f}"
+        total = int(agg["gcount"].sum())                     # cabang count
+        return f"TOTAL rows (all groups) = {total}"
+    except Exception:
+        return ""
+
+
 def build_followup_context(
     df: pd.DataFrame,
     question: str,
@@ -598,6 +629,12 @@ def build_followup_context(
             work, group_col, _is_temporal = resolved
             block = _build_breakdown_block(work, group_col, q, prof, domain_context)
             if block:
+                # Commit B': sertakan grand total deterministik (sumber SAMA dgn
+                # tabel) → prosa boleh menyebut total (mis. Revenue 1.058.314)
+                # tanpa diredaksi [?]; angka karangan tetap [?].
+                total_line = _grand_total_context_line(df, q, prof, domain_context)
+                if total_line:
+                    block = f"{block}\n{total_line}"
                 return block
 
         # Segmentasi diminta tapi tak bisa dihitung → backstop jujur.
