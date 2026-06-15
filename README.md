@@ -2,7 +2,7 @@
 
 > **Tugas Akhir** Teknik Telekomunikasi, Institut Teknologi Bandung
 >
-> Sulthan Miftahul Ulum & Hanan Ainayya Ramadina
+> Author: Sulthan Miftahul Ulum & Hanan Ainayya Ramadina
 > 
 > Pengembangan Prototipe Agentic AI (RAG/MCP) dengan Local-LLM Engine untuk Data Analysis Agent
 
