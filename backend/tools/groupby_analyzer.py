@@ -202,6 +202,28 @@ _SALES_RANK_INTENT = re.compile(
     re.IGNORECASE,
 )
 
+# Metrik numerik GENERIK non-retail (Fix A) — domain akademik & lainnya. Pola SAMA
+# dengan _GROUP_SYNONYMS (dimensi): (regex_trigger_query, tuple_substring_nama_kolom).
+# Frasa metrik dicocokkan ke kolom numerik yang BENAR-BENAR ADA via _find_numeric;
+# bila tak ada kolom yang namanya berkaitan → TIDAK match (biar fallback jujur jalan),
+# supaya tak salah-petakan ke kolom numerik acak (mis. ukt_kelompok).
+#
+# CATATAN regex (KRITIS): frasa SPESIFIK, JANGAN bare \bnilai\b (akan salah-tangkap
+# nilai_huruf/bobot_nilai) dan JANGAN bare \bfinal\b (terlalu umum di teks campuran
+# ID/EN) — UAS dibatasi "nilai uas|ujian akhir|final exam".
+_METRIC_SYNONYMS = [
+    (re.compile(r"\b(bobot\s+nilai|nilai\s+mutu|grade\s*point|ipk|gpa)\b", re.IGNORECASE),
+     ("bobot_nilai", "bobot", "gpa", "ipk")),
+    (re.compile(r"\b(kehadiran|presensi|attendance)\b", re.IGNORECASE),
+     ("kehadiran", "attendance", "presensi")),
+    (re.compile(r"\b(nilai\s+tugas|assignment)\b", re.IGNORECASE),
+     ("tugas", "assignment")),
+    (re.compile(r"\b(nilai\s+uts|ujian\s+tengah|midterm)\b", re.IGNORECASE),
+     ("uts", "midterm")),
+    (re.compile(r"\b(nilai\s+uas|ujian\s+akhir|final\s+exam)\b", re.IGNORECASE),
+     ("uas", "final")),
+]
+
 
 def _find_numeric(numeric_cols: list, keys: tuple) -> Optional[str]:
     """Kolom numerik pertama yang namanya memuat salah satu `keys` (case-insensitive)."""
@@ -765,6 +787,19 @@ def _select_front_metrics(
         work, rev = _maybe_add_revenue(work, base_numeric)
         if rev:
             front.append(rev)
+    # Fix A — resolver metrik GENERIK (akademik & domain non-retail). DIJALANKAN
+    # SETELAH 3 cabang retail + Revenue-default, dan HANYA bila front masih kosong:
+    # jangan timpa match retail (Revenue/Price/Quantity). Frasa metrik (mis. "bobot
+    # nilai") → kolom numerik yang BENAR-BENAR ADA via _find_numeric. Anti-false-match:
+    # bila frasa cocok tapi kolom tak ada → tetap dilewati (col is None), biar fallback
+    # numeric_now[0]/count lama yang jalan. Multi-append seperti cabang retail; primary
+    # = match pertama sesuai urutan _METRIC_SYNONYMS.
+    if not front:
+        for pattern, keys in _METRIC_SYNONYMS:
+            if pattern.search(q):
+                col = _find_numeric(base_numeric, keys)
+                if col and col not in front:
+                    front.append(col)
     return work, front
 
 
