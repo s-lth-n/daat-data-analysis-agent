@@ -608,14 +608,22 @@ def _build_breakdown_block(
         if c in work.columns and not (c in seen or seen.add(c))
     ]
     rest = [c for c in base_numeric if c not in seen]
-    metric_cols = front_unique + rest
+    mean_intent = bool(_MEAN_INTENT.search(q))
+    # Fix D — di mode MEAN dengan metrik DIMINTA teridentifikasi (front), konteks LLM
+    # hanya emit mean_<diminta>; sibling mean_* (mis. mean_nilai_tugas) di-DROP. Tanpa
+    # ini, breakdown memuat ≤5 mean metrik per grup → LLM bisa ambil nilai metrik LAIN
+    # (mis. mean_nilai_tugas=63,69) lalu me-relabel sbg metrik yang ditanya (kehadiran);
+    # angka itu SAH di pool sehingga lolos redactor (validasi keberadaan, bukan ikatan
+    # metrik↔entitas). Mempersempit ke front menutup mis-attribution lintas-metrik DAN
+    # mengeluarkan angka itu dari valid_vals → bila LLM tetap mengarang, redactor tangkap.
+    # Gated mean_intent → sum/count byte-identik; front kosong (distribusi/Fix B) → lama.
+    metric_cols = front_unique if (mean_intent and front_unique) else front_unique + rest
 
     # Fix C — saat pertanyaan minta RATA-RATA, konteks LLM HARUS diurut & bernilai
     # MEAN per grup (IDENTIK dengan tabel user & chart), bukan SUM. Tanpa ini, LLM
     # diberi ranking sum (grup ber-n besar di atas) TANPA nilai mean → tak punya
     # jangkar faktual → mengarang nama+angka. force_agg="mean" → format_groupby_for_context
     # mempertahankan mean_ sbg metrik utama & mengurut by mean.
-    mean_intent = bool(_MEAN_INTENT.search(q))
     sub_df = work[[group_col] + metric_cols] if metric_cols else work
     gb = compute_groupby_stats(
         sub_df, group_col, domain_context,
