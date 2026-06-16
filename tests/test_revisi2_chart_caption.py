@@ -11,7 +11,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "backend"))
 
-from main import _chart_caption_md
+from main import _chart_caption_md, CHART_DIR
 
 
 def test_id_caption_uses_grafik():
@@ -42,3 +42,29 @@ def test_unexpected_language_defaults_to_english():
 def test_empty_keys_yield_empty_string():
     assert _chart_caption_md([], "id") == ""
     assert _chart_caption_md([], "en") == ""
+
+
+# ── Interactive-HTML link (ADDITIF): gated by .html existence ────────────────
+
+def test_no_interactive_link_when_html_absent():
+    # PNG selalu tampil; tanpa file .html → tak ada link (omission jujur).
+    md = _chart_caption_md(["nohtml_key"], "id")
+    assert "![" in md                      # PNG inline tetap ada
+    assert "chart/image/nohtml_key.png" in md
+    assert ".html" not in md
+    assert "interaktif" not in md.lower()
+
+def test_interactive_link_appended_when_html_exists():
+    key = "ithtml01"
+    f = CHART_DIR / f"{key}.html"
+    f.write_text("<html><body>plotly</body></html>")
+    try:
+        md_id = _chart_caption_md([key], "id")
+        assert f"chart/image/{key}.png" in md_id            # PNG tetap
+        assert f"chart/image/{key}.html" in md_id           # link interaktif ADDITIF
+        assert "🔍 [Buka grafik interaktif]" in md_id        # link word id
+        md_en = _chart_caption_md([key], "en")
+        assert "🔍 [Open interactive chart]" in md_en        # link word en, never bilingual
+        assert "Buka grafik interaktif" not in md_en
+    finally:
+        f.unlink(missing_ok=True)

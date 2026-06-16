@@ -59,6 +59,22 @@ def _render_charts_to_png(charts: list[dict]) -> list[str]:
             filepath.write_bytes(img_bytes)
             keys.append(chart_id)
             logger.info(f"[chart] Rendered → {filepath}")
+            # ADDITIF: versi HTML Plotly interaktif (hover/zoom/pan). Try/except
+            # TERPISAH dari PNG → HTML gagal TIDAK menggugurkan PNG; key sudah
+            # masuk `keys` di atas. include_plotlyjs=True meng-EMBED plotly.js
+            # (~3MB/file) karena DAAT offline/no-cloud — JANGAN "cdn".
+            # (Optimasi lanjutan: include_plotlyjs="directory" untuk berbagi satu
+            #  plotly.min.js; perlu media_type .js & cleanup — sengaja TIDAK dipakai.)
+            try:
+                fig.write_html(
+                    CHART_DIR / f"{chart_id}.html",
+                    include_plotlyjs=True,
+                    full_html=True,
+                    config={"displaylogo": False},
+                )
+                logger.info(f"[chart] Interactive HTML → {chart_id}.html")
+            except Exception as he:
+                logger.warning(f"[chart] HTML render skipped (PNG kept): {he}")
         except Exception as e:
             logger.warning(f"[chart] Failed to render chart to PNG: {e}")
     return keys
@@ -73,12 +89,19 @@ def _chart_caption_md(chart_keys: list[str], language: str = "id") -> str:
     is omitted when there is exactly one chart. Never bilingual.
     """
     word = "Grafik" if language == "id" else "Chart"
+    link_word = "Buka grafik interaktif" if language == "id" else "Open interactive chart"
     total = len(chart_keys)
     md = ""
     for i, key in enumerate(chart_keys):
         label = word if total == 1 else f"{word} {i + 1}"
         url = f"{settings.public_url}/chart/image/{key}.png"
         md += f"\n\n**📊 {label}**\n\n![{label}]({url})"
+        # ADDITIF: link ke versi interaktif HANYA bila file .html benar-benar ada
+        # (gate .exists() langsung — backend & CHART_DIR satu filesystem). PNG di
+        # atas TETAP tampil; HTML gagal → tak ada link (omission jujur).
+        if (CHART_DIR / f"{key}.html").exists():
+            html_url = f"{settings.public_url}/chart/image/{key}.html"
+            md += f"\n\n🔍 [{link_word}]({html_url})"
     return md
 
 
@@ -201,6 +224,12 @@ class AnalysisResponse(BaseModel):
     language: str = "id"
     session_id: str | None = None       # Session ID for follow-up chat
     chart_keys: list[str] | None = None # Rendered PNG keys (without extension)
+    # Subset of chart_keys whose interactive Plotly .html was ALSO written
+    # successfully. The OWUI tool lives in another container (no shared CHART_DIR
+    # filesystem), so it cannot stat the files — this list is the backend's signal
+    # of which keys may get a "Buka grafik interaktif" link. PNG-only keys are
+    # simply absent here (honest omission), never broken links.
+    chart_html_keys: list[str] | None = None
 
 
 class FollowUpRequest(BaseModel):
@@ -449,6 +478,11 @@ async def analyze_data(request: AnalysisRequest):
             language   = request.language,
             session_id = session_id,
             chart_keys = (chart_keys_to_emit or None) if emit_charts else None,
+            # Sinyal HTML untuk DAAT tool: HANYA key yang file .html-nya benar-benar
+            # ada (gate .exists() di backend). Tool append link hanya bila k di sini.
+            chart_html_keys = (
+                [k for k in (chart_keys_to_emit or []) if (CHART_DIR / f"{k}.html").exists()] or None
+            ) if emit_charts else None,
         )
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
@@ -493,8 +527,23 @@ async def render_chart(request: ChartRenderRequest):
 
         logger.info(f"Chart rendered: {filepath} ({len(img_bytes)} bytes)")
 
+        # ADDITIF: versi HTML interaktif (embed plotly.js, offline). Try/except
+        # TERPISAH → HTML gagal tak menggugurkan respons PNG; html_url cuma null.
+        html_url = None
+        try:
+            fig.write_html(
+                CHART_DIR / f"{chart_id}.html",
+                include_plotlyjs=True,
+                full_html=True,
+                config={"displaylogo": False},
+            )
+            html_url = f"{settings.public_url}/chart/image/{chart_id}.html"
+        except Exception as he:
+            logger.warning(f"Chart HTML skipped (image kept): {he}")
+
         return {
             "image_url": f"{settings.public_url}/chart/image/{filename}",
+            "html_url": html_url,
             "chart_id": chart_id,
             "format": request.format,
         }
@@ -508,12 +557,19 @@ async def render_chart(request: ChartRenderRequest):
 
 @app.get("/chart/image/{filename}")
 async def get_chart_image(filename: str):
-    """Serve a rendered chart image."""
+    """Serve a rendered chart image (PNG/SVG) or interactive Plotly HTML."""
     filepath = CHART_DIR / filename
     if not filepath.exists():
         raise HTTPException(404, "Chart not found")
 
-    media = "image/png" if filename.endswith(".png") else "image/svg+xml"
+    # .html → text/html agar browser merender grafik interaktif (plotly.js embed).
+    # png/svg dipertahankan persis seperti semula.
+    if filename.endswith(".html"):
+        media = "text/html"
+    elif filename.endswith(".png"):
+        media = "image/png"
+    else:
+        media = "image/svg+xml"
     return FileResponse(filepath, media_type=media)
 
 

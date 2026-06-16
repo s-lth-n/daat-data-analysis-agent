@@ -318,9 +318,17 @@ class Tools:
         # Default EN bila bukan 'id'; tidak pernah bilingual.
         report_lang = data.get("language") or language
         word = "Grafik" if report_lang == "id" else "Chart"
+        link_word = "Buka grafik interaktif" if report_lang == "id" else "Open interactive chart"
+        # Backend memberi tahu key mana yang punya .html (tool ini di container lain →
+        # tak bisa stat file). Link interaktif ADDITIF: PNG inline tetap; link cuma
+        # ditempel bila k ∈ chart_html_keys (omission jujur bila HTML tak ada).
+        # URL pakai public_url (browser host), BUKAN host.docker.internal.
+        html_keys = set(data.get("chart_html_keys") or [])
         for i, k in enumerate(data.get("chart_keys") or []):
             lbl = f"{word} {i + 1}"
             report += f"\n\n**📊 {lbl}**\n\n![{lbl}]({pub}/chart/image/{k}.png)"
+            if k in html_keys:
+                report += f"\n\n🔍 [{link_word}]({pub}/chart/image/{k}.html)"
 
         # Outlet Filter akan mengganti isi pesan asisten dengan laporan ini.
         self._stash_report(report, __metadata__)
