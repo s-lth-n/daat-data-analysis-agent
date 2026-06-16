@@ -48,7 +48,8 @@ def test_detect_negara_maps_country():
 def test_negara_real_numbers_not_backstop():
     ctx = build_followup_context(DF, "rata-rata revenue per negara", PROFILE)
     assert "BREAKDOWN PER COUNTRY" in ctx
-    assert "sum_Revenue" in ctx
+    # Fix C — pertanyaan "rata-rata ..." → konteks diurut & bernilai MEAN (bukan sum).
+    assert "mean_Revenue" in ctx
     assert "TIDAK TERSEDIA" not in ctx
 
 

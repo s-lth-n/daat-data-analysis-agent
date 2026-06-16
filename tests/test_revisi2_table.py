@@ -69,9 +69,12 @@ def test_metric_cells_match_gsum():
     assert "| Germany | 10,00 | 9,90% | 5,00 | 1 |" in block
 
 
-def test_metric_mean_intent_adds_mean_column():
+def test_metric_mean_intent_mean_layout():
+    # Fix C — saat mean_intent, kolom Σ ("Revenue") & "%" disembunyikan (tak bermakna
+    # dimensional); metrik utama = Rata-rata. Harga/unit tetap (deterministik ΣRev/ΣQty).
     block = build_deterministic_block(DF, "rata-rata revenue per negara", PROFILE)
-    assert "| Country | Revenue | % | Harga/unit | Rata-rata | n |" in block
+    assert "| Country | Rata-rata | Harga/unit | n |" in block
+    assert "| Country | Revenue | % |" not in block        # kolom Σ & % tak muncul
 
 
 def test_english_headers():

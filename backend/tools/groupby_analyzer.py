@@ -400,6 +400,7 @@ def compute_groupby_stats(
     group_col: str,
     domain_context: Optional[dict] = None,
     max_groups: int = 15,
+    force_agg: Optional[str] = None,
 ) -> dict:
     """
     Jalankan groupby computation pada DataFrame yang di-cache.
@@ -425,6 +426,11 @@ def compute_groupby_stats(
         pref = domain_context.get("preferred_aggregation", "sum")
         if pref in ("mean", "median", "sum"):
             agg_func = pref
+    # Fix C — override eksplisit dari caller (mis. _build_breakdown_block saat
+    # pertanyaan minta RATA-RATA). OPSIONAL: default None → caller existing
+    # byte-identik (domain_context tetap satu-satunya penentu seperti sebelumnya).
+    if force_agg in ("mean", "median", "sum"):
+        agg_func = force_agg
 
     # Pilih kolom numerik valid (bukan object/bool)
     numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
@@ -604,8 +610,17 @@ def _build_breakdown_block(
     rest = [c for c in base_numeric if c not in seen]
     metric_cols = front_unique + rest
 
+    # Fix C — saat pertanyaan minta RATA-RATA, konteks LLM HARUS diurut & bernilai
+    # MEAN per grup (IDENTIK dengan tabel user & chart), bukan SUM. Tanpa ini, LLM
+    # diberi ranking sum (grup ber-n besar di atas) TANPA nilai mean → tak punya
+    # jangkar faktual → mengarang nama+angka. force_agg="mean" → format_groupby_for_context
+    # mempertahankan mean_ sbg metrik utama & mengurut by mean.
+    mean_intent = bool(_MEAN_INTENT.search(q))
     sub_df = work[[group_col] + metric_cols] if metric_cols else work
-    gb = compute_groupby_stats(sub_df, group_col, domain_context)
+    gb = compute_groupby_stats(
+        sub_df, group_col, domain_context,
+        force_agg="mean" if mean_intent else None,
+    )
     ctx = format_groupby_for_context(gb)
     if not ctx:
         return ""
@@ -671,6 +686,11 @@ def _grand_total_context_line(
             return ""
         primary = agg["primary"]
         if primary is not None:
+            # Fix C — saat mean_intent, total Σ menyesatkan (jumlah persen/nilai tak
+            # bermakna); pakai RATA-RATA seluruh baris = headline tabel mean.
+            if agg["mean_intent"]:
+                gmean_all = float(agg["work"][primary].mean())
+                return f"MEAN {primary} (all rows) = {gmean_all:.2f}"
             total = float(agg["grp"][primary].sum().sum())   # == total head tabel
             return f"TOTAL {primary} (all groups) = {total:.2f}"
         total = int(agg["gcount"].sum())                     # cabang count
@@ -946,8 +966,10 @@ def _format_groups_as_table(
     _uc = (lambda r: [r.get("unit", "")]) if has_unit else (lambda r: [])
     if kind == "metric":
         if mean_intent:
-            headers = [dim_label, value_header, "%"] + _uh + [("Mean" if en else "Rata-rata"), "n"]
-            row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"] + _uc(r) + [r["mean"], r["n"]]
+            # Fix C — saat mean, kolom Σ ("value") & "%" tak bermakna dimensional
+            # (jumlah persen/nilai) → DISEMBUNYIKAN; metrik utama = Rata-rata.
+            headers = [dim_label, ("Mean" if en else "Rata-rata")] + _uh + ["n"]
+            row_cells = lambda r: [r["group"], r["mean"]] + _uc(r) + [r["n"]]
         else:
             headers = [dim_label, value_header, "%"] + _uh + ["n"]
             row_cells = lambda r: [r["group"], r["value"], f"{r['pct']}%"] + _uc(r) + [r["n"]]
@@ -974,12 +996,17 @@ def _format_groups_as_list(
     out: list = []
     for r in rows:
         if kind == "metric":
-            seg = f"{r['i']}. {r['group']} — {r['value']} ({r['pct']}%)"
-            if r.get("unit"):
-                seg += f"; harga/unit {r['unit']}"
+            # Fix C — saat mean, drop Σ value & % (tak bermakna); tampilkan rata-rata.
             if mean_intent and r.get("mean") is not None:
-                seg += f"; rata-rata {r['mean']}"
-            seg += f"; n={r['n']}"
+                seg = f"{r['i']}. {r['group']} — rata-rata {r['mean']}"
+                if r.get("unit"):
+                    seg += f"; harga/unit {r['unit']}"
+                seg += f"; n={r['n']}"
+            else:
+                seg = f"{r['i']}. {r['group']} — {r['value']} ({r['pct']}%)"
+                if r.get("unit"):
+                    seg += f"; harga/unit {r['unit']}"
+                seg += f"; n={r['n']}"
         else:
             seg = f"{r['i']}. {r['group']} — {r['value']} {value_unit} ({r['pct']}%)"
         out.append(seg)
@@ -1027,8 +1054,29 @@ def build_deterministic_block(
             gsum = grp[primary].sum()
             gmean = grp[primary].mean()
             total = float(gsum.sum())
-            order = gsum.sort_values(ascending=False).index[:15]
-            if en:
+            # Fix C — saat mean_intent: urut & headline by RATA-RATA. Σ menyesatkan
+            # (grup ber-n besar tampak teratas padahal mean-nya bukan tertinggi).
+            # Cabang sum (mean_intent=False) byte-identik dengan sebelumnya.
+            order = (gmean if mean_intent else gsum).sort_values(
+                ascending=False
+            ).index[:15]
+            if mean_intent:
+                gmean_all = float(work[primary].mean())
+                if en:
+                    head = (
+                        f"**📊 Key figures per {dim_label} — computed directly from the "
+                        f"data (not LLM estimates):**\n"
+                        f"_Mean {primary} = {_fmt_num(gmean_all, language)} "
+                        f"across {_fmt_intnum(len(work), language)} rows_"
+                    )
+                else:
+                    head = (
+                        f"**📊 Angka kunci per {dim_label} — dihitung otomatis dari data "
+                        f"(bukan estimasi LLM):**\n"
+                        f"_Rata-rata {primary} = {_fmt_num(gmean_all, language)} "
+                        f"dari {_fmt_intnum(len(work), language)} baris_"
+                    )
+            elif en:
                 head = (
                     f"**📊 Key figures per {dim_label} — computed directly from the "
                     f"data (not LLM estimates):**\n"
@@ -1147,10 +1195,12 @@ def build_followup_chart_spec(
         group_col   = agg["group_col"]
         is_temporal = agg["is_temporal"]
         primary     = agg["primary"]
+        mean_intent = agg["mean_intent"]
         grp         = agg["grp"]
 
         if primary is not None:
-            series = grp[primary].sum()          # SAMA dengan blok deterministik
+            # Fix C — bars = MEAN saat mean_intent (IDENTIK blok & konteks); else SUM.
+            series = grp[primary].mean() if mean_intent else grp[primary].sum()
             value_label = str(primary)
         else:
             series = agg["gcount"]               # cabang COUNT (sebaran kategori)
@@ -1177,8 +1227,12 @@ def build_followup_chart_spec(
         s = series.sort_values(ascending=False).head(15).sort_values()
         plot_df = s.reset_index()
         plot_df.columns = [group_col, value_label]
-        title = (f"Top {group_col} berdasarkan {value_label}" if language == "id"
-                 else f"Top {group_col} by {value_label}")
+        if mean_intent and primary is not None:
+            title = (f"Rata-rata {value_label} per {group_col}" if language == "id"
+                     else f"Average {value_label} by {group_col}")
+        else:
+            title = (f"Top {group_col} berdasarkan {value_label}" if language == "id"
+                     else f"Top {group_col} by {value_label}")
         return create_bar_chart(
             plot_df, x=group_col, y=value_label, title=title,
             orientation="h", labels={group_col: group_col, value_label: value_label},
