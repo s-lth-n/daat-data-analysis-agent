@@ -4,7 +4,7 @@
 >
 > Author: Sulthan Miftahul Ulum & Hanan Ainayya Ramadina
 > 
-> Pengembangan Prototipe Agentic AI (RAG/MCP) dengan Local-LLM Engine untuk Data Analysis Agent
+> Pengembangan Prototipe Agentic AI dengan Local-LLM Engine untuk Data Analysis Agent
 
 ## Overview
 
