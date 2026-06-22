@@ -2,9 +2,12 @@
 tools/narrative_generator.py
 Constrained narrative generation for data analysis reports.
 
-Uses Ollama grammar-constrained decoding (format=JSON schema) via NarrativeSchema
-to prevent Qwen3 8B from hallucinating numbers.  If JSON parsing fails for any
-reason, falls back to free-form generation (original behaviour).
+Uses Ollama grammar-constrained decoding (format=JSON schema) via NarrativeSchema.
+The grammar only enforces JSON STRUCTURE (all fields are strings/List[str]; there
+are no numeric fields), so it makes the output parseable but does NOT validate
+numeric correctness. Number hallucinations are caught downstream by the redaction
+layer (_redact_unverified_numbers). If JSON parsing fails for any reason, falls
+back to free-form generation (original behaviour).
 """
 
 import json

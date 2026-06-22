@@ -4,7 +4,7 @@
 >
 > Author: Sulthan Miftahul Ulum & Hanan Ainayya Ramadina
 > 
-> Pengembangan Prototipe Agentic AI dengan Local-LLM Engine untuk Data Analysis Agent
+> Pengembangan Prototipe Agentic AI berbasis Tool-Calling (LangGraph) dengan Local-LLM Engine untuk Data Analysis Agent
 
 ## Overview
 
@@ -93,9 +93,14 @@ ta-data-analyst/
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/health` | System health check |
-| POST | `/upload` | Upload CSV/Excel file |
-| POST | `/analyze` | Run analysis on uploaded data |
+| GET | `/health` | System health & Ollama connectivity check |
+| POST | `/upload` | Upload a CSV/Excel file for analysis |
+| POST | `/analyze` | Main analysis endpoint for uploaded data |
+| POST | `/chart/render` | Render a Plotly chart spec to a PNG image |
+| GET | `/chart/image/{filename}` | Serve a rendered chart (PNG/SVG) or interactive Plotly HTML |
+| POST | `/analyze/followup` | Follow-up analysis without re-uploading the file |
+| GET | `/session/{session_id}/status` | Validate an active session (used by Open WebUI inlet) |
+| GET | `/sessions` | List active sessions (development/debug only) |
 | GET | `/models` | List available Ollama models |
 
 ## Testing
