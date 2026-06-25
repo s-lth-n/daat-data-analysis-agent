@@ -29,6 +29,9 @@ services:
     environment:
       # Point to Ollama running natively on host
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # Disable third-party cloud integrations & update checks (privacy)
+      - ENABLE_OPENAI_API=false
+      - ENABLE_VERSION_UPDATE_CHECK=false
       # Disable built-in RAG — file analysis handled by FastAPI backend tool
       - ENABLE_RAG=false
       # Default model
