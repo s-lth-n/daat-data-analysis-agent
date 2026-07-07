@@ -9,13 +9,16 @@ deterministic block — so the whole response speaks ONE language consistently.
 
 Heuristic: count Indonesian vs English stopwords/markers in the question.
   - Indonesian wins ONLY when it strictly out-scores English.
-  - Default "en" otherwise — including ties, very short questions, empty input,
-    and questions dominated by technical terms (per project decision (b)).
-Never raises: any failure falls back to "en".
+  - The configured default language (settings.default_language, currently "en")
+    otherwise — including ties, very short questions, empty input, and questions
+    dominated by technical terms (per project decision (b)).
+Never raises: any failure falls back to that same configured default.
 """
 
 import re
 from typing import Set
+
+from config import settings
 
 # Distinct function words / markers per language. Kept deliberately NON-overlapping
 # (no shared tokens like "data"/"total") so the score reflects real language signal.
@@ -47,22 +50,26 @@ _MIN_TOKENS = 3   # shorter than this → treat as ambiguous → default "en"
 
 def detect_language(question: str) -> str:
     """
-    Detect the dominant language of `question`, returning "id" or "en".
+    Detect the dominant language of `question`, returning "id" or the configured
+    default language (settings.default_language).
 
     Returns "id" only when Indonesian markers STRICTLY out-score English ones and
-    the question is long enough to be confident. Everything else → "en"
-    (ties, short/empty input, technical-term-heavy queries). Never raises.
+    the question is long enough to be confident. Everything else falls back to
+    settings.default_language (ties, short/empty input, technical-term-heavy
+    queries, or any failure). Never raises.
     """
+    # Single source of truth for the fallback language: config, not a literal.
+    fallback = settings.default_language
     try:
         if not question:
-            return "en"
+            return fallback
         tokens = re.findall(r"[a-zA-Z]+(?:-[a-zA-Z]+)?", question.lower())
         if len(tokens) < _MIN_TOKENS:
-            return "en"
+            return fallback
 
         id_score = sum(1 for t in tokens if t in _ID_WORDS)
         en_score = sum(1 for t in tokens if t in _EN_WORDS)
 
-        return "id" if id_score > en_score else "en"
+        return "id" if id_score > en_score else fallback
     except Exception:
-        return "en"
+        return fallback

@@ -64,3 +64,23 @@ def test_non_string_does_not_raise():
     # Defensive: helper must swallow bad input and fall back to "en".
     assert detect_language(None) == "en"          # type: ignore[arg-type]
     assert detect_language(12345) == "en"         # type: ignore[arg-type]
+
+
+# ── Fallback wired to settings.default_language (single source of truth) ──────
+
+def test_fallback_follows_settings_default_language(monkeypatch):
+    """
+    On a genuine id/en tie the fallback is decided by settings.default_language,
+    proving lang_detect reads the config setting (single source of truth) rather
+    than a literal baked into the module. Flipping the setting flips the tie.
+    """
+    from config import settings
+
+    # 1 Indonesian marker ("penjualan") + 1 English marker ("revenue") → tie.
+    tie_question = "penjualan revenue foobar"
+
+    monkeypatch.setattr(settings, "default_language", "en")
+    assert detect_language(tie_question) == "en"
+
+    monkeypatch.setattr(settings, "default_language", "id")
+    assert detect_language(tie_question) == "id"

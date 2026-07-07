@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     ]
 
     # --- Language ---
-    default_language: str = "id"  # "id" for Indonesian, "en" for English
+    default_language: str = "en"  # "id" for Indonesian, "en" for English
 
     model_config = {
         "env_file": ".env",
