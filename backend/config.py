@@ -6,6 +6,13 @@ All settings can be overridden via environment variables or .env file.
 from pydantic_settings import BaseSettings
 from pathlib import Path
 
+# Anchor the .env path to THIS file's own directory so Settings() resolves the
+# same .env regardless of the process's current working directory at launch
+# time. The bare relative "./.env" used before was silently CWD-sensitive
+# (e.g. tests run from repo root loaded a different .env than the app launched
+# from backend/).
+_ENV_FILE = Path(__file__).resolve().parent / ".env"
+
 
 class Settings(BaseSettings):
     """Application settings — all local, no cloud."""
@@ -51,7 +58,7 @@ class Settings(BaseSettings):
     default_language: str = "en"  # "id" for Indonesian, "en" for English
 
     model_config = {
-        "env_file": ".env",
+        "env_file": str(_ENV_FILE),
         "env_prefix": "TA_",
     }
 
