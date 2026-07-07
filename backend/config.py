@@ -35,9 +35,6 @@ class Settings(BaseSettings):
     chart_default_width: int = 800
     chart_default_height: int = 500
 
-    # --- DuckDB ---
-    duckdb_memory_limit: str = "2GB"
-
     # --- Server ---
     host: str = "0.0.0.0"
     port: int = 8000

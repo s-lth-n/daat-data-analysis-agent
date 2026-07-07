@@ -2,7 +2,6 @@
 Data Loader Tool
 ================
 Reads CSV and Excel files into Pandas DataFrames.
-Also provides DuckDB SQL interface for analytical queries.
 """
 
 import logging
@@ -10,7 +9,6 @@ import math
 from pathlib import Path
 from typing import Any
 
-import duckdb
 import pandas as pd
 
 from config import settings
@@ -144,30 +142,6 @@ def load_and_preview(file_path: str | Path) -> dict[str, Any]:
         "head": _sanitize_for_json(df.head(5).to_dict(orient="records")),
         "null_counts": {col: int(v) for col, v in df.isnull().sum().items()},
     }
-
-
-def query_with_duckdb(df: pd.DataFrame, sql_query: str) -> pd.DataFrame:
-    """
-    Execute a SQL query on a DataFrame using DuckDB.
-
-    Args:
-        df: Source DataFrame (registered as 'data' table).
-        sql_query: SQL query string.
-
-    Returns:
-        pd.DataFrame with query results.
-    """
-    con = duckdb.connect(database=":memory:")
-    con.execute(f"SET memory_limit='{settings.duckdb_memory_limit}'")
-
-    # Register the DataFrame as a table named 'data'
-    con.register("data", df)
-
-    logger.info(f"DuckDB query: {sql_query[:100]}...")
-    result = con.execute(sql_query).fetchdf()
-    con.close()
-
-    return result
 
 
 def get_data_summary(df: pd.DataFrame) -> str:

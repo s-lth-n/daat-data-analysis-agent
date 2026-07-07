@@ -18,7 +18,7 @@ Sistem analisis data berbasis AI yang berjalan **100% lokal** tanpa cloud, tanpa
 | Backend | Python 3.11+ / FastAPI |
 | LLM Engine | Ollama + **Qwen3 8B** |
 | Agent Orchestration | LangChain + **LangGraph** |
-| Data Processing | **Pandas** (active) + DuckDB (available & tested, not yet integrated into the live pipeline) |
+| Data Processing | **Pandas** |
 | Visualization | **Plotly** (interactive) |
 | Hardware | NVIDIA RTX 3060 12GB |
 | OS | Ubuntu 22.04 LTS |
@@ -83,7 +83,7 @@ ta-data-analyst/
 │   │   ├── data_agent.py      # LangGraph workflow
 │   │   └── prompts.py         # Bilingual (ID/EN) prompts
 │   └── tools/
-│       ├── data_loader.py         # CSV/Excel loader (+ DuckDB SQL helper, not in live path)
+│       ├── data_loader.py         # CSV/Excel loader
 │       ├── data_cleaner.py        # Data cleaning / normalization
 │       ├── column_profiler.py     # Column type & domain profiling
 │       ├── statistics.py          # Descriptive statistics

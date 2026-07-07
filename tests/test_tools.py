@@ -44,12 +44,6 @@ class TestDataLoader:
         with pytest.raises(FileNotFoundError):
             load_dataframe("/nonexistent/file.csv")
 
-    def test_duckdb_query(self, sample_df):
-        from tools.data_loader import query_with_duckdb
-        result = query_with_duckdb(sample_df, "SELECT AVG(penjualan) as avg_sales FROM data")
-        assert "avg_sales" in result.columns
-        assert result["avg_sales"].iloc[0] > 0
-
     def test_data_summary(self, sample_df):
         from tools.data_loader import get_data_summary
         summary = get_data_summary(sample_df)
