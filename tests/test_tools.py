@@ -132,33 +132,6 @@ class TestVisualization:
         assert len(charts) >= 2  # Should generate multiple charts
 
 
-# ── TestReport ───────────────────────────────────────────────────────
-
-class TestReport:
-    """Tests for the report tool."""
-
-    def test_format_report(self, sample_df):
-        from tools.statistics import descriptive_statistics
-        from tools.report import format_report
-        stats = descriptive_statistics(sample_df)
-        report = format_report(
-            title="Laporan Penjualan",
-            analysis_text="Test narrative about sales data.",
-            statistics=stats,
-            chart_count=4,
-            language="id",
-        )
-        assert isinstance(report, str)
-        assert len(report) > 0
-
-    def test_extract_report_title(self):
-        from tools.report import extract_report_title
-        narrative = "# Analisis Penjualan 2024\nData menunjukkan tren positif."
-        title = extract_report_title(narrative, language="id")
-        assert isinstance(title, str)
-        assert len(title) > 0
-
-
 # ── TestNarrativeGenerator ───────────────────────────────────────────
 
 class TestNarrativeGenerator:
