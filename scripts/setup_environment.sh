@@ -21,7 +21,7 @@ log_err()   { echo -e "${RED}[ERROR]${NC} $1"; }
 
 echo "============================================================"
 echo "  TA Data Analysis Agent — Environment Setup"
-echo "  Stack: Qwen3 8B | FastAPI | LangGraph | Plotly | DuckDB"
+echo "  Stack: Qwen3 8B | FastAPI | LangGraph | Plotly"
 echo "============================================================"
 echo ""
 
