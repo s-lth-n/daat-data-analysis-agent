@@ -14,11 +14,11 @@ Sistem analisis data berbasis AI yang berjalan **100% lokal** tanpa cloud, tanpa
 
 | Component | Technology |
 |-----------|-----------|
-| Frontend | Open WebUI (Svelte) + Custom Pipelines |
+| Frontend | Open WebUI (Svelte) + Custom Tool & Filter |
 | Backend | Python 3.11+ / FastAPI |
 | LLM Engine | Ollama + **Qwen3 8B** |
 | Agent Orchestration | LangChain + **LangGraph** |
-| Data Processing | Pandas + **DuckDB** |
+| Data Processing | **Pandas** (active) + DuckDB (available & tested, not yet integrated into the live pipeline) |
 | Visualization | **Plotly** (interactive) |
 | Hardware | NVIDIA RTX 3060 12GB |
 | OS | Ubuntu 22.04 LTS |
@@ -72,21 +72,29 @@ uvicorn main:app --reload --port 8000
 
 ```
 ta-data-analyst/
-├── docker-compose.yml     # Ollama + Open WebUI
+├── docker-compose.yml         # Ollama + Open WebUI
+├── DAAT Analyze Tool.py       # Open WebUI Tool: calls the backend, renders charts + report
+├── DAAT Session Filter.py     # Open WebUI Filter: injects session/file context on inlet
 ├── backend/
-│   ├── main.py            # FastAPI app
-│   ├── config.py          # Settings
+│   ├── main.py                # FastAPI app (see API Endpoints below)
+│   ├── config.py              # Settings (Pydantic)
+│   ├── session_store.py       # In-memory session / uploaded-file registry
 │   ├── agents/
-│   │   ├── data_agent.py  # LangGraph workflow
-│   │   └── prompts.py     # Bilingual prompts
-│   ├── tools/
-│   │   ├── data_loader.py # File reading + DuckDB
-│   │   ├── statistics.py  # Descriptive stats
-│   │   └── visualization.py # Plotly charts
-│   └── pipelines/         # Open WebUI plugins
-├── data/samples/          # Test datasets
-├── tests/                 # pytest test suite
-└── scripts/               # Setup & utility scripts
+│   │   ├── data_agent.py      # LangGraph workflow
+│   │   └── prompts.py         # Bilingual (ID/EN) prompts
+│   └── tools/
+│       ├── data_loader.py         # CSV/Excel loader (+ DuckDB SQL helper, not in live path)
+│       ├── data_cleaner.py        # Data cleaning / normalization
+│       ├── column_profiler.py     # Column type & domain profiling
+│       ├── statistics.py          # Descriptive statistics
+│       ├── groupby_analyzer.py    # Group-by aggregation & intent parsing
+│       ├── chart_intent.py        # Detect the requested chart from the prompt
+│       ├── visualization.py       # Plotly chart generation
+│       ├── narrative_generator.py # LLM narrative report (constrained JSON)
+│       └── lang_detect.py         # ID/EN output-language detection
+├── data/samples/              # Sample datasets used by tests
+├── tests/                     # pytest test suite
+└── scripts/                   # Setup & run scripts
 ```
 
 ## API Endpoints
@@ -107,7 +115,8 @@ ta-data-analyst/
 
 ```bash
 source venv/bin/activate
-cd backend
+# Run from the project root (conftest.py adds backend/ to the path and
+# sample-data paths are resolved relative to the repo root):
 pytest tests/ -v
 ```
 
