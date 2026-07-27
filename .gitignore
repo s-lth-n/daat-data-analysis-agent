@@ -58,3 +58,9 @@ _archive/
 
 # Output lampiran TA (lokal) — jangan ke git
 ta-lampiran-output/
+
+# Dataset eksperimen TA (reproduksibilitas)
+!data/samples/*.csv
+
+# Berkas mentah terlalu besar untuk repo — rujuk via URL + checksum (Lampiran F)
+data/samples/U.S._Chronic_Disease_Indicators.csv

@@ -1,0 +1,1001 @@
+nim,angkatan,fakultas,program_studi,jenis_kelamin,asal_provinsi,jalur_masuk,ukt_kelompok,beasiswa,tahun_ajaran,semester,mata_kuliah,sks,nilai_huruf,bobot_nilai,kehadiran_persen,nilai_tugas,nilai_uts,nilai_uas
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Ganjil,Tugas Akhir II,2,B,3.0,77,78.8,85.0,70.8
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Ganjil,Elemen Mesin,3,B,3.0,70,85.3,76.5,67.0
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Ganjil,Kalkulus II,3,A,4.0,98,76.7,71.2,83.3
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Ganjil,Kalkulus I,2,C,2.0,67,36.0,42.7,37.7
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Genap,Bahasa Inggris,2,AB,3.5,95,70.9,59.7,95.7
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Genap,Elemen Mesin,2,B,3.0,82,73.3,54.7,66.2
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Genap,Mekanika Fluida,2,AB,3.5,96,66.9,75.7,68.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2021/2022,Genap,Olahraga,3,AB,3.5,86,73.2,92.3,77.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,BC,2.5,92,71.0,49.2,66.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,2,BC,2.5,91,44.8,55.3,64.2
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Kekuatan Material,2,AB,3.5,94,75.8,69.5,58.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Fisika Dasar IA,4,BC,2.5,77,58.1,69.7,65.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Manajemen Proyek,4,BC,2.5,82,59.9,51.3,49.2
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Pengantar Rekayasa,3,A,4.0,96,89.3,85.8,71.0
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Ganjil,Termodinamika,2,B,3.0,81,74.5,77.9,66.1
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Genap,Manajemen Proyek,3,B,3.0,87,64.3,57.3,82.9
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Genap,Olahraga,3,A,4.0,90,84.4,90.0,89.3
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Genap,Etika Profesi,3,B,3.0,78,71.4,80.6,68.1
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Genap,Fisika Dasar IA,4,A,4.0,92,63.7,87.9,85.7
+23130001,2023,FTMD,Teknik Mesin,Laki-laki,Jawa Barat,SNBP,6,Tidak,2022/2023,Genap,Kerja Praktik,3,B,3.0,94,72.7,48.4,69.3
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Pancasila,3,A,4.0,92,80.9,71.9,79.0
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Etika Profesi,3,AB,3.5,93,82.4,70.0,85.9
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,B,3.0,83,79.3,60.9,67.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,B,3.0,82,54.9,66.4,69.8
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Etika Profesi,3,B,3.0,74,68.7,52.9,65.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,B,3.0,72,60.7,62.3,72.0
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IIA,4,A,4.0,98,86.4,82.6,84.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Genap,Kimia Dasar IA,3,C,2.0,74,51.2,50.3,80.9
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Genap,Etika Profesi,3,B,3.0,84,71.1,64.9,54.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2021/2022,Genap,Bahasa Inggris,3,A,4.0,85,88.0,85.2,71.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,A,4.0,94,73.4,85.5,100.0
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,BC,2.5,84,56.1,59.1,54.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Ganjil,Olahraga,2,BC,2.5,93,61.6,47.8,66.7
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Ganjil,Etika Profesi,4,BC,2.5,78,73.8,50.9,57.5
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Genap,Metodologi Penelitian,2,AB,3.5,96,68.9,76.6,94.4
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Genap,Fisika Dasar IIA,4,C,2.0,84,56.0,55.1,63.9
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Genap,Etika Profesi,4,BC,2.5,86,47.6,61.1,61.8
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Genap,Pengantar Rekayasa,4,B,3.0,89,75.8,62.5,75.9
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2022/2023,Genap,Kerja Praktik,3,B,3.0,70,67.8,88.3,79.2
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Ganjil,Tugas Akhir I,2,BC,2.5,88,63.9,46.5,68.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Ganjil,Pengantar Rekayasa,4,A,4.0,87,75.6,87.1,87.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Ganjil,Agama,3,A,4.0,87,100.0,77.4,75.7
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Ganjil,Kalkulus II,4,BC,2.5,87,55.1,58.2,65.8
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Genap,Kimia Dasar IA,3,B,3.0,89,80.0,69.6,90.8
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Genap,Manajemen Proyek,3,B,3.0,76,89.7,70.9,57.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Genap,Manajemen Proyek,4,BC,2.5,94,63.7,55.1,68.4
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Genap,Tugas Akhir I,3,AB,3.5,91,74.7,62.8,57.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2023/2024,Genap,Bahasa Inggris,3,B,3.0,82,73.0,65.1,51.2
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Etika Profesi,2,B,3.0,70,75.4,59.7,74.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Metodologi Penelitian,3,B,3.0,77,62.0,71.1,77.9
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Manajemen Proyek,3,A,4.0,85,89.8,63.0,70.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Fisika Dasar IIA,2,AB,3.5,86,79.8,76.8,100.0
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Agama,2,A,4.0,86,91.4,87.1,90.1
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Ganjil,Tugas Akhir I,4,B,3.0,72,73.5,56.4,64.6
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Genap,Olahraga,2,B,3.0,88,72.4,91.2,49.3
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Genap,Manajemen Proyek,3,AB,3.5,92,64.5,68.5,90.5
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Genap,Manajemen Proyek,4,B,3.0,95,62.6,60.4,79.4
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Genap,Pancasila,3,B,3.0,73,71.0,66.3,61.4
+21120002,2021,FTTM,Teknik Perminyakan,Perempuan,Jawa Barat,SNBT,8,Tidak,2024/2025,Genap,Tugas Akhir I,2,A,4.0,98,90.1,59.7,87.2
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Ganjil,Kalkulus II,2,B,3.0,76,62.6,64.4,75.0
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,B,3.0,74,59.4,62.3,63.3
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,C,2.0,67,68.0,56.0,38.7
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,3,B,3.0,72,86.5,76.4,51.3
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Tugas Akhir I,2,BC,2.5,85,65.7,46.4,60.9
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,B,3.0,82,60.7,64.2,29.2
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Kalkulus II,4,C,2.0,60,48.1,36.1,69.7
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Manajemen Proyek,3,C,2.0,74,42.6,46.3,63.4
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Kalkulus I,3,D,1.0,79,49.3,39.6,28.2
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IA,3,BC,2.5,92,60.6,50.6,59.8
+24100003,2024,SITH,Mikrobiologi,Laki-laki,Sumatera Utara,SNBT,8,Tidak,2021/2022,Genap,Agama,4,BC,2.5,95,63.4,66.4,81.6
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,A,4.0,90,66.8,76.2,89.5
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Ganjil,Kalkulus II,2,BC,2.5,86,58.9,58.9,58.0
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir II,2,BC,2.5,75,62.0,56.8,46.9
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Ganjil,Manajemen Proyek,2,B,3.0,72,72.6,74.7,77.6
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir II,2,C,2.0,55,48.3,58.5,60.1
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,BC,2.5,88,61.8,71.1,53.8
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir II,3,B,3.0,80,65.0,61.2,79.8
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Genap,Agama,4,AB,3.5,91,81.9,84.4,75.6
+24170004,2024,FSRD,Desain Produk,Laki-laki,NTB,SNBP,5,Tidak,2021/2022,Genap,Kerja Praktik,3,B,3.0,80,65.4,67.9,66.4
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Ganjil,Kalkulus I,4,B,3.0,72,61.4,85.6,55.8
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Ganjil,Etika Profesi,3,BC,2.5,86,65.1,61.7,63.3
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Ganjil,Kerja Praktik,3,B,3.0,81,74.2,61.4,75.2
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,BC,2.5,77,69.0,57.1,51.3
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Pengantar Rekayasa,2,BC,2.5,87,68.1,56.1,54.9
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Bahasa Inggris,3,B,3.0,91,72.4,61.8,64.8
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Etika Profesi,2,B,3.0,74,58.7,52.7,61.7
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Tugas Akhir I,3,B,3.0,73,68.3,77.5,76.1
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Manajemen Proyek,3,B,3.0,74,66.2,53.2,66.1
+24150005,2024,FTSL,Teknik Lingkungan,Laki-laki,Jawa Timur,SNBT,8,Tidak,2021/2022,Genap,Metodologi Penelitian,3,B,3.0,89,67.7,53.8,71.3
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Ganjil,Fisika Dasar IA,2,AB,3.5,95,78.5,78.1,70.4
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Ganjil,Etika Profesi,4,A,4.0,93,84.7,80.6,75.3
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Ganjil,Kerja Praktik,2,A,4.0,99,86.6,92.3,94.1
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Ganjil,Olahraga,3,A,4.0,98,78.9,88.7,87.2
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IIA,2,A,4.0,96,78.5,71.6,77.8
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IA,3,BC,2.5,74,50.9,45.5,56.9
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Genap,Kimia Dasar IA,3,A,4.0,86,100.0,89.5,78.1
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2021/2022,Genap,Tugas Akhir I,3,B,3.0,95,77.3,56.3,95.3
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,A,4.0,96,81.2,62.9,100.0
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Ganjil,Pancasila,4,A,4.0,98,94.9,64.1,77.8
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Ganjil,Manajemen Proyek,4,A,4.0,89,82.8,73.1,89.9
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Ganjil,Agama,4,AB,3.5,92,76.5,74.6,83.8
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Genap,Bahasa Inggris,4,A,4.0,92,76.0,64.7,100.0
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Genap,Kerja Praktik,3,A,4.0,88,79.0,95.5,86.4
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Genap,Kalkulus I,3,A,4.0,86,85.5,100.0,100.0
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Genap,Metodologi Penelitian,4,AB,3.5,92,87.6,81.8,96.3
+23150006,2023,FTSL,Teknik Kelautan,Laki-laki,DKI Jakarta,SNBT,8,Tidak,2022/2023,Genap,Manajemen Proyek,2,B,3.0,84,78.2,79.5,51.6
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Ganjil,Olahraga,3,D,1.0,84,38.6,47.4,58.8
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,BC,2.5,70,68.9,40.0,35.5
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Ganjil,Etika Profesi,2,C,2.0,66,57.7,52.3,29.8
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Ganjil,Metodologi Penelitian,2,C,2.0,66,43.8,59.0,58.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,C,2.0,70,41.7,34.1,45.0
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Genap,Kerja Praktik,3,BC,2.5,86,56.8,66.8,58.4
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Genap,Kerja Praktik,2,C,2.0,62,46.4,35.7,40.6
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2021/2022,Genap,Tugas Akhir I,3,D,1.0,77,58.9,42.7,34.8
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,BC,2.5,72,56.4,52.9,64.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Ganjil,Tugas Akhir I,4,BC,2.5,80,58.5,54.2,59.4
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,D,1.0,57,20.0,46.1,51.9
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Ganjil,Pancasila,3,BC,2.5,79,63.3,59.4,95.6
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Manajemen Proyek,2,B,3.0,91,65.3,53.7,47.1
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Kerja Praktik,4,BC,2.5,91,51.2,40.8,49.4
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Metodologi Penelitian,3,D,1.0,61,57.8,52.2,44.3
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Tugas Akhir II,3,B,3.0,79,70.6,57.9,88.2
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Pengantar Rekayasa,3,BC,2.5,70,52.3,56.1,50.0
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2022/2023,Genap,Kimia Dasar IA,3,D,1.0,63,48.7,59.8,24.6
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Tugas Akhir II,3,BC,2.5,95,55.6,53.3,53.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Kerja Praktik,4,C,2.0,60,46.9,37.1,49.8
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,C,2.0,68,52.8,43.6,47.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Etika Profesi,3,BC,2.5,90,66.7,50.2,63.9
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Manajemen Proyek,3,BC,2.5,72,49.3,65.3,54.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Tugas Akhir I,4,BC,2.5,94,54.8,40.2,41.3
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Ganjil,Pancasila,2,BC,2.5,79,63.7,49.9,69.3
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Genap,Pancasila,4,D,1.0,54,44.0,31.5,36.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Genap,Kimia Dasar IA,3,BC,2.5,90,48.8,49.7,67.7
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Genap,Kalkulus I,3,D,1.0,74,50.1,31.3,49.8
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Genap,Kalkulus II,3,B,3.0,77,49.8,58.2,76.5
+22100007,2022,SITH,Mikrobiologi,Laki-laki,Jawa Tengah,SNBT,4,Tidak,2023/2024,Genap,Agama,2,BC,2.5,92,62.1,50.7,60.2
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,4,B,3.0,89,75.2,72.7,68.2
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Ganjil,Etika Profesi,3,BC,2.5,94,53.1,58.4,51.5
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,BC,2.5,89,80.9,70.1,60.4
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Ganjil,Manajemen Proyek,4,B,3.0,86,70.2,49.2,61.4
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,D,1.0,85,39.9,42.1,62.9
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Bahasa Inggris,3,BC,2.5,78,63.0,70.0,38.2
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Manajemen Proyek,3,BC,2.5,92,70.0,46.1,77.5
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Etika Profesi,3,BC,2.5,78,61.5,68.2,92.1
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Olahraga,3,B,3.0,87,71.2,61.2,59.1
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Agama,2,AB,3.5,89,68.9,72.4,70.0
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Tugas Akhir II,2,B,3.0,92,68.9,73.5,60.1
+24120008,2024,FTTM,Teknik Pertambangan,Laki-laki,Sumatera Barat,Mandiri,5,Tidak,2021/2022,Genap,Etika Profesi,2,BC,2.5,76,50.9,51.9,63.3
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,B,3.0,82,72.3,75.9,70.3
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Kalkulus I,4,A,4.0,98,78.8,67.6,63.7
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,A,4.0,92,90.2,79.4,88.4
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Kekuatan Material,3,BC,2.5,78,82.9,61.8,64.6
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Perancangan Mesin,3,A,4.0,85,85.7,79.4,72.3
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Etika Profesi,3,AB,3.5,97,94.3,88.3,98.4
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Ganjil,Termodinamika,3,B,3.0,84,61.5,64.8,70.1
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Genap,Kerja Praktik,3,A,4.0,85,71.5,95.3,83.1
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Genap,Tugas Akhir I,2,B,3.0,83,62.2,50.2,80.2
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Genap,Kalkulus I,2,B,3.0,84,59.0,52.9,65.3
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Genap,Kekuatan Material,2,A,4.0,93,82.9,65.0,82.1
+24130009,2024,FTMD,Teknik Dirgantara,Laki-laki,Jawa Barat,SNBT,7,Tidak,2021/2022,Genap,Tugas Akhir II,3,B,3.0,76,50.3,67.6,69.1
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Fisika Dasar IA,2,A,4.0,87,94.0,77.3,71.7
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Manajemen Proyek,4,A,4.0,86,85.5,80.1,84.7
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Kalkulus I,4,B,3.0,77,68.8,60.7,63.4
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,B,3.0,70,69.3,62.6,74.9
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Kalkulus II,3,B,3.0,77,83.4,41.3,84.5
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,A,4.0,88,68.4,76.6,80.5
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Genap,Etika Profesi,3,BC,2.5,93,53.7,46.3,80.9
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Genap,Olahraga,3,A,4.0,90,95.2,87.2,71.5
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Genap,Tugas Akhir I,4,B,3.0,73,72.6,53.1,77.3
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Genap,Bahasa Inggris,3,B,3.0,79,68.6,75.0,76.9
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2021/2022,Genap,Kerja Praktik,3,B,3.0,82,79.6,56.0,77.7
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Pancasila,4,A,4.0,86,82.5,83.3,70.0
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Fisika Dasar IA,3,AB,3.5,98,75.7,67.8,89.8
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Tugas Akhir II,3,B,3.0,72,55.7,48.2,74.2
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Agama,3,B,3.0,80,81.2,43.1,87.5
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,2,AB,3.5,98,75.3,66.5,80.9
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Pengantar Rekayasa,4,B,3.0,73,82.4,70.9,75.4
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,B,3.0,81,69.9,69.9,49.8
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Kimia Dasar IA,3,BC,2.5,93,66.4,59.6,58.3
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Kerja Praktik,3,B,3.0,80,76.9,64.8,64.8
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Bahasa Inggris,4,AB,3.5,87,68.1,75.9,55.5
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Metodologi Penelitian,3,A,4.0,99,88.0,81.9,96.0
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Olahraga,2,A,4.0,99,93.1,61.6,69.6
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Manajemen Proyek,3,B,3.0,91,67.9,69.6,59.0
+23190010,2023,SBM,Kewirausahaan,Perempuan,Bali,SNBT,7,Tidak,2022/2023,Genap,Etika Profesi,3,AB,3.5,85,69.8,65.6,58.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,D,1.0,81,36.4,53.9,32.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Kalkulus I,3,AB,3.5,92,82.0,75.6,67.8
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,BC,2.5,90,60.2,63.0,95.5
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Pancasila,3,BC,2.5,84,72.0,53.0,62.4
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Fisika Dasar IA,4,B,3.0,72,64.5,84.2,78.0
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Ganjil,Agama,3,BC,2.5,82,63.2,65.6,65.6
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Genap,Pengantar Rekayasa,3,D,1.0,72,36.2,38.9,41.2
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Genap,Manajemen Proyek,3,BC,2.5,93,65.4,47.7,68.5
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Genap,Tugas Akhir II,3,BC,2.5,81,68.4,71.8,73.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Genap,Tugas Akhir I,3,BC,2.5,78,61.8,43.0,67.5
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2021/2022,Genap,Manajemen Proyek,3,BC,2.5,77,62.0,44.6,46.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Ganjil,Pancasila,4,B,3.0,92,74.0,77.2,74.6
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Ganjil,Metodologi Penelitian,2,BC,2.5,76,65.6,50.6,59.2
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,3,C,2.0,67,49.7,48.2,55.8
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,C,2.0,83,63.0,42.2,50.7
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Fisika Dasar IIA,3,C,2.0,84,64.9,53.5,65.8
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Pancasila,2,C,2.0,52,51.0,56.4,49.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Pengantar Rekayasa,4,B,3.0,87,64.3,79.2,96.0
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Agama,3,BC,2.5,74,56.6,72.2,79.1
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Tugas Akhir I,3,C,2.0,81,49.2,48.0,36.4
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2022/2023,Genap,Bahasa Inggris,2,C,2.0,50,40.5,39.5,48.2
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Manajemen Proyek,3,BC,2.5,85,72.5,47.6,71.9
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Manajemen Proyek,2,BC,2.5,72,55.2,60.3,42.2
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Etika Profesi,3,BC,2.5,72,62.9,63.9,65.1
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,A,4.0,86,77.2,72.3,74.8
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Bahasa Inggris,2,C,2.0,69,47.1,62.4,69.3
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Ganjil,Kalkulus II,2,C,2.0,65,45.4,55.1,45.4
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Genap,Tugas Akhir I,4,BC,2.5,82,65.7,46.0,82.7
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Genap,Kerja Praktik,3,AB,3.5,99,70.8,67.8,79.2
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Genap,Kerja Praktik,3,BC,2.5,88,66.4,78.6,59.0
+22190011,2022,SBM,Kewirausahaan,Laki-laki,DKI Jakarta,SNBT,4,Tidak,2023/2024,Genap,Agama,4,BC,2.5,79,44.8,46.4,55.4
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Ganjil,Kalkulus I,3,B,3.0,77,75.6,69.8,88.1
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Ganjil,Kerja Praktik,3,A,4.0,94,80.8,75.1,97.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Ganjil,Etika Profesi,3,A,4.0,99,99.8,85.8,80.7
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Ganjil,Kerja Praktik,2,A,4.0,92,93.9,88.2,91.1
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Ganjil,Manajemen Proyek,4,A,4.0,91,94.4,93.8,92.8
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Fisika Dasar IIA,2,A,4.0,94,84.5,90.6,73.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Tugas Akhir I,3,A,4.0,94,81.9,80.3,100.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Agama,3,A,4.0,99,85.4,66.4,94.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Kimia Dasar IA,3,A,4.0,97,100.0,76.9,87.6
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Olahraga,4,A,4.0,100,97.6,79.0,88.3
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Tugas Akhir II,3,A,4.0,86,86.5,75.5,87.3
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2021/2022,Genap,Fisika Dasar IA,4,A,4.0,95,76.8,81.3,76.6
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Kalkulus I,3,A,4.0,90,72.8,74.4,89.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Fisika Dasar IA,3,A,4.0,99,84.5,74.4,100.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Agama,4,AB,3.5,90,58.9,76.8,70.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Tugas Akhir II,4,B,3.0,83,80.5,73.2,68.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Manajemen Proyek,3,B,3.0,85,79.2,75.0,71.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Ganjil,Olahraga,4,A,4.0,100,76.4,64.7,76.7
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Kerja Praktik,3,A,4.0,100,86.5,77.2,88.8
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Metodologi Penelitian,3,B,3.0,82,84.0,67.9,85.9
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Etika Profesi,4,A,4.0,86,88.7,85.7,90.4
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Fisika Dasar IIA,3,A,4.0,95,95.6,82.0,93.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Bahasa Inggris,3,A,4.0,88,95.6,72.4,100.0
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2022/2023,Genap,Kerja Praktik,4,A,4.0,97,73.2,80.9,76.4
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Ganjil,Manajemen Proyek,2,A,4.0,96,79.8,75.5,62.3
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Ganjil,Tugas Akhir I,3,A,4.0,100,61.1,60.1,89.6
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Ganjil,Etika Profesi,3,A,4.0,86,88.4,70.3,84.4
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Ganjil,Kerja Praktik,2,A,4.0,89,75.7,95.0,95.5
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Etika Profesi,3,A,4.0,85,83.0,80.1,58.3
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Manajemen Proyek,3,A,4.0,87,77.1,67.8,79.2
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Fisika Dasar IIA,2,A,4.0,88,90.1,74.3,91.9
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Kalkulus I,3,A,4.0,88,92.4,80.6,77.2
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Agama,3,A,4.0,89,88.1,89.0,92.6
+22120012,2022,FTTM,Teknik Pertambangan,Perempuan,Jawa Barat,SNBP,5,Ya,2023/2024,Genap,Bahasa Inggris,3,A,4.0,94,80.7,93.2,87.4
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Ganjil,Kerja Praktik,4,AB,3.5,98,92.0,75.8,70.3
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,A,4.0,93,77.6,79.9,86.4
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,AB,3.5,94,79.1,96.3,100.0
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,A,4.0,100,83.7,79.7,90.7
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Ganjil,Olahraga,4,A,4.0,99,78.7,59.5,85.6
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Tugas Akhir I,4,A,4.0,92,81.1,95.7,70.3
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Metodologi Penelitian,3,B,3.0,77,72.2,77.3,90.6
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Tugas Akhir I,4,A,4.0,98,89.0,75.5,78.3
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Kerja Praktik,2,A,4.0,100,90.2,64.2,100.0
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Tugas Akhir II,3,A,4.0,97,80.0,84.0,90.9
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Etika Profesi,3,A,4.0,89,80.6,73.3,84.7
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2021/2022,Genap,Etika Profesi,3,A,4.0,86,89.3,76.3,94.3
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Ganjil,Metodologi Penelitian,2,BC,2.5,84,65.7,37.0,52.2
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Ganjil,Tugas Akhir II,2,B,3.0,74,63.4,81.5,68.2
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,89,84.6,84.8,85.9
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,2,B,3.0,95,80.1,63.5,53.5
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Ganjil,Etika Profesi,4,A,4.0,95,92.7,84.6,76.5
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Etika Profesi,4,A,4.0,86,78.9,97.6,86.1
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Fisika Dasar IA,3,A,4.0,92,91.5,80.9,80.2
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Metodologi Penelitian,3,A,4.0,94,82.5,77.9,91.8
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Tugas Akhir I,4,A,4.0,87,90.9,79.2,85.9
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Tugas Akhir II,3,B,3.0,73,72.3,65.5,77.0
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Kerja Praktik,4,BC,2.5,92,72.7,52.5,69.3
+23170013,2023,FSRD,Desain Produk,Laki-laki,Jawa Timur,SNBT,3,Tidak,2022/2023,Genap,Manajemen Proyek,4,B,3.0,84,79.5,60.1,67.1
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,A,4.0,92,82.0,84.4,86.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Kerja Praktik,3,A,4.0,89,86.6,100.0,83.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Bahasa Inggris,2,A,4.0,93,92.6,90.3,98.4
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Etika Profesi,3,A,4.0,85,75.9,96.3,71.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,A,4.0,99,79.0,79.4,88.9
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Fisika Dasar IA,4,AB,3.5,90,82.7,91.1,84.8
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Ganjil,Elektronika,2,AB,3.5,96,87.4,87.1,65.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Tugas Akhir II,4,A,4.0,100,90.6,77.0,100.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Telekomunikasi Digital,2,A,4.0,97,81.6,74.3,80.8
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Olahraga,3,AB,3.5,94,65.7,88.9,67.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Pengolahan Sinyal Digital,4,B,3.0,79,55.0,62.1,56.3
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Pengantar Rekayasa,2,A,4.0,97,93.1,73.1,100.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2021/2022,Genap,Pancasila,3,A,4.0,86,82.4,55.0,100.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Pengantar Rekayasa,3,B,3.0,93,55.1,75.1,97.5
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Agama,4,A,4.0,89,89.5,85.9,95.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,A,4.0,86,87.2,81.0,84.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Rangkaian Elektrik,3,B,3.0,84,72.4,53.7,73.4
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Etika Profesi,2,B,3.0,81,63.4,70.3,89.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Pancasila,3,A,4.0,87,72.4,70.1,96.3
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Ganjil,Olahraga,4,AB,3.5,95,76.5,79.5,66.7
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Bahasa Inggris,4,A,4.0,90,72.5,72.4,87.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Pancasila,3,B,3.0,85,75.7,68.3,78.8
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Kimia Dasar IA,4,A,4.0,94,95.3,80.7,79.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Sistem Embedded,3,A,4.0,95,87.7,79.0,83.9
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Rangkaian Elektrik,4,AB,3.5,99,69.8,57.1,96.1
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Pemrograman Dasar,4,B,3.0,74,64.2,59.0,80.4
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2022/2023,Genap,Metodologi Penelitian,4,AB,3.5,92,89.2,68.0,82.5
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Sistem Embedded,2,B,3.0,81,90.9,58.0,77.5
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Rangkaian Elektrik,3,A,4.0,93,88.3,78.1,83.4
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Fisika Dasar IA,3,AB,3.5,96,75.4,82.1,100.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Elektronika,2,AB,3.5,92,65.6,71.5,100.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Kalkulus I,3,B,3.0,89,81.2,81.6,61.5
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Olahraga,4,A,4.0,95,98.0,76.2,82.6
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Ganjil,Manajemen Proyek,4,AB,3.5,92,68.2,65.7,61.6
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Genap,Tugas Akhir II,3,A,4.0,88,76.3,80.1,63.8
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Genap,Pengolahan Sinyal Digital,2,A,4.0,86,91.7,60.1,89.5
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Genap,Etika Profesi,3,A,4.0,100,75.3,96.7,90.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2023/2024,Genap,Pengantar Rekayasa,2,AB,3.5,92,74.6,76.7,76.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Ganjil,Elektronika,3,A,4.0,98,77.6,81.7,68.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Ganjil,Pengolahan Sinyal Digital,3,A,4.0,89,73.8,69.1,95.9
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Ganjil,Rangkaian Elektrik,4,A,4.0,88,89.9,69.1,81.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Ganjil,Kerja Praktik,4,A,4.0,98,86.1,100.0,89.7
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Ganjil,Manajemen Proyek,4,A,4.0,93,81.6,80.5,82.2
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Genap,Etika Profesi,3,A,4.0,92,92.7,72.1,69.0
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Genap,Rangkaian Elektrik,4,BC,2.5,73,67.8,49.9,37.9
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Genap,Pancasila,4,A,4.0,96,100.0,79.9,95.1
+21180014,2021,FTEK,Teknik Tenaga Listrik,Laki-laki,DKI Jakarta,Mandiri,3,Tidak,2024/2025,Genap,Pengolahan Sinyal Digital,3,A,4.0,96,82.2,87.4,79.5
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Ganjil,Etika Profesi,2,AB,3.5,89,71.0,82.1,74.3
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Ganjil,Kerja Praktik,4,B,3.0,76,69.9,53.5,65.9
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Ganjil,Kalkulus I,2,B,3.0,94,75.7,68.6,66.7
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Ganjil,Kalkulus II,3,A,4.0,91,92.4,82.3,81.4
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Ganjil,Metodologi Penelitian,4,BC,2.5,77,51.5,54.5,52.7
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Kimia Dasar IA,3,B,3.0,95,71.7,72.9,70.4
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Kerja Praktik,2,AB,3.5,85,78.5,53.9,66.7
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Kalkulus I,2,B,3.0,81,56.0,68.6,84.1
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Olahraga,4,A,4.0,92,83.3,94.9,86.8
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Manajemen Proyek,3,B,3.0,70,64.9,63.3,65.1
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir I,2,B,3.0,71,76.1,70.9,80.1
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Ganjil,Kerja Praktik,3,A,4.0,96,92.6,65.2,54.4
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,88,71.5,75.5,68.4
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,3,BC,2.5,77,59.5,60.7,48.2
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Ganjil,Fisika Dasar IA,4,D,1.0,52,36.9,44.5,23.5
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,B,3.0,91,74.9,76.8,76.4
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,3,BC,2.5,73,73.0,59.0,63.1
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,3,BC,2.5,84,60.3,52.1,61.7
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Kalkulus I,2,A,4.0,87,73.3,63.2,100.0
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Kalkulus II,3,B,3.0,74,65.7,77.8,63.8
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Manajemen Proyek,2,A,4.0,93,90.4,75.1,100.0
+23120015,2023,FTTM,Teknik Geofisika,Laki-laki,Yogyakarta,SNBP,5,Tidak,2022/2023,Genap,Tugas Akhir II,3,B,3.0,88,73.0,66.9,82.7
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Ganjil,Etika Profesi,3,A,4.0,92,76.9,82.7,74.8
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,A,4.0,99,86.1,76.3,87.2
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Ganjil,Pancasila,3,AB,3.5,88,67.4,83.1,67.3
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Ganjil,Kerja Praktik,3,B,3.0,80,76.4,80.3,80.8
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Tugas Akhir I,2,A,4.0,88,78.9,65.8,100.0
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Kimia Dasar IA,3,AB,3.5,96,77.4,88.2,86.1
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Manajemen Proyek,4,A,4.0,86,100.0,73.6,96.1
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Fisika Dasar IA,3,AB,3.5,95,79.3,88.3,83.3
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Tugas Akhir II,3,A,4.0,98,93.6,76.4,74.9
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2021/2022,Genap,Tugas Akhir I,3,B,3.0,91,56.4,89.0,58.9
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Kalkulus II,2,A,4.0,100,78.2,78.9,90.2
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Pengantar Rekayasa,2,A,4.0,88,80.3,78.3,88.4
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Kerja Praktik,3,A,4.0,96,93.0,80.5,88.9
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Etika Profesi,2,A,4.0,93,94.4,81.8,69.4
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,A,4.0,98,79.8,74.7,92.0
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,4,A,4.0,85,85.2,83.1,100.0
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Ganjil,Pancasila,3,A,4.0,93,100.0,85.7,63.9
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Genap,Bahasa Inggris,3,A,4.0,90,88.0,92.9,93.1
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Genap,Olahraga,4,A,4.0,97,75.2,77.9,74.8
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Genap,Pengantar Rekayasa,2,AB,3.5,85,81.5,89.3,81.5
+23170016,2023,FSRD,Desain Produk,Laki-laki,DKI Jakarta,SNBT,5,Tidak,2022/2023,Genap,Metodologi Penelitian,2,B,3.0,86,74.2,79.1,63.3
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Ganjil,Kalkulus II,2,B,3.0,72,63.8,73.1,68.6
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,B,3.0,91,67.0,65.8,82.8
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Ganjil,Bahasa Inggris,3,B,3.0,89,80.0,59.1,68.9
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Ganjil,Kerja Praktik,3,AB,3.5,93,67.9,57.2,60.9
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Genap,Metodologi Penelitian,3,A,4.0,100,78.1,100.0,75.8
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,B,3.0,79,84.1,88.2,96.5
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Genap,Tugas Akhir I,2,A,4.0,97,90.2,83.2,91.4
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Genap,Kerja Praktik,4,BC,2.5,71,57.9,61.4,62.4
+24150017,2024,FTSL,Teknik Lingkungan,Laki-laki,DKI Jakarta,SNBP,4,Tidak,2021/2022,Genap,Pengantar Rekayasa,2,B,3.0,79,71.0,71.9,66.5
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,B,3.0,93,69.9,60.6,49.0
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,A,4.0,85,81.0,92.4,89.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,B,3.0,72,87.4,81.0,79.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Ganjil,Tugas Akhir I,4,A,4.0,98,72.9,72.3,93.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,A,4.0,98,97.3,75.1,71.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Fisika Dasar IIA,4,A,4.0,96,70.1,82.5,82.5
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Tugas Akhir II,2,AB,3.5,88,65.4,79.0,71.8
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Kalkulus I,2,B,3.0,88,42.1,61.8,86.4
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Metodologi Penelitian,3,A,4.0,87,81.3,74.0,90.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Bahasa Inggris,3,B,3.0,79,75.3,76.7,87.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2021/2022,Genap,Etika Profesi,3,A,4.0,92,80.2,68.4,71.9
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Bahasa Inggris,2,A,4.0,96,83.5,85.1,70.9
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Fisika Dasar IA,3,A,4.0,89,82.8,79.8,76.0
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Metodologi Penelitian,2,BC,2.5,74,65.7,63.6,55.2
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,3,A,4.0,90,87.6,63.0,77.1
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Kerja Praktik,3,A,4.0,87,75.0,82.9,68.7
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Ganjil,Tugas Akhir I,2,A,4.0,100,84.7,63.8,99.0
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Tugas Akhir II,3,AB,3.5,100,69.0,73.4,89.3
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Manajemen Proyek,3,B,3.0,79,73.2,73.2,81.0
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Etika Profesi,4,A,4.0,86,81.6,71.4,85.6
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Etika Profesi,3,B,3.0,72,48.7,72.8,82.9
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Metodologi Penelitian,3,BC,2.5,84,51.1,63.0,83.9
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Tugas Akhir I,2,A,4.0,96,77.2,76.4,99.5
+23150018,2023,FTSL,Teknik Sipil,Laki-laki,Jawa Timur,SNBP,2,Tidak,2022/2023,Genap,Kimia Dasar IA,4,AB,3.5,87,70.0,67.4,64.9
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,A,4.0,99,87.1,77.0,81.0
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Etika Profesi,2,C,2.0,71,59.7,50.1,50.4
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Pancasila,4,A,4.0,87,87.4,72.5,79.9
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Mekanika Fluida,3,AB,3.5,90,80.6,60.9,90.7
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Perancangan Mesin,2,BC,2.5,92,76.5,69.7,56.2
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,A,4.0,99,81.6,85.0,86.9
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,BC,2.5,89,54.6,67.6,55.7
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Genap,Termodinamika,3,BC,2.5,71,56.5,65.5,88.9
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Genap,Pengantar Rekayasa,4,BC,2.5,90,57.7,69.4,56.6
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Genap,Kekuatan Material,3,B,3.0,80,64.3,73.3,70.5
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Genap,Elemen Mesin,2,AB,3.5,97,87.6,99.7,85.0
+24130019,2024,FTMD,Teknik Material,Laki-laki,Kalimantan Timur,SNBT,7,Tidak,2021/2022,Genap,Mekanika Fluida,3,B,3.0,93,73.0,64.3,75.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,B,3.0,91,80.9,56.7,84.0
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,A,4.0,87,80.9,55.9,74.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,AB,3.5,98,75.4,61.6,69.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Pengantar Rekayasa,3,AB,3.5,85,81.4,70.4,72.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Sistem Embedded,3,BC,2.5,75,57.3,77.9,60.9
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Elektronika,4,A,4.0,95,93.0,86.2,75.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Ganjil,Sinyal dan Sistem,4,B,3.0,85,66.5,54.5,70.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Genap,Agama,3,BC,2.5,87,72.3,55.4,65.3
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Genap,Kimia Dasar IA,4,B,3.0,86,69.4,73.7,65.8
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Genap,Fisika Dasar IA,2,B,3.0,80,60.6,69.0,94.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Genap,Pengantar Rekayasa,4,BC,2.5,89,53.2,61.4,60.8
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2021/2022,Genap,Fisika Dasar IIA,2,B,3.0,82,76.1,74.8,85.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Ganjil,Bahasa Inggris,2,B,3.0,81,70.8,75.7,95.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Ganjil,Etika Profesi,3,B,3.0,77,59.5,75.2,65.9
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Ganjil,Tugas Akhir I,4,C,2.0,68,53.7,40.4,45.8
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Ganjil,Manajemen Proyek,4,B,3.0,95,73.5,75.4,66.7
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Ganjil,Pengolahan Sinyal Digital,3,B,3.0,87,71.7,77.3,81.2
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Genap,Pengantar Rekayasa,4,BC,2.5,84,68.0,51.5,69.0
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Genap,Jaringan Komputer,3,B,3.0,79,87.0,66.3,68.1
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Genap,Pancasila,4,B,3.0,86,72.0,78.5,55.0
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Genap,Rangkaian Elektrik,3,BC,2.5,75,49.6,65.3,78.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2022/2023,Genap,Kerja Praktik,4,B,3.0,95,66.2,65.0,81.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Ganjil,Olahraga,3,B,3.0,73,67.3,72.1,71.4
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Ganjil,Kalkulus II,3,B,3.0,86,78.5,39.9,78.7
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Ganjil,Tugas Akhir II,4,BC,2.5,79,47.5,64.5,78.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Ganjil,Jaringan Komputer,2,B,3.0,75,74.9,80.2,83.0
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Ganjil,Rangkaian Elektrik,3,A,4.0,89,90.9,80.8,65.8
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Fisika Dasar IA,3,BC,2.5,81,53.4,79.4,58.1
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Agama,2,AB,3.5,87,80.3,72.2,96.2
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Pengolahan Sinyal Digital,3,BC,2.5,70,64.0,52.2,46.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Rangkaian Elektrik,3,BC,2.5,73,62.2,55.5,54.2
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Kalkulus I,4,C,2.0,71,47.9,32.2,57.7
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Telekomunikasi Digital,4,B,3.0,74,57.8,62.9,60.4
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2023/2024,Genap,Kalkulus II,2,B,3.0,85,82.6,49.4,73.2
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Ganjil,Etika Profesi,4,B,3.0,70,72.4,66.0,58.0
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Ganjil,Jaringan Komputer,3,B,3.0,74,59.1,73.2,65.7
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Ganjil,Pengolahan Sinyal Digital,3,A,4.0,98,84.5,72.9,66.8
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Ganjil,Tugas Akhir I,2,C,2.0,68,37.9,51.7,56.7
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Ganjil,Kalkulus I,2,C,2.0,57,54.0,40.8,48.6
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Genap,Agama,3,A,4.0,88,92.2,77.3,74.3
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Genap,Telekomunikasi Digital,4,C,2.0,81,41.4,43.8,35.3
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Genap,Tugas Akhir II,3,B,3.0,70,67.9,61.8,59.5
+21180020,2021,FTEK,Teknik Tenaga Listrik,Perempuan,DKI Jakarta,SNBP,8,Tidak,2024/2025,Genap,Tugas Akhir I,3,B,3.0,88,73.9,55.9,87.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,B,3.0,86,76.1,69.2,81.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,B,3.0,82,62.2,67.5,53.4
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Metodologi Penelitian,4,B,3.0,71,71.0,65.6,69.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,C,2.0,73,47.0,50.7,53.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,BC,2.5,70,70.1,48.8,71.6
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Fisika Dasar IA,2,B,3.0,87,63.3,82.9,54.2
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir I,3,AB,3.5,90,87.4,68.3,96.1
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Agama,4,B,3.0,91,76.0,72.4,72.1
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,AB,3.5,100,84.7,56.5,94.0
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Metodologi Penelitian,3,C,2.0,58,61.8,63.0,40.5
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Kimia Dasar IA,2,B,3.0,94,57.3,60.8,62.4
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Kalkulus II,4,AB,3.5,97,88.5,87.7,71.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Pengantar Rekayasa,4,B,3.0,87,54.7,56.7,79.7
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Pancasila,3,A,4.0,86,75.1,74.1,84.7
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Manajemen Proyek,4,B,3.0,76,66.5,73.5,67.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Kerja Praktik,3,B,3.0,94,74.4,66.6,64.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Tugas Akhir II,2,B,3.0,90,68.4,62.0,66.0
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,88,89.5,77.0,93.4
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Kerja Praktik,3,B,3.0,85,76.3,67.4,65.6
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Tugas Akhir II,3,B,3.0,95,62.1,59.5,60.4
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,3,B,3.0,95,85.5,90.3,79.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,2,AB,3.5,98,60.8,65.8,65.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Metodologi Penelitian,2,BC,2.5,89,62.7,56.4,40.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Bahasa Inggris,4,AB,3.5,90,69.1,75.8,100.0
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,BC,2.5,92,40.8,55.6,74.2
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Fisika Dasar IIA,3,A,4.0,99,75.2,85.0,79.4
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Fisika Dasar IA,3,BC,2.5,71,84.3,45.3,66.2
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Manajemen Proyek,3,B,3.0,81,83.6,71.9,78.6
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Pengantar Rekayasa,3,B,3.0,83,68.4,59.7,73.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Tugas Akhir I,3,B,3.0,95,69.5,63.1,80.0
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Fisika Dasar IA,3,BC,2.5,95,49.5,73.4,52.8
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Manajemen Proyek,3,BC,2.5,75,58.9,74.6,38.0
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Etika Profesi,4,A,4.0,89,93.4,82.2,84.3
+22150021,2022,FTSL,Teknik Kelautan,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Tugas Akhir II,4,B,3.0,91,77.2,75.7,79.7
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Ganjil,Kerja Praktik,4,BC,2.5,81,60.7,57.3,75.5
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,B,3.0,72,46.3,72.9,72.2
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,BC,2.5,86,60.6,72.1,75.1
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Ganjil,Etika Profesi,3,BC,2.5,80,59.4,44.3,39.6
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Agama,3,BC,2.5,87,70.5,70.3,69.8
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Fisika Dasar IIA,2,B,3.0,94,75.3,61.1,76.3
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Kalkulus I,3,B,3.0,84,71.9,74.7,74.4
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Bahasa Inggris,2,B,3.0,89,76.0,63.9,56.8
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Manajemen Proyek,3,BC,2.5,85,56.3,52.8,60.5
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2021/2022,Genap,Metodologi Penelitian,2,BC,2.5,74,53.5,34.9,58.5
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Ganjil,Etika Profesi,4,BC,2.5,80,57.4,67.6,75.2
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Ganjil,Bahasa Inggris,3,C,2.0,54,41.7,38.8,36.5
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Ganjil,Fisika Dasar IA,3,B,3.0,79,64.6,60.4,42.1
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Ganjil,Manajemen Proyek,4,B,3.0,75,60.3,67.3,73.6
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Genap,Tugas Akhir I,4,AB,3.5,92,67.0,43.1,79.7
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Genap,Metodologi Penelitian,4,A,4.0,85,91.8,79.3,76.0
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Genap,Agama,3,AB,3.5,96,70.2,78.4,84.0
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Genap,Fisika Dasar IIA,3,B,3.0,87,96.6,74.5,68.4
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2022/2023,Genap,Pancasila,2,B,3.0,72,55.5,59.2,64.7
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Ganjil,Pengantar Rekayasa,3,BC,2.5,83,59.9,48.1,72.1
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Ganjil,Tugas Akhir II,4,BC,2.5,72,63.8,57.7,65.8
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Ganjil,Manajemen Proyek,2,B,3.0,80,65.2,61.9,68.5
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,C,2.0,78,43.9,44.1,60.9
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Manajemen Proyek,3,B,3.0,71,68.1,71.9,64.9
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Metodologi Penelitian,4,B,3.0,86,67.0,67.2,60.8
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Tugas Akhir I,2,D,1.0,60,38.4,53.3,50.6
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Kimia Dasar IA,2,B,3.0,92,83.4,70.6,75.9
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Tugas Akhir I,2,BC,2.5,86,55.2,61.6,72.2
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Bahasa Inggris,4,BC,2.5,72,58.9,59.8,69.7
+22190022,2022,SBM,Manajemen,Laki-laki,Jawa Tengah,Mandiri,4,Tidak,2023/2024,Genap,Tugas Akhir II,3,C,2.0,85,31.1,42.5,34.8
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Ganjil,Bahasa Inggris,2,B,3.0,70,61.8,76.9,69.4
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Ganjil,Manajemen Proyek,2,B,3.0,90,74.9,55.1,82.4
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Ganjil,Kerja Praktik,4,B,3.0,78,71.5,52.3,47.5
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Ganjil,Riset Operasi,3,AB,3.5,98,78.1,62.1,64.7
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,AB,3.5,85,68.7,90.3,67.4
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Etika Profesi,3,B,3.0,72,70.7,75.5,66.8
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir I,3,B,3.0,75,65.6,52.3,74.2
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Pengantar Rekayasa,3,BC,2.5,85,60.0,49.2,31.1
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Kerja Praktik,3,B,3.0,80,84.3,69.9,64.8
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Manajemen Rantai Pasok,3,BC,2.5,80,64.5,66.8,50.1
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Agama,4,A,4.0,95,89.8,86.4,89.3
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2021/2022,Genap,Perancangan Pabrik,3,B,3.0,81,72.5,69.8,62.9
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Kimia Dasar IA,3,BC,2.5,78,62.0,74.1,46.3
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Statistika Industri,3,C,2.0,59,53.6,51.0,54.3
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Metodologi Penelitian,2,B,3.0,79,67.6,80.8,50.2
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Tugas Akhir I,4,BC,2.5,89,57.8,39.9,56.5
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,3,A,4.0,90,83.7,81.0,68.4
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Riset Operasi,4,BC,2.5,88,57.8,55.0,76.2
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Ganjil,Agama,3,AB,3.5,91,69.6,76.6,84.5
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Genap,Manajemen Rantai Pasok,2,AB,3.5,97,91.0,63.9,68.6
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Genap,Metodologi Penelitian,3,C,2.0,65,52.5,57.1,66.2
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Genap,Pengendalian Kualitas,2,B,3.0,81,63.6,64.6,56.2
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Genap,Pengantar Rekayasa,2,A,4.0,94,72.1,81.8,100.0
+23160023,2023,FTI,Teknik Industri,Perempuan,Sumatera Utara,SNBP,5,Tidak,2022/2023,Genap,Kalkulus I,3,BC,2.5,90,59.5,54.8,58.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Kalkulus II,3,BC,2.5,79,70.9,42.0,55.4
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir II,2,AB,3.5,99,81.1,56.3,82.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Manajemen Proyek,4,A,4.0,93,74.1,81.9,77.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,A,4.0,88,85.1,73.6,90.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,A,4.0,88,83.5,87.2,69.5
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Ganjil,Pancasila,3,AB,3.5,95,80.9,87.8,81.4
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Kimia Dasar IA,2,AB,3.5,86,77.6,60.8,84.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Pancasila,2,A,4.0,95,81.4,75.3,88.2
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Kerja Praktik,4,AB,3.5,99,75.8,93.2,73.4
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Metodologi Penelitian,2,AB,3.5,89,72.0,80.4,75.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Tugas Akhir II,3,B,3.0,89,84.8,84.5,67.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2021/2022,Genap,Tugas Akhir II,3,BC,2.5,82,70.1,52.5,71.6
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Tugas Akhir II,3,BC,2.5,79,68.2,46.3,69.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,85,73.2,72.2,89.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,88,86.5,96.9,63.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Kerja Praktik,4,A,4.0,94,85.8,71.0,69.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Tugas Akhir I,4,AB,3.5,85,86.2,73.2,97.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,B,3.0,78,66.1,50.6,70.6
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Genap,Kalkulus II,3,A,4.0,97,81.6,54.0,87.4
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Genap,Tugas Akhir II,2,A,4.0,92,88.2,92.4,72.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Genap,Manajemen Proyek,2,A,4.0,88,94.5,62.2,88.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Genap,Bahasa Inggris,2,AB,3.5,99,75.0,75.1,69.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2022/2023,Genap,Metodologi Penelitian,3,B,3.0,74,74.2,59.2,60.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Pancasila,3,A,4.0,100,75.8,86.7,90.6
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Kerja Praktik,3,BC,2.5,80,58.0,72.6,51.7
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Metodologi Penelitian,4,AB,3.5,99,79.8,79.8,73.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Manajemen Proyek,4,B,3.0,80,86.1,88.2,86.5
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Kalkulus II,3,A,4.0,93,75.1,68.6,87.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Kimia Dasar IA,3,A,4.0,91,96.1,86.4,66.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Ganjil,Manajemen Proyek,4,A,4.0,93,77.0,76.2,88.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Agama,3,A,4.0,93,100.0,86.1,82.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Pengantar Rekayasa,3,A,4.0,97,92.1,76.8,100.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Etika Profesi,4,A,4.0,97,87.0,84.9,88.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Pancasila,4,A,4.0,89,80.1,74.4,71.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Manajemen Proyek,3,A,4.0,94,91.2,84.6,100.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2023/2024,Genap,Metodologi Penelitian,4,A,4.0,87,86.0,65.2,76.0
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Etika Profesi,4,A,4.0,93,91.8,77.1,84.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Etika Profesi,4,B,3.0,92,62.7,71.4,72.5
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Olahraga,3,A,4.0,88,85.4,80.1,77.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Manajemen Proyek,3,A,4.0,92,88.4,84.9,78.7
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Pancasila,2,B,3.0,91,74.0,57.4,54.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Ganjil,Tugas Akhir I,4,A,4.0,92,81.9,90.6,92.4
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Genap,Kalkulus II,2,A,4.0,89,74.1,92.1,88.1
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Genap,Fisika Dasar IIA,2,AB,3.5,90,78.2,55.1,81.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Genap,Kerja Praktik,3,B,3.0,85,59.6,51.7,83.8
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Genap,Metodologi Penelitian,3,B,3.0,76,86.7,65.1,53.9
+21190024,2021,SBM,Kewirausahaan,Perempuan,Yogyakarta,SNBT,6,Tidak,2024/2025,Genap,Manajemen Proyek,4,B,3.0,79,79.4,64.5,63.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Ganjil,Bahasa Inggris,4,AB,3.5,90,86.2,87.6,73.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Ganjil,Kerja Praktik,4,BC,2.5,79,55.7,59.2,47.5
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Ganjil,Kalkulus II,4,BC,2.5,70,65.5,59.5,63.1
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,BC,2.5,89,62.9,52.5,75.4
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Genap,Metodologi Penelitian,3,A,4.0,100,67.9,68.6,64.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Genap,Pengantar Rekayasa,4,B,3.0,74,65.1,48.2,54.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Genap,Etika Profesi,4,BC,2.5,84,63.9,60.2,53.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2021/2022,Genap,Etika Profesi,3,B,3.0,95,69.7,67.4,94.1
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,A,4.0,90,74.6,88.3,94.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Ganjil,Bahasa Inggris,2,BC,2.5,80,67.3,73.6,47.3
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Ganjil,Etika Profesi,4,BC,2.5,88,71.2,63.0,69.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Ganjil,Etika Profesi,3,AB,3.5,91,78.8,58.4,88.3
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Genap,Kerja Praktik,3,A,4.0,97,82.1,78.6,65.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,3,AB,3.5,90,82.0,72.6,90.9
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Genap,Tugas Akhir II,4,B,3.0,85,73.5,55.3,68.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Genap,Kerja Praktik,3,B,3.0,77,72.3,63.3,69.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2022/2023,Genap,Metodologi Penelitian,2,A,4.0,97,77.0,59.9,100.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Ganjil,Etika Profesi,3,A,4.0,85,74.7,86.9,79.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Ganjil,Olahraga,3,A,4.0,96,83.3,74.0,71.5
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,B,3.0,71,58.0,54.0,64.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Ganjil,Pengantar Rekayasa,3,B,3.0,84,70.6,77.0,58.2
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Ganjil,Tugas Akhir II,3,B,3.0,82,78.7,75.4,75.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Fisika Dasar IIA,4,AB,3.5,100,83.6,62.9,90.1
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Etika Profesi,2,A,4.0,96,75.0,76.9,89.4
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Pengantar Rekayasa,3,B,3.0,87,78.8,90.3,60.8
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Tugas Akhir I,4,BC,2.5,94,60.9,63.3,55.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Agama,3,A,4.0,91,74.3,86.9,77.7
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2023/2024,Genap,Tugas Akhir I,4,A,4.0,87,100.0,72.3,78.4
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Metodologi Penelitian,3,A,4.0,89,77.8,75.8,81.2
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Tugas Akhir I,2,C,2.0,83,53.0,44.4,47.2
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Fisika Dasar IA,3,A,4.0,91,70.7,84.3,77.4
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Tugas Akhir II,3,B,3.0,85,75.8,69.4,76.3
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Fisika Dasar IIA,2,A,4.0,99,79.3,71.1,68.9
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Kalkulus II,4,BC,2.5,84,87.6,73.6,47.8
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Ganjil,Pancasila,2,B,3.0,83,68.9,67.5,71.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Tugas Akhir II,3,B,3.0,70,68.7,69.5,70.8
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Kalkulus II,3,C,2.0,54,48.2,40.1,52.2
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Tugas Akhir I,2,A,4.0,96,87.9,76.9,96.1
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Etika Profesi,3,AB,3.5,86,80.5,79.0,100.0
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Pengantar Rekayasa,4,BC,2.5,72,64.8,49.1,67.6
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Kalkulus I,4,BC,2.5,85,53.8,51.9,68.8
+21100025,2021,SITH,Mikrobiologi,Perempuan,Banten,SNBP,5,Tidak,2024/2025,Genap,Tugas Akhir II,2,A,4.0,98,71.5,77.4,72.9
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Elektronika,2,C,2.0,84,45.8,71.2,53.4
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,D,1.0,58,26.1,41.3,55.7
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Kerja Praktik,3,D,1.0,64,19.5,53.3,39.2
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Sistem Embedded,4,D,1.0,51,46.0,14.7,41.8
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,C,2.0,79,61.1,41.7,54.7
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Rangkaian Elektrik,3,D,1.0,84,43.2,31.6,36.3
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,3,D,1.0,74,45.7,48.5,37.6
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Genap,Agama,2,BC,2.5,93,45.2,51.6,56.2
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Genap,Pengolahan Sinyal Digital,4,AB,3.5,86,67.7,87.1,88.6
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Genap,Rangkaian Elektrik,4,C,2.0,76,67.3,55.1,57.9
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Genap,Kimia Dasar IA,3,C,2.0,51,59.7,59.4,42.4
+24180026,2024,FTEK,Teknik Telekomunikasi,Laki-laki,Jawa Tengah,Mandiri,8,Tidak,2021/2022,Genap,Olahraga,2,D,1.0,54,41.6,34.4,42.5
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Agama,2,A,4.0,95,80.5,76.8,91.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Tugas Akhir I,3,BC,2.5,94,52.1,56.8,71.3
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Pancasila,3,A,4.0,95,65.4,82.1,72.8
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Kalkulus II,2,B,3.0,74,62.5,62.4,60.2
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Kimia Dasar IA,4,BC,2.5,86,64.5,67.8,65.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Metodologi Penelitian,2,B,3.0,79,66.4,64.6,75.2
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Ganjil,Pengantar Rekayasa,3,A,4.0,90,79.1,80.8,90.5
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Tugas Akhir I,3,A,4.0,98,90.6,87.9,86.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Perancangan Mesin,2,A,4.0,97,88.3,71.4,100.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Kalkulus II,2,A,4.0,100,81.5,75.2,88.6
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Termodinamika,2,A,4.0,92,85.6,82.2,100.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Kekuatan Material,3,A,4.0,89,86.5,89.4,72.6
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Metodologi Penelitian,4,A,4.0,86,97.8,76.3,73.2
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2021/2022,Genap,Mekanika Fluida,3,B,3.0,83,64.1,61.2,68.4
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Ganjil,Kekuatan Material,3,B,3.0,84,65.4,71.3,54.4
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Ganjil,Agama,4,A,4.0,87,89.1,90.3,77.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Ganjil,Olahraga,3,A,4.0,91,76.3,88.9,87.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Ganjil,Pancasila,2,A,4.0,97,75.6,71.0,92.2
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Ganjil,Mekanika Fluida,3,B,3.0,89,73.6,52.7,80.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Genap,Fisika Dasar IA,3,BC,2.5,85,65.5,64.7,52.7
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Genap,Pancasila,2,A,4.0,95,87.1,74.6,72.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Genap,Tugas Akhir II,3,BC,2.5,70,62.5,41.6,60.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2022/2023,Genap,Manajemen Proyek,2,AB,3.5,91,82.2,69.5,72.8
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Ganjil,Perancangan Mesin,3,A,4.0,92,87.7,83.2,90.6
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Ganjil,Agama,3,B,3.0,94,76.1,72.6,57.8
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Ganjil,Kerja Praktik,3,AB,3.5,99,76.6,71.4,80.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Ganjil,Pancasila,3,A,4.0,96,93.7,66.9,92.5
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Olahraga,4,A,4.0,100,88.1,90.9,100.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Termodinamika,4,A,4.0,95,87.0,90.5,86.7
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Metodologi Penelitian,4,AB,3.5,96,76.8,90.8,69.8
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Perancangan Mesin,3,A,4.0,86,89.0,66.0,89.4
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Dinamika,3,BC,2.5,77,63.4,64.9,51.3
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2023/2024,Genap,Fisika Dasar IIA,3,A,4.0,85,96.2,71.0,67.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Tugas Akhir I,2,A,4.0,92,100.0,80.0,97.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Tugas Akhir II,3,A,4.0,92,79.1,75.1,99.8
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Etika Profesi,3,A,4.0,95,89.5,71.2,100.0
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Elemen Mesin,3,B,3.0,85,71.4,73.6,92.7
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Pengantar Rekayasa,4,A,4.0,100,88.3,84.6,85.5
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Ganjil,Kimia Dasar IA,3,A,4.0,96,64.7,77.0,87.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Genap,Kimia Dasar IA,4,B,3.0,86,71.0,62.5,88.9
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Genap,Tugas Akhir I,2,A,4.0,87,81.3,78.5,84.1
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Genap,Perancangan Mesin,4,B,3.0,91,76.4,63.3,61.3
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Genap,Bahasa Inggris,2,A,4.0,85,90.0,72.0,95.7
+21130027,2021,FTMD,Teknik Material,Laki-laki,Yogyakarta,SNBT,1,Ya,2024/2025,Genap,Etika Profesi,3,B,3.0,90,75.1,77.5,72.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Manajemen Proyek,2,B,3.0,93,64.8,61.2,57.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,B,3.0,79,57.4,61.4,66.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Kalkulus I,2,BC,2.5,92,61.1,59.6,68.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Kerja Praktik,3,A,4.0,90,75.1,63.7,67.8
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,B,3.0,73,63.9,55.8,51.1
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Kerja Praktik,3,B,3.0,77,68.4,69.7,60.3
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir II,2,B,3.0,86,60.0,63.9,57.2
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Tugas Akhir I,3,AB,3.5,92,63.0,69.5,80.9
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Olahraga,4,AB,3.5,92,100.0,78.4,67.3
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Tugas Akhir II,3,B,3.0,72,56.4,66.2,60.6
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Fisika Dasar IA,3,B,3.0,90,70.3,69.6,67.1
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Manajemen Proyek,4,A,4.0,87,82.4,98.3,94.8
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2021/2022,Genap,Kerja Praktik,3,AB,3.5,97,79.3,76.2,53.2
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Kalkulus II,3,B,3.0,80,75.5,64.9,51.9
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Etika Profesi,3,B,3.0,73,84.7,79.9,70.3
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Kalkulus I,4,AB,3.5,86,72.1,54.0,64.0
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Bahasa Inggris,2,A,4.0,100,82.8,77.6,81.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Fisika Dasar IA,3,A,4.0,87,97.6,100.0,82.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,B,3.0,78,62.4,85.3,60.5
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Ganjil,Kerja Praktik,4,B,3.0,88,64.9,64.0,63.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Genap,Bahasa Inggris,3,B,3.0,94,61.2,56.9,75.5
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Genap,Metodologi Penelitian,4,BC,2.5,82,62.3,70.1,54.3
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Genap,Kalkulus I,4,BC,2.5,79,56.5,67.8,60.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2022/2023,Genap,Pancasila,2,B,3.0,77,76.1,57.5,80.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Manajemen Proyek,2,AB,3.5,98,73.2,63.2,65.0
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Tugas Akhir I,2,AB,3.5,87,86.7,66.3,82.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,C,2.0,75,46.0,48.8,39.8
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Tugas Akhir II,4,BC,2.5,80,56.8,62.4,59.9
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Kimia Dasar IA,2,C,2.0,67,32.2,41.7,54.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Fisika Dasar IA,4,D,1.0,78,34.1,32.5,54.7
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Ganjil,Tugas Akhir I,3,B,3.0,81,70.8,65.8,42.1
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Kerja Praktik,3,AB,3.5,87,81.0,79.9,100.0
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Bahasa Inggris,3,C,2.0,74,64.5,46.3,54.2
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Tugas Akhir II,3,B,3.0,90,67.7,61.8,75.0
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Tugas Akhir II,2,BC,2.5,82,62.4,50.1,42.8
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Fisika Dasar IA,3,BC,2.5,73,71.1,53.1,65.3
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Pengantar Rekayasa,2,BC,2.5,79,70.3,68.2,86.4
+22150028,2022,FTSL,Teknik Sipil,Laki-laki,Jawa Tengah,SNBT,6,Tidak,2023/2024,Genap,Agama,3,AB,3.5,93,81.1,72.7,91.3
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,BC,2.5,80,59.7,58.0,62.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Ganjil,Termodinamika,4,BC,2.5,70,61.4,61.7,81.3
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,B,3.0,82,76.6,61.6,59.0
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Ganjil,Kerja Praktik,4,B,3.0,93,76.4,80.7,62.1
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Genap,Tugas Akhir II,2,BC,2.5,78,44.4,51.3,69.5
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Genap,Metodologi Penelitian,3,BC,2.5,85,60.3,51.2,59.0
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Genap,Bahasa Inggris,2,C,2.0,60,49.0,17.1,46.1
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Genap,Manajemen Proyek,3,D,1.0,76,53.2,50.4,49.1
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2021/2022,Genap,Kekuatan Material,3,AB,3.5,87,67.4,88.5,86.2
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Olahraga,2,BC,2.5,70,72.5,49.5,53.6
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Agama,4,BC,2.5,80,55.5,46.7,74.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Perancangan Mesin,4,BC,2.5,82,60.0,49.3,35.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Pancasila,4,B,3.0,80,53.2,64.5,52.1
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Dinamika,3,AB,3.5,98,87.0,76.3,94.8
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Ganjil,Fisika Dasar IIA,4,C,2.0,58,55.7,51.7,54.5
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Mekanika Fluida,4,B,3.0,80,78.4,71.7,52.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Kerja Praktik,3,C,2.0,81,49.2,49.6,36.6
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Pancasila,4,A,4.0,92,97.1,86.0,85.9
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Perancangan Mesin,3,BC,2.5,78,50.1,56.2,60.8
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Manajemen Proyek,4,C,2.0,75,50.1,44.6,24.5
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2022/2023,Genap,Bahasa Inggris,3,C,2.0,62,47.9,68.5,57.9
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Ganjil,Manajemen Proyek,3,C,2.0,68,50.3,29.8,59.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Ganjil,Tugas Akhir I,4,BC,2.5,72,54.4,66.3,39.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Ganjil,Kalkulus I,4,D,1.0,76,35.2,49.7,21.6
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Ganjil,Dinamika,3,D,1.0,58,27.9,37.4,45.9
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Ganjil,Pancasila,3,BC,2.5,77,57.9,70.1,38.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Manajemen Proyek,4,BC,2.5,85,57.4,58.3,49.8
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Kimia Dasar IA,3,BC,2.5,87,40.2,51.1,65.6
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Elemen Mesin,3,C,2.0,76,50.5,53.0,45.9
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Kekuatan Material,3,BC,2.5,95,53.8,56.8,68.8
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Fisika Dasar IA,4,BC,2.5,92,50.7,55.6,64.0
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2023/2024,Genap,Dinamika,4,D,1.0,84,48.6,35.5,44.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Ganjil,Fisika Dasar IIA,2,B,3.0,89,60.8,61.0,68.3
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Ganjil,Agama,2,BC,2.5,90,71.9,47.1,51.3
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Ganjil,Manajemen Proyek,3,BC,2.5,82,52.2,55.2,65.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Ganjil,Termodinamika,4,BC,2.5,80,55.7,49.0,38.3
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Fisika Dasar IIA,3,BC,2.5,82,77.1,60.4,65.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Kalkulus I,3,BC,2.5,91,50.6,75.2,63.2
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Manajemen Proyek,3,AB,3.5,89,70.3,90.2,85.4
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Olahraga,3,B,3.0,70,73.2,65.2,85.7
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Agama,3,B,3.0,79,51.5,52.8,65.0
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Metodologi Penelitian,3,BC,2.5,72,62.5,72.3,39.5
+21130029,2021,FTMD,Teknik Mesin,Laki-laki,Banten,SNBT,5,Tidak,2024/2025,Genap,Tugas Akhir I,2,BC,2.5,93,46.7,66.2,60.1
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Ganjil,Pengolahan Sinyal Digital,2,BC,2.5,71,68.8,66.6,65.6
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Ganjil,Manajemen Proyek,4,B,3.0,73,70.5,55.7,76.2
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Ganjil,Etika Profesi,2,A,4.0,95,92.3,71.5,88.0
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Ganjil,Sinyal dan Sistem,3,C,2.0,60,52.8,51.4,25.8
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Genap,Pemrograman Dasar,4,BC,2.5,77,53.3,50.5,41.1
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Genap,Bahasa Inggris,4,B,3.0,90,73.1,65.5,62.0
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Genap,Sistem Embedded,2,AB,3.5,98,90.9,68.6,70.3
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Genap,Sinyal dan Sistem,3,B,3.0,93,63.2,61.6,75.0
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2021/2022,Genap,Telekomunikasi Digital,3,C,2.0,62,58.6,47.5,43.2
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Metodologi Penelitian,4,B,3.0,95,66.0,45.9,84.2
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Telekomunikasi Digital,4,B,3.0,88,71.2,73.9,55.4
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Elektronika,2,B,3.0,87,69.8,76.7,46.4
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Kalkulus I,2,BC,2.5,80,55.4,62.0,65.8
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Pancasila,2,B,3.0,73,60.4,61.9,55.4
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Tugas Akhir I,3,AB,3.5,100,72.7,42.5,71.1
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Ganjil,Olahraga,3,BC,2.5,90,49.8,47.7,64.1
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Tugas Akhir I,3,A,4.0,99,83.0,69.9,86.0
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Elektronika,3,BC,2.5,91,57.0,48.3,41.6
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Manajemen Proyek,3,BC,2.5,79,64.6,59.5,58.3
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Etika Profesi,4,BC,2.5,88,62.6,42.3,67.1
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Metodologi Penelitian,2,BC,2.5,74,51.2,40.3,51.2
+23180030,2023,FTEK,Teknik Tenaga Listrik,Laki-laki,Jawa Timur,Mandiri,4,Tidak,2022/2023,Genap,Fisika Dasar IIA,3,AB,3.5,92,81.1,82.5,83.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Ergonomi,3,BC,2.5,75,52.6,69.8,44.5
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Bahasa Inggris,3,B,3.0,84,78.3,85.8,66.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Manajemen Rantai Pasok,3,B,3.0,81,87.5,59.7,50.9
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir I,4,D,1.0,81,49.1,23.7,38.9
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Etika Profesi,2,B,3.0,82,68.0,67.6,69.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Tugas Akhir II,4,B,3.0,86,67.3,64.2,65.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Ganjil,Kerja Praktik,3,B,3.0,83,77.7,71.4,84.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Ergonomi,3,C,2.0,67,63.7,64.1,59.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Pengendalian Kualitas,2,AB,3.5,94,66.7,70.2,71.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Manajemen Rantai Pasok,2,B,3.0,84,61.0,73.5,85.8
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Bahasa Inggris,3,B,3.0,94,71.4,55.8,59.0
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Fisika Dasar IA,4,B,3.0,87,74.9,64.9,63.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Kalkulus I,3,D,1.0,57,27.3,54.9,20.5
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2021/2022,Genap,Agama,3,B,3.0,87,78.1,54.0,72.3
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Tugas Akhir I,2,B,3.0,90,71.6,96.6,51.5
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Kalkulus II,4,B,3.0,79,71.4,76.7,78.1
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Pengendalian Kualitas,4,C,2.0,52,56.7,34.3,62.1
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Manajemen Proyek,3,B,3.0,81,70.3,72.7,69.6
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Pancasila,4,B,3.0,72,62.6,59.1,83.9
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Ganjil,Ergonomi,3,AB,3.5,88,74.6,72.8,65.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Pancasila,3,AB,3.5,89,85.2,94.8,69.4
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Tugas Akhir II,4,BC,2.5,76,60.2,62.5,55.8
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Statistika Industri,4,C,2.0,72,60.5,58.8,42.4
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Kerja Praktik,3,AB,3.5,90,85.1,73.0,76.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2022/2023,Genap,Etika Profesi,3,B,3.0,92,60.8,64.7,41.9
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Pengantar Rekayasa,4,B,3.0,95,58.4,82.4,67.0
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Tugas Akhir II,3,BC,2.5,71,55.0,54.7,77.1
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Olahraga,4,D,1.0,58,53.5,45.8,28.8
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,C,2.0,58,64.8,40.3,37.6
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Fisika Dasar IIA,2,B,3.0,92,76.3,60.3,76.1
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Ganjil,Kimia Dasar IA,3,C,2.0,65,60.7,60.8,58.3
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Manajemen Rantai Pasok,2,B,3.0,95,79.9,62.7,51.6
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Kimia Dasar IA,4,B,3.0,72,83.4,53.4,62.3
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Tugas Akhir II,3,B,3.0,93,65.9,53.4,79.8
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Olahraga,3,A,4.0,96,86.6,71.0,66.4
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Ergonomi,3,BC,2.5,85,73.6,66.5,64.7
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Perancangan Pabrik,3,BC,2.5,70,47.5,62.5,67.2
+22160031,2022,FTI,Teknik Industri,Laki-laki,Jawa Tengah,SNBP,5,Tidak,2023/2024,Genap,Pengendalian Kualitas,4,C,2.0,55,59.4,51.3,63.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Olahraga,4,C,2.0,53,44.7,49.9,67.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Metodologi Penelitian,2,BC,2.5,90,58.7,47.8,75.4
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Pengantar Rekayasa,4,D,1.0,79,57.0,40.2,63.0
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Etika Profesi,2,BC,2.5,75,59.3,52.6,56.3
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Tugas Akhir I,3,BC,2.5,70,58.5,49.6,55.9
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,C,2.0,77,37.3,57.0,42.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Ganjil,Manajemen Proyek,2,D,1.0,58,28.5,23.4,25.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Bahasa Inggris,3,C,2.0,60,62.1,40.1,48.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Olahraga,2,BC,2.5,90,64.6,60.0,49.2
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Fisika Dasar IA,3,BC,2.5,92,76.5,42.6,49.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Tugas Akhir I,4,C,2.0,77,43.1,54.3,42.0
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Etika Profesi,3,AB,3.5,88,84.8,73.3,87.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2021/2022,Genap,Kerja Praktik,2,BC,2.5,85,60.1,53.5,65.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Ganjil,Kimia Dasar IA,3,BC,2.5,70,63.3,43.7,52.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Ganjil,Tugas Akhir II,2,C,2.0,71,52.2,70.8,36.2
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Ganjil,Agama,4,BC,2.5,83,76.5,84.4,59.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Ganjil,Metodologi Penelitian,3,BC,2.5,85,63.1,58.1,57.3
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Genap,Agama,2,BC,2.5,81,43.7,67.9,65.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Genap,Tugas Akhir II,4,C,2.0,58,67.7,43.0,46.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Genap,Fisika Dasar IA,3,B,3.0,94,60.8,58.7,65.7
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2022/2023,Genap,Fisika Dasar IIA,4,BC,2.5,90,63.6,46.4,55.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Ganjil,Fisika Dasar IA,3,D,1.0,78,40.9,45.1,46.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Ganjil,Metodologi Penelitian,3,D,1.0,63,44.3,38.3,52.4
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Ganjil,Tugas Akhir II,3,BC,2.5,74,66.8,60.4,74.2
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Ganjil,Kalkulus I,4,C,2.0,78,52.0,73.7,63.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Ganjil,Kerja Praktik,4,BC,2.5,72,49.1,44.0,62.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Genap,Kimia Dasar IA,3,BC,2.5,83,50.1,54.4,74.1
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Genap,Fisika Dasar IIA,3,BC,2.5,74,51.4,56.9,50.9
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Genap,Tugas Akhir II,2,C,2.0,55,46.4,43.5,34.6
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2023/2024,Genap,Tugas Akhir II,2,C,2.0,68,47.8,21.3,76.9
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Ganjil,Manajemen Proyek,3,BC,2.5,76,61.5,61.7,50.4
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Ganjil,Pengantar Rekayasa,3,B,3.0,79,85.7,68.5,82.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Ganjil,Pancasila,3,BC,2.5,95,50.6,54.6,62.9
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Ganjil,Metodologi Penelitian,4,C,2.0,65,47.3,46.7,48.1
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Tugas Akhir II,4,C,2.0,70,45.6,45.0,38.7
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Fisika Dasar IIA,2,BC,2.5,88,46.5,72.1,80.0
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Agama,3,BC,2.5,87,35.7,50.8,55.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Manajemen Proyek,3,D,1.0,80,39.4,57.9,51.5
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Fisika Dasar IA,4,D,1.0,54,25.6,34.7,35.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Metodologi Penelitian,2,BC,2.5,72,54.3,61.3,81.8
+21190032,2021,SBM,Kewirausahaan,Perempuan,NTB,SNBT,7,Tidak,2024/2025,Genap,Kalkulus I,2,BC,2.5,76,55.3,51.8,51.5
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Ganjil,Etika Profesi,3,B,3.0,79,72.9,69.3,66.5
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,B,3.0,76,67.7,61.5,71.1
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Ganjil,Kerja Praktik,4,B,3.0,74,83.2,60.9,94.0
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,BC,2.5,82,64.8,63.5,51.8
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Genap,Pengantar Rekayasa,2,A,4.0,98,93.3,56.1,89.1
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Genap,Kerja Praktik,2,C,2.0,53,46.1,68.3,46.9
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Genap,Agama,3,B,3.0,93,71.5,89.9,51.1
+24120033,2024,FTTM,Teknik Pertambangan,Laki-laki,Jawa Timur,SNBT,6,Tidak,2021/2022,Genap,Kalkulus II,3,B,3.0,75,80.3,83.5,67.1
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Bahasa Inggris,3,A,4.0,98,94.8,84.1,72.3
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Termodinamika,3,BC,2.5,72,59.3,61.3,78.0
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Kimia Dasar IA,3,B,3.0,88,61.3,80.2,73.6
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Olahraga,3,B,3.0,85,85.7,58.9,73.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,3,BC,2.5,81,43.2,57.2,85.9
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Ganjil,Kalkulus I,2,D,1.0,60,36.4,42.9,38.2
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Bahasa Inggris,3,BC,2.5,70,49.6,59.8,50.9
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Olahraga,2,C,2.0,50,54.7,53.8,45.8
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Fisika Dasar IIA,2,BC,2.5,85,72.0,62.8,74.2
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Tugas Akhir II,3,BC,2.5,74,68.6,59.0,60.4
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Kerja Praktik,2,C,2.0,52,50.7,38.7,40.7
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2021/2022,Genap,Agama,3,BC,2.5,92,50.4,77.8,74.9
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Agama,3,A,4.0,88,75.2,80.7,69.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Mekanika Fluida,3,C,2.0,53,46.8,64.6,49.4
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Manajemen Proyek,2,B,3.0,95,76.6,91.1,54.0
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Elemen Mesin,3,B,3.0,71,82.9,60.1,85.8
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Etika Profesi,4,BC,2.5,72,62.6,53.3,55.8
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Olahraga,4,A,4.0,94,85.0,87.8,75.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Ganjil,Fisika Dasar IA,4,C,2.0,69,55.9,32.6,42.3
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Fisika Dasar IA,3,BC,2.5,95,56.3,51.6,60.2
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Tugas Akhir I,3,B,3.0,89,73.9,54.9,64.6
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Dinamika,2,B,3.0,81,80.2,55.5,77.3
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Kalkulus I,3,D,1.0,81,35.7,54.3,23.9
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Termodinamika,4,C,2.0,62,58.9,35.5,45.2
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2022/2023,Genap,Pancasila,3,B,3.0,87,68.0,66.9,82.0
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Ganjil,Kimia Dasar IA,3,B,3.0,92,67.4,58.9,69.7
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Ganjil,Kalkulus I,4,C,2.0,71,57.5,47.0,51.7
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Ganjil,Elemen Mesin,2,C,2.0,74,50.9,41.5,37.8
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Ganjil,Agama,4,B,3.0,93,71.4,74.0,64.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Ganjil,Tugas Akhir I,3,B,3.0,76,69.6,66.6,55.3
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Genap,Elemen Mesin,2,BC,2.5,77,65.5,59.9,37.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Genap,Perancangan Mesin,4,BC,2.5,86,80.4,56.3,54.0
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Genap,Kalkulus II,3,BC,2.5,81,67.3,73.8,49.7
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Genap,Kimia Dasar IA,3,B,3.0,93,73.1,63.6,72.5
+22130034,2022,FTMD,Teknik Mesin,Perempuan,Riau,SNBP,5,Tidak,2023/2024,Genap,Olahraga,2,AB,3.5,88,84.4,61.7,87.2
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Ganjil,Pengantar Rekayasa,3,B,3.0,72,67.7,62.4,81.4
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Ganjil,Olahraga,4,B,3.0,74,62.6,63.9,73.7
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Ganjil,Metodologi Penelitian,4,AB,3.5,88,83.5,65.8,100.0
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Ganjil,Tugas Akhir II,2,B,3.0,75,79.2,64.1,75.4
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Ganjil,Etika Profesi,3,B,3.0,80,84.5,81.3,85.2
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Fisika Dasar IIA,3,BC,2.5,73,58.6,63.7,74.4
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Tugas Akhir I,2,BC,2.5,95,72.6,75.7,53.1
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Tugas Akhir I,3,BC,2.5,92,56.9,58.8,51.7
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Pancasila,3,A,4.0,86,88.4,80.4,67.8
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Etika Profesi,2,C,2.0,70,55.4,30.0,65.3
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Pengantar Rekayasa,2,BC,2.5,92,90.7,84.9,62.6
+24170035,2024,FSRD,Desain Interior,Laki-laki,Jawa Tengah,SNBT,8,Tidak,2021/2022,Genap,Etika Profesi,2,B,3.0,81,73.3,79.3,45.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Astrofisika,4,C,2.0,58,55.2,53.9,63.3
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Tugas Akhir I,2,D,1.0,53,26.2,52.3,34.8
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Etika Profesi,4,D,1.0,64,37.7,44.3,35.1
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Agama,2,BC,2.5,82,56.9,52.1,42.0
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,3,C,2.0,55,53.7,51.3,51.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Manajemen Proyek,3,C,2.0,66,45.3,23.8,48.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Ganjil,Kerja Praktik,4,B,3.0,72,59.2,61.5,74.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Genap,Fisika Dasar IA,4,BC,2.5,72,59.7,53.5,39.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Genap,Pancasila,4,BC,2.5,95,80.1,63.6,63.5
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Genap,Etika Profesi,3,BC,2.5,71,59.8,49.3,69.8
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2021/2022,Genap,Astrofisika,4,BC,2.5,71,59.1,46.8,74.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Ganjil,Tugas Akhir II,3,BC,2.5,83,58.9,70.5,57.4
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Ganjil,Mekanika Kuantum,2,D,1.0,63,36.8,24.4,48.5
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Ganjil,Analisis Real,4,D,1.0,67,28.6,17.3,37.4
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Ganjil,Fisika Statistik,3,BC,2.5,74,52.6,42.8,41.1
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Ganjil,Kalkulus I,2,BC,2.5,89,50.9,56.5,44.7
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Genap,Etika Profesi,3,BC,2.5,72,68.9,62.0,53.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Genap,Pengantar Rekayasa,3,BC,2.5,74,57.4,56.9,55.4
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Genap,Fisika Statistik,3,BC,2.5,90,56.8,43.1,42.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Genap,Mekanika Kuantum,4,D,1.0,83,24.0,24.5,38.7
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2022/2023,Genap,Tugas Akhir I,2,C,2.0,84,51.9,46.9,24.2
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Ganjil,Analisis Real,4,BC,2.5,81,69.7,50.5,68.3
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Ganjil,Persamaan Diferensial,4,C,2.0,82,48.9,34.2,26.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Ganjil,Fisika Statistik,3,C,2.0,67,51.9,47.1,38.7
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Ganjil,Tugas Akhir I,2,C,2.0,70,54.9,50.5,54.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Genap,Kalkulus I,3,D,1.0,64,53.4,31.3,49.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Genap,Olahraga,4,B,3.0,73,78.4,68.5,68.2
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Genap,Kalkulus II,2,B,3.0,77,55.7,54.2,62.3
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Genap,Fisika Statistik,3,B,3.0,95,72.1,56.0,65.4
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2023/2024,Genap,Metodologi Penelitian,4,C,2.0,53,44.9,58.8,34.1
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Ganjil,Tugas Akhir II,3,B,3.0,95,79.4,79.9,67.2
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Ganjil,Analisis Real,3,BC,2.5,81,43.7,47.9,61.1
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Ganjil,Persamaan Diferensial,4,B,3.0,70,60.8,62.5,67.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Ganjil,Bahasa Inggris,3,D,1.0,72,47.5,34.7,40.4
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Ganjil,Agama,4,BC,2.5,88,51.9,55.8,55.6
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Genap,Tugas Akhir II,2,C,2.0,52,47.2,54.4,72.8
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Genap,Pancasila,2,BC,2.5,77,72.1,47.3,66.0
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Genap,Fisika Statistik,3,C,2.0,51,33.9,37.3,60.0
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Genap,Tugas Akhir I,3,B,3.0,70,68.2,47.8,63.9
+21100036,2021,SF,Astronomi,Perempuan,NTB,SNBP,1,Tidak,2024/2025,Genap,Pengantar Rekayasa,3,BC,2.5,89,61.1,38.8,49.0
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Ganjil,Kimia Dasar IA,4,B,3.0,72,50.2,62.8,69.4
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,B,3.0,91,76.4,73.1,61.3
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Ganjil,Fisika Dasar IIA,3,D,1.0,56,40.1,52.5,60.0
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Ganjil,Metodologi Penelitian,3,B,3.0,80,72.9,69.8,62.8
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Genap,Bahasa Inggris,2,BC,2.5,87,74.4,49.0,80.4
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Genap,Kerja Praktik,3,BC,2.5,89,69.7,42.7,66.2
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Genap,Etika Profesi,4,C,2.0,64,43.7,55.2,67.1
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Genap,Manajemen Proyek,3,C,2.0,61,41.9,51.1,52.9
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2021/2022,Genap,Metodologi Penelitian,3,B,3.0,93,75.4,64.0,90.1
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Kimia Dasar IA,2,BC,2.5,80,61.8,45.5,61.4
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Bahasa Inggris,4,BC,2.5,89,66.7,61.2,44.8
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Kalkulus I,2,BC,2.5,88,63.5,71.1,68.7
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Tugas Akhir II,2,B,3.0,85,70.4,70.4,85.0
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Tugas Akhir II,2,C,2.0,54,46.2,39.9,53.6
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Ganjil,Kalkulus II,2,B,3.0,80,69.9,46.8,69.7
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Genap,Etika Profesi,2,B,3.0,76,75.8,72.1,68.1
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Genap,Fisika Dasar IA,2,D,1.0,54,47.7,34.4,69.8
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Genap,Manajemen Proyek,3,B,3.0,95,63.4,58.6,66.9
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Genap,Metodologi Penelitian,2,BC,2.5,70,68.9,59.3,51.2
+23150037,2023,FTSL,Teknik Sipil,Perempuan,Yogyakarta,Mandiri,4,Tidak,2022/2023,Genap,Etika Profesi,2,A,4.0,99,81.7,84.3,74.0
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Tugas Akhir II,3,B,3.0,80,58.6,90.0,89.2
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Etika Profesi,3,B,3.0,73,57.8,67.0,67.7
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Agama,2,A,4.0,90,81.7,80.7,97.6
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Bahasa Inggris,4,AB,3.5,90,67.9,85.8,96.0
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Astrofisika,3,A,4.0,87,76.0,82.4,60.0
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Fisika Dasar IA,3,B,3.0,89,65.8,85.9,60.9
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Kalkulus II,4,C,2.0,51,50.0,32.1,62.8
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Etika Profesi,3,C,2.0,62,50.2,27.7,46.1
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Bahasa Inggris,3,A,4.0,93,87.9,71.4,84.6
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Kerja Praktik,3,B,3.0,79,74.6,53.6,77.9
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Mekanika Kuantum,2,D,1.0,53,32.5,32.4,45.2
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Manajemen Proyek,3,B,3.0,87,59.6,57.4,73.2
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Kalkulus II,4,B,3.0,74,65.2,61.5,78.2
+24100038,2024,SF,Matematika,Laki-laki,Jawa Timur,SNBT,2,Tidak,2021/2022,Genap,Fisika Dasar IIA,2,B,3.0,70,64.7,84.1,48.4
+23100039,2023,SF,Matematika,Perempuan,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Bahasa Inggris,4,BC,2.5,79,50.9,51.0,46.9
+23100039,2023,SF,Matematika,Perempuan,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Etika Profesi,4,C,2.0,80,58.7,52.8,56.2
+23100039,2023,SF,Matematika,Perempuan,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Pengantar Rekayasa,3,D,1.0,66,25.1,6.0,24.6
+23100039,2023,SF,Matematika,Perempuan,Jawa Timur,SNBT,2,Tidak,2021/2022,Ganjil,Fisika Dasar IA,2,C,2.0,84,56.2,48.1,51.8
